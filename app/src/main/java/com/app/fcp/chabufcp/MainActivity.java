@@ -9,13 +9,15 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
-    private final String MSG = "Msg";
+    private final String MSG_MainActivity = "Msg";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,37 +57,11 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void testConnectDatabase(View view){
-        Log.i(MSG,"Begin testConnectDatabase");
-        String result ="";
-        InputStream isr = null;
-        String link = "http://localhost/android/connectDB.php";
-        URL url;
-        HttpURLConnection urlConnection = null;
-        try{
-            url = new URL(link);
-            Log.i(MSG, "Connection Database");
-            urlConnection = (HttpURLConnection)url.openConnection();
-            InputStream in = urlConnection.getInputStream();
-            InputStreamReader isw = new InputStreamReader(in);
-            Log.i(MSG, "Start read Date");
-            int data = isw.read();
-            while (data != -1) {
-                char current = (char) data;
-                data = isw.read();
-                System.out.print(current);
-            }
-        }
-        catch (Exception e){
-            Log.i(MSG, "Error in http connection "+ e.toString());
-        }
-        finally {
-            if (urlConnection != null) {
-                urlConnection.disconnect();
-                Log.i(MSG, "Disconnect Database");
-            }
-        }
-
+    public void testConnectDatabase(View view) {
+        Log.i(MSG_MainActivity, "Begin testConnectDatabase");
+        connectBase con = new connectBase();
+        con.execute();
+        Log.i(MSG_MainActivity, "Exit testConnectDatabase");
     }
 
 }
