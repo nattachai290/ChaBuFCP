@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.app.fcp.constant.DatabaseConstant;
-import com.app.fcp.database.connectBase;
 import com.app.fcp.database.service.Imp.QueryServiceImp;
 import com.app.fcp.database.service.QueryService;
 
@@ -25,7 +24,7 @@ import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
-    private final String MSG_MainActivity = "Msg";
+    private final String MSG_MainActivity = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,72 +86,93 @@ public class MainActivity extends AppCompatActivity {
         Log.i(MSG_MainActivity, "Exit testConnectDatabase");
     }*/
 
-    public void clickLogin(View view) throws ExecutionException, InterruptedException, JSONException {
+    public void clickLogin(View view){
         Log.i(MSG_MainActivity, "Begin clickLogin");
         EditText username_input = (EditText) findViewById(R.id.usrname);
         EditText pwd_input = (EditText) findViewById(R.id.password);
         String userName = username_input.getText().toString();
         String password = pwd_input.getText().toString();
 
-        String link = DatabaseConstant.HTTP_URL+"SelectAdmin_getSome.php";
-        String tableName = "admin";
-        QueryService query = new QueryServiceImp();
-        JSONObject JObjectResult = query.SelectData(link,tableName,userName);
-        int jResponse = JObjectResult.getInt("success");
-        Log.i(MSG_MainActivity, "jResponse: " + jResponse);
+        String link = DatabaseConstant.HTTP_URL+"SelectQuery_getSome.php";
+        String tableName = "ADMIN";
+        try{
+            QueryService query = new QueryServiceImp();
+            JSONObject JObjectResult = query.SelectData(link,tableName,userName);
+            int jResponse = JObjectResult.getInt("success");
+            Log.i(MSG_MainActivity, "jResponse: " + jResponse);
 
-        if(jResponse==1){
-            Log.i(MSG_MainActivity, "UserName: " + userName);
-            Log.i(MSG_MainActivity, "Password: " + password);
+            if(jResponse==1){
+                Log.i(MSG_MainActivity, "UserName: " + userName);
+                Log.i(MSG_MainActivity, "Password: " + password);
 
-            JSONArray jMember = JObjectResult.getJSONArray("member");
-            Log.i(MSG_MainActivity, "jMember: " + jMember.toString());
+                JSONArray jMember = JObjectResult.getJSONArray("member");
+                Log.i(MSG_MainActivity, "jMember: " + jMember.toString());
 
-            Log.i(MSG_MainActivity, "=========================================");
-            String QuserId=null,Qname=null,Qpassword=null,Qfname=null,Qlname=null,Qposition=null;
+                Log.i(MSG_MainActivity, "=========================================");
+                String QuserId=null,Qname=null,Qpassword=null,Qfname=null,Qlname=null,Qposition=null;
 
-            for (int i = 0; i < jMember.length(); i++) {
+                for (int i = 0; i < jMember.length(); i++) {
 
-                QuserId = jMember.getJSONObject(i).getString("userId");
-                Log.i(MSG_MainActivity, "User Id: " + QuserId);
+                    QuserId = jMember.getJSONObject(i).getString("userId");
+                    Log.i(MSG_MainActivity, "User Id: " + QuserId);
 
-                Qname = jMember.getJSONObject(i).getString("username");
-                Log.i(MSG_MainActivity, "User Name: " + Qname);
+                    Qname = jMember.getJSONObject(i).getString("username");
+                    Log.i(MSG_MainActivity, "User Name: " + Qname);
 
-                Qpassword = jMember.getJSONObject(i).getString("pwd");
-                Log.i(MSG_MainActivity, "Password: " + Qpassword);
+                    Qpassword = jMember.getJSONObject(i).getString("pwd");
+                    Log.i(MSG_MainActivity, "Password: " + Qpassword);
 
-                Qfname = jMember.getJSONObject(i).getString("fname");
-                Log.i(MSG_MainActivity, "First Name: " + Qfname);
+                    Qfname = jMember.getJSONObject(i).getString("fname");
+                    Log.i(MSG_MainActivity, "First Name: " + Qfname);
 
-                Qlname = jMember.getJSONObject(i).getString("lname");
-                Log.i(MSG_MainActivity, "Last Name: " + Qlname);
+                    Qlname = jMember.getJSONObject(i).getString("lname");
+                    Log.i(MSG_MainActivity, "Last Name: " + Qlname);
 
-                Qposition = jMember.getJSONObject(i).getString("position");
-                Log.i(MSG_MainActivity, "Position: " + Qposition);
+                    Qposition = jMember.getJSONObject(i).getString("position");
+                    Log.i(MSG_MainActivity, "Position: " + Qposition);
 
-            }
-            Log.i(MSG_MainActivity, "=========================================");
+                }
+                Log.i(MSG_MainActivity, "=========================================");
 
-            if(Qpassword.equals(password)){
-                Log.i(MSG_MainActivity, "Welcome "+userName);
+                if(Qpassword.equals(password)){
+                    Log.i(MSG_MainActivity, "Welcome "+userName);
+                    Intent i = new Intent(this,AfterLogin.class);
+                    i.putExtra("userId", QuserId);
+                    i.putExtra("userName", Qname);
+                    i.putExtra("password", Qpassword);
+                    i.putExtra("fname", Qfname);
+                    i.putExtra("lname", Qlname);
+                    i.putExtra("position", Qposition);
+                    startActivity(i);
+                }
+                else{
+                    Log.i(MSG_MainActivity, "User name or password Wrong!!! ");
+                }
             }
             else{
                 Log.i(MSG_MainActivity, "User name or password Wrong!!! ");
             }
-        }
-        else{
-            Log.i(MSG_MainActivity, "User name or password Wrong!!! ");
+
+        }catch (JSONException e){
+            Log.i(MSG_MainActivity, "Error JSON: "+e.toString());
+        }catch (NullPointerException e){
+            Log.i(MSG_MainActivity, "Error NullPointer: "+e.toString());
+        }catch (InterruptedException e){
+            Log.i(MSG_MainActivity, "Error Interrupted: "+e.toString());
+        }catch (ExecutionException e){
+            Log.i(MSG_MainActivity, "Error Execution: "+e.toString());
+        }catch (Exception e){
+            Log.i(MSG_MainActivity, "Error Exception: "+e.toString());
         }
 
         Log.i(MSG_MainActivity, "Exit clickLogin");
     }
 
   /*  public void onClick(View view) {
-        Intent i = new Intent(this,Green.class);
+
         EditText input = (EditText) findViewById(R.id.yelowInput);
         String msg = input.getText().toString();
-        i.putExtra("Message", msg);
+
         startActivity(i);
     }*/
 }

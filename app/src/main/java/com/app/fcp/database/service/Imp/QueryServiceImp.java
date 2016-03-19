@@ -6,29 +6,23 @@ import android.util.Log;
 
 import com.app.fcp.database.service.QueryService;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.DataOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Arm on 19/3/2559.
  */
 public class QueryServiceImp implements QueryService {
-    private final String MSG_QueryServiceImp = "Msg";
-//    private final String USER_AGENT = "Mozilla/5.0";
+    private final String MSG_QueryServiceImp = "QueryServiceImp";
 
     @Override
     public JSONObject SelectData(String... param) throws InterruptedException, ExecutionException {
@@ -36,7 +30,7 @@ public class QueryServiceImp implements QueryService {
         final String link = param[0];
         final JSONObject[] jResult = {null};
         final String tableName = param[1];
-        final String userName = param[2];
+        final String userNameOrId = param[2];
 
         class connectDataBase extends AsyncTask<Void, Void,Void>{
 
@@ -49,7 +43,8 @@ public class QueryServiceImp implements QueryService {
 
                 try{
                     Uri.Builder builder = new Uri.Builder();
-                    builder.appendQueryParameter("userName",userName);
+                    builder.appendQueryParameter("tableName",tableName);
+                    builder.appendQueryParameter("userName",userNameOrId);
 
                     String param = builder.build().getEncodedQuery();
                     Log.i(MSG_QueryServiceImp, "Connection Database");
