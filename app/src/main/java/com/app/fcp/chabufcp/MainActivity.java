@@ -1,5 +1,6 @@
 package com.app.fcp.chabufcp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import com.app.fcp.constant.DatabaseConstant;
 import com.app.fcp.database.connectBase;
@@ -17,6 +19,7 @@ import com.app.fcp.database.service.QueryService;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
@@ -62,12 +65,12 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void testConnectDatabase(View view) throws JSONException, ExecutionException, InterruptedException {
+   /* public void testConnectDatabase(View view) throws JSONException, ExecutionException, InterruptedException {
         Log.i(MSG_MainActivity, "Begin testConnectDatabase");
-        String link = DatabaseConstant.HTTP+DatabaseConstant.DATABASE_GENY_EMU+"/android/testQuery_getAll.php";
+        String link = DatabaseConstant.HTTP_URL+"SelectAdmin_getSome.php";
         String tableName = "member";
         QueryService query = new QueryServiceImp();
-        JSONArray jMember = query.SelectData(link,tableName);
+        JSONArray jMember = query.SelectData(link, tableName);
 
         if(jMember!=null) {
             for (int i = 0; i < jMember.length(); i++) {
@@ -82,7 +85,74 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         Log.i(MSG_MainActivity, "Exit testConnectDatabase");
+    }*/
+
+    public void clickLogin(View view) throws ExecutionException, InterruptedException, JSONException {
+        Log.i(MSG_MainActivity, "Begin clickLogin");
+        EditText username_input = (EditText) findViewById(R.id.usrname);
+        EditText pwd_input = (EditText) findViewById(R.id.password);
+        String userName = username_input.getText().toString();
+        String password = pwd_input.getText().toString();
+
+        String link = DatabaseConstant.HTTP_URL+"SelectAdmin_getSome.php";
+        String tableName = "admin";
+        QueryService query = new QueryServiceImp();
+        JSONObject JObjectResult = query.SelectData(link,tableName,userName);
+        int jResponse = JObjectResult.getInt("success");
+        Log.i(MSG_MainActivity, "jResponse: " + jResponse);
+
+        if(jResponse==1){
+            Log.i(MSG_MainActivity, "UserName: " + userName);
+            Log.i(MSG_MainActivity, "Password: " + password);
+
+            JSONArray jMember = JObjectResult.getJSONArray("member");
+            Log.i(MSG_MainActivity, "jMember: " + jMember.toString());
+
+            Log.i(MSG_MainActivity, "=========================================");
+            String QuserId=null,Qname=null,Qpassword=null,Qfname=null,Qlname=null,Qposition=null;
+
+            for (int i = 0; i < jMember.length(); i++) {
+
+                QuserId = jMember.getJSONObject(i).getString("userId");
+                Log.i(MSG_MainActivity, "User Id: " + QuserId);
+
+                Qname = jMember.getJSONObject(i).getString("username");
+                Log.i(MSG_MainActivity, "User Name: " + Qname);
+
+                Qpassword = jMember.getJSONObject(i).getString("pwd");
+                Log.i(MSG_MainActivity, "Password: " + Qpassword);
+
+                Qfname = jMember.getJSONObject(i).getString("fname");
+                Log.i(MSG_MainActivity, "First Name: " + Qfname);
+
+                Qlname = jMember.getJSONObject(i).getString("lname");
+                Log.i(MSG_MainActivity, "Last Name: " + Qlname);
+
+                Qposition = jMember.getJSONObject(i).getString("position");
+                Log.i(MSG_MainActivity, "Position: " + Qposition);
+
+            }
+            Log.i(MSG_MainActivity, "=========================================");
+
+            if(Qpassword.equals(password)){
+                Log.i(MSG_MainActivity, "Welcome "+userName);
+            }
+            else{
+                Log.i(MSG_MainActivity, "User name or password Wrong!!! ");
+            }
+        }
+        else{
+            Log.i(MSG_MainActivity, "User name or password Wrong!!! ");
+        }
+
+        Log.i(MSG_MainActivity, "Exit clickLogin");
     }
 
-
+  /*  public void onClick(View view) {
+        Intent i = new Intent(this,Green.class);
+        EditText input = (EditText) findViewById(R.id.yelowInput);
+        String msg = input.getText().toString();
+        i.putExtra("Message", msg);
+        startActivity(i);
+    }*/
 }

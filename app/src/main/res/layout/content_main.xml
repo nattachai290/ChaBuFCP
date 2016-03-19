@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/editText2"
+        android:id="@+id/password"
         android:hint="Password" />
 
     <Space
@@ -59,6 +59,6 @@
         android:id="@+id/logIn"
         android:layout_gravity="center_horizontal"
         android:textSize="20dp"
-        android:onClick="testConnectDatabase" />
+        android:onClick="clickLogin" />
 
 </LinearLayout>
