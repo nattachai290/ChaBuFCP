@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         }catch (JSONException e){
             Log.i(MSG_MainActivity, "Error JSON: "+e.toString());
         }catch (NullPointerException e){
-            Log.i(MSG_MainActivity, "Error NullPointer: "+e.toString());
+            Log.i(MSG_MainActivity, "Error NullPointer2: "+e.toString());
         }catch (InterruptedException e){
             Log.i(MSG_MainActivity, "Error Interrupted: "+e.toString());
         }catch (ExecutionException e){
