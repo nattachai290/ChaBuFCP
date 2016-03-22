@@ -30,17 +30,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
     @Override
@@ -64,28 +57,6 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-   /* public void testConnectDatabase(View view) throws JSONException, ExecutionException, InterruptedException {
-        Log.i(MSG_MainActivity, "Begin testConnectDatabase");
-        String link = DatabaseConstant.HTTP_URL+"SelectAdmin_getSome.php";
-        String tableName = "member";
-        QueryService query = new QueryServiceImp();
-        JSONArray jMember = query.SelectData(link, tableName);
-
-        if(jMember!=null) {
-            for (int i = 0; i < jMember.length(); i++) {
-                Log.i(MSG_MainActivity, "index: " + i);
-                String userId = jMember.getJSONObject(i).getString("userId");
-                String name = jMember.getJSONObject(i).getString("username");
-                String password = jMember.getJSONObject(i).getString("pwd");
-                String fname = jMember.getJSONObject(i).getString("fname");
-                String lname = jMember.getJSONObject(i).getString("lname");
-                String position = jMember.getJSONObject(i).getString("position");
-                Log.i(MSG_MainActivity, "Data: " + userId + "," + name + "," + password + "," + fname + "," + lname + "," + position);
-            }
-        }
-        Log.i(MSG_MainActivity, "Exit testConnectDatabase");
-    }*/
 
     public void clickLogin(View view){
         Log.i(MSG_MainActivity, "Begin clickLogin");
@@ -137,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(Qpassword.equals(password)){
                     Log.i(MSG_MainActivity, "Welcome "+userName);
-                    Intent i = new Intent(this,AfterLogin.class);
+                    Intent i = new Intent(this,NavigationUser.class);
                     i.putExtra("userId", QuserId);
                     i.putExtra("userName", Qname);
                     i.putExtra("password", Qpassword);
@@ -169,11 +140,4 @@ public class MainActivity extends AppCompatActivity {
         Log.i(MSG_MainActivity, "Exit clickLogin");
     }
 
-  /*  public void onClick(View view) {
-
-        EditText input = (EditText) findViewById(R.id.yelowInput);
-        String msg = input.getText().toString();
-
-        startActivity(i);
-    }*/
 }
