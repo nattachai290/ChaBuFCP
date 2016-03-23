@@ -132,5 +132,10 @@ public class NavigationUser extends AppCompatActivity implements NavigationView.
         return true;
     }
 
+    public void chooseTable(View view){
+
+    }
+
+
 
 }
