@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:paddingBottom="@dimen/activity_vertical_margin"
@@ -15,58 +15,11 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="43dp"
-        android:columnCount="3"
-        android:rowCount="3"
-        android:layout_weight="0.28">
+        android:layout_marginTop="43dp"      >
 
-        <ImageView
-        android:layout_width="100dp"
-        android:layout_height="148dp"
-        android:id="@+id/imageTable1"
-        android:src="@drawable/talbe_icon2"
-            android:layout_margin="10dp"
-            android:onClick="chooseTable" />
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="148dp"
-            android:id="@+id/imageTable2"
-            android:src="@drawable/talbe_icon3"
-            android:layout_margin="10dp"
-            android:onClick="chooseTable" />
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="148dp"
-            android:id="@+id/imageTable3"
-            android:src="@drawable/talbe_icon4"
-            android:layout_margin="10dp"
-            android:onClick="chooseTable" />
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="148dp"
-            android:id="@+id/imageTable4"
-            android:src="@drawable/talbe_icon5"
-            android:layout_margin="10dp"
-            android:onClick="chooseTable" />
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="148dp"
-            android:id="@+id/imageTable5"
-            android:src="@drawable/talbe_icon6"
-            android:layout_margin="10dp"
-            android:onClick="chooseTable" />
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="148dp"
-            android:id="@+id/imageTable6"
-            android:src="@drawable/talbe_icon7"
-            android:layout_margin="10dp"
-            android:onClick="chooseTable" />
-
-    </GridLayout>
+    <FrameLayout
+        android:id="@+id/flContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
 <!--</LinearLayout>-->
