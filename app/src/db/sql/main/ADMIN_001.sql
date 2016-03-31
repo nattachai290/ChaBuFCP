@@ -1,0 +1,10 @@
+CREATE TABLE ADMIN
+(
+ADMID int NOT NULL AUTO_INCREMENT,
+USERNAME varchar(255),
+PWD varchar(255),
+FNAME varchar(255),
+LNAME varchar(255),
+POSITION  varchar(255),
+PRIMARY KEY (ADMID)
+)
