@@ -63,11 +63,11 @@ public class MainActivity extends AppCompatActivity {
         String userName = username_input.getText().toString();
         String password = pwd_input.getText().toString();
 
-        String link = DatabaseConstant.HTTP_URL+"SelectQuery_getSome.php";
+        String link = DatabaseConstant.SELECT_ADMIN;
         String tableName = "ADMIN";
         try{
             QueryService query = new QueryServiceImp();
-            JSONObject JObjectResult = query.SelectData(link,tableName,userName);
+            JSONObject JObjectResult = query.SelectData(link,userName);
             int jResponse = JObjectResult.getInt("success");
             Log.i(MSG_MainActivity, "jResponse: " + jResponse);
 
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.i(MSG_MainActivity, "UserName: " + userName);
                 Log.i(MSG_MainActivity, "Password: " + password);
 
-                JSONArray jMember = JObjectResult.getJSONArray("member");
+                JSONArray jMember = JObjectResult.getJSONArray("admin");
                 Log.i(MSG_MainActivity, "jMember: " + jMember.toString());
 
                 Log.i(MSG_MainActivity, "=========================================");

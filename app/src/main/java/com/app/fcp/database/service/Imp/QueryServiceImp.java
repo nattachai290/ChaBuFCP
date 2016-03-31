@@ -29,9 +29,8 @@ public class QueryServiceImp implements QueryService {
         Log.i(MSG_QueryServiceImp, "Begin SelectData");
         final String link = param[0];
         final JSONObject[] jResult = {null};
-        final String tableName = param[1];
-        final String userNameOrId = param[2];
-
+        final String name = param[1]!=null?param[1]:null;
+        final String id = param[2]!=null?param[2]:null;
         class connectDataBase extends AsyncTask<Void, Void,Void>{
 
             @Override
@@ -43,9 +42,8 @@ public class QueryServiceImp implements QueryService {
 
                 try{
                     Uri.Builder builder = new Uri.Builder();
-                    builder.appendQueryParameter("tableName",tableName);
-                    builder.appendQueryParameter("userName",userNameOrId);
-
+                    builder.appendQueryParameter("name",name);
+                    builder.appendQueryParameter("id",id);
                     String param = builder.build().getEncodedQuery();
                     Log.i(MSG_QueryServiceImp, "Connection Database");
                     url = new URL(link);
@@ -99,9 +97,6 @@ public class QueryServiceImp implements QueryService {
                         try {
                             jResult[0] = new JSONObject(result);
                             Log.i(MSG_QueryServiceImp,"JSONObject: "+ jResult[0].toString());
-//                            jArray[0] = jObject.getJSONArray(tableName);
-//                            Log.i(MSG_QueryServiceImp,"JSONArray: "+ jArray[0].toString());
-
                         }
                         catch (JSONException e) {
                             Log.i(MSG_QueryServiceImp, "Error parsing data " +e.toString());
