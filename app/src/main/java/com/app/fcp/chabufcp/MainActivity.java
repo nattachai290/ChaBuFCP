@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         String tableName = "ADMIN";
         try{
             QueryService query = new QueryServiceImp();
-            JSONObject JObjectResult = query.SelectData(link,userName);
+            JSONObject JObjectResult = query.selectData(link,userName,null);
             int jResponse = JObjectResult.getInt("success");
             Log.i(MSG_MainActivity, "jResponse: " + jResponse);
 

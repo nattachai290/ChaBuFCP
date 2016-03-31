@@ -20,7 +20,7 @@ public class DatabaseConstant {
     public static final String SELECT_HISTRNSDTL = HTTP_URL+"SelectHistrnsdtl";
     public static final String SELECT_ITMGNL = HTTP_URL+"SelectItmgnl";
     public static final String SELECT_TYPE = HTTP_URL+"SelectType";
-    public static final String SELECT_ADMIN = HTTP_URL+"SelectAdmin";
+    public static final String SELECT_ADMIN = HTTP_URL+"SelectAdmin.php";
 
     /*** UPDATE ***/
     public static final String UPDATE_HISTRNSHDR = HTTP_URL+"UpdateHistrnshdr";

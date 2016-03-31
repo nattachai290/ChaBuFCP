@@ -25,14 +25,14 @@ public class QueryServiceImp implements QueryService {
     private final String MSG_QueryServiceImp = "QueryServiceImp";
 
     @Override
-    public JSONObject SelectData(String... param) throws InterruptedException, ExecutionException {
+    public JSONObject selectData(String... param) throws InterruptedException, ExecutionException {
         Log.i(MSG_QueryServiceImp, "Begin SelectData");
         final String link = param[0];
         final JSONObject[] jResult = {null};
         final String name = param[1]!=null?param[1]:null;
         final String id = param[2]!=null?param[2]:null;
-        class connectDataBase extends AsyncTask<Void, Void,Void>{
 
+        class connectDataBase extends AsyncTask<Void, Void,Void>{
             @Override
             protected Void doInBackground(Void... params) {
 
@@ -124,5 +124,39 @@ public class QueryServiceImp implements QueryService {
 
         Log.i(MSG_QueryServiceImp, "Exit SelectData");
         return jResult[0];
+    }
+
+    @Override
+    public JSONObject InsertData(String... param) throws ExecutionException, InterruptedException {
+
+        class connectDataBase extends AsyncTask<Void, Void,Void> {
+            @Override
+            protected Void doInBackground(Void... params) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public JSONObject deleteData(String... param) throws ExecutionException, InterruptedException {
+        class connectDataBase extends AsyncTask<Void, Void,Void> {
+            @Override
+            protected Void doInBackground(Void... params) {
+                return null;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public JSONObject updateData(String... param) throws ExecutionException, InterruptedException {
+        class connectDataBase extends AsyncTask<Void, Void,Void> {
+            @Override
+            protected Void doInBackground(Void... params) {
+                return null;
+            }
+        }
+        return null;
     }
 }
