@@ -1,7 +1,5 @@
-package com.app.fcp.chabufcp.fragment;
+package com.app.fcp.chabufcp.fragment.tab;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,17 +8,16 @@ import android.view.ViewGroup;
 
 import com.app.fcp.chabufcp.R;
 
-public class FirstFragment extends Fragment {
+/**
+ * Created by arm on 6/4/2559.
+ */
+public class fragment_shushi extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_order,container,false);
+        View view = inflater.inflate(R.layout.tab_fragment_shushi,container,false);
         return view;
     }
-
-
-
-
 }

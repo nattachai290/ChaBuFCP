@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".MainLoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -27,11 +27,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".NavigationUser"
+            android:name=".MainOverView"
             android:label="@string/title_activity_navigation_user"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".AddTable" />
+        <activity
+            android:name=".OrderMenu"
+            android:label="@string/title_activity_order_menu"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

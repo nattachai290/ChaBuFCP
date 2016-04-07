@@ -19,15 +19,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
-public class MainActivity extends AppCompatActivity {
-    private final String MSG_MainActivity = "MainActivity";
+public class MainLoginActivity extends AppCompatActivity {
+    private final String MSG_MainActivity = "MainLoginActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.login_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -64,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         String password = pwd_input.getText().toString();
 
         String link = DatabaseConstant.SELECT_ADMIN;
-        String tableName = "ADMIN";
+//        String tableName = "ADMIN";
         try{
             QueryService query = new QueryServiceImp();
             JSONObject JObjectResult = query.selectData(link,userName,null);
@@ -106,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(Qpassword.equals(password)){
                     Log.i(MSG_MainActivity, "Welcome "+userName);
-                    Intent i = new Intent(this,NavigationUser.class);
+                    Intent i = new Intent(this,MainOverView.class);
                     i.putExtra("userId", QuserId);
                     i.putExtra("userName", Qname);
                     i.putExtra("password", Qpassword);

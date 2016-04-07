@@ -10,15 +10,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.app.fcp.chabufcp.MainActivity"
-    tools:showIn="@layout/activity_main"
+    tools:context=".MainLoginActivity"
+    tools:showIn="@layout/login_activity"
     android:weightSum="1">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Sign In"
+        android:text="@string/text_sign_in"
         android:id="@+id/signIn"
         android:layout_gravity="center_horizontal"
         android:textSize="30dp" />
@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/usrname"
-        android:hint="User Name" />
+        android:hint="@string/text_username" />
 
     <Space
         android:layout_width="match_parent"
@@ -45,7 +45,7 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/password"
-        android:hint="Password" />
+        android:hint="@string/text_password"  />
 
     <Space
         android:layout_width="match_parent"
@@ -55,8 +55,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Log in"
-        android:id="@+id/logIn"
+        android:text="@string/text_log_in"
+        android:id="@+id/btn_logIn"
         android:layout_gravity="center_horizontal"
         android:textSize="20dp"
         android:onClick="clickLogin" />
