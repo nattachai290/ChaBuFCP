@@ -1,24 +1,4 @@
 INSERT INTO TYPE (TYPEDESC)
-VALUES ('Beef');
-INSERT INTO TYPE (TYPEDESC)
-VALUES ('Pig');
-INSERT INTO TYPE (TYPEDESC)
-VALUES ('Chicken');
-INSERT INTO TYPE (TYPEDESC)
-VALUES ('Aquatic Animal');
-INSERT INTO TYPE (TYPEDESC)
-VALUES ('Vegetable');
-INSERT INTO TYPE (TYPEDESC)
-VALUES ('Dessert');
-INSERT INTO TYPE (TYPEDESC)
-VALUES ('Shushi');
-INSERT INTO TYPE (TYPEDESC)
-VALUES ('Alcohol');
-INSERT INTO TYPE (TYPEDESC)
-VALUES ('Fruit');
-INSERT INTO TYPE (TYPEDESC)
-VALUES ('Snack');
-INSERT INTO TYPE (TYPEDESC)
-VALUES ('Noodles ');
-INSERT INTO TYPE (TYPEDESC)
-VALUES ('Egg');
+VALUES ('Beef'),('Pig'),('Chicken'),('Aquatic Animal'),
+('Vegetable'),('Dessert'),('Shushi'),('Alcohol'),
+('Fruit'),('Snack'),('Noodles'),('Egg');

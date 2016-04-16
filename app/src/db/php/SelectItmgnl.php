@@ -4,8 +4,8 @@ require_once 'connectDB.php';
 // connecting to db
 $db = new DB_CONNECT();
 	
-if (isset($_POST["name"])||isset($_POST["id"])){
-		
+if (isset($_POST["name"])||isset($_POST["id"])||isset($_POST["type"])){
+	mysql_query("SET NAMES UTF8");
 	$param=null;
 	$query = "SELECT * FROM ITMGNL ";
 	
@@ -18,28 +18,38 @@ if (isset($_POST["name"])||isset($_POST["id"])){
 	 $param = mysql_escape_string($_POST['id']);	
 	 $query = $query."WHERE ITMID = '$param'";		 
 	}	
-	
+	else if (isset($_POST["type"])){
+    	 $param = mysql_escape_string($_POST['type']);
+    	 $query = $query."WHERE ITMTYPE = '$param'";
+    }
 	$result = mysql_query($query)  or die(mysql_error());
 	
 	  if (!empty($result)) {
 		   // check for empty result
 		   
 		   
-		if (mysql_num_rows($result) > 0){
-			 $result = mysql_fetch_array($result);
- 
-			$itmgnl = array();
-			$itmgnl["itmId"] = $result["ITMID"];
-			$itmgnl["itmName"] = $result["ITMNAME"];
-			$itmgnl["itmQty"] = $result["ITMQTY"];
-			$itmgnl["itmType"] = $result["ITMTYPE"];			
+		if (mysql_num_rows($result) > 0){				
+			// user node
+			$response["itmgnl"] = array();
+			
+			 while ($row = mysql_fetch_array($result)) {
+				// temp user array
+					$itmgnl = array();
+					$itmgnl["itmId"] = $row["ITMID"];
+					$itmgnl["itmName"] = $row["ITMNAME"];
+					$itmgnl["itmQty"] = $row["ITMQTY"];
+					$itmgnl["itmType"] = $row["ITMTYPE"];	
+		 
+				// push single product into final response array
+				array_push($response["itmgnl"], $itmgnl);
+			}
+			
 			// success
 			$response["success"] = 1;
  
-			// user node
-			$response["itmgnl"] = array();
+		
  
-			array_push($response["itmgnl"], $itmgnl);
+			
  
 			// echoing JSON response
 			echo json_encode($response);

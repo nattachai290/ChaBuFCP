@@ -61,12 +61,12 @@ public class MainLoginActivity extends AppCompatActivity {
         EditText pwd_input = (EditText) findViewById(R.id.password);
         String userName = username_input.getText().toString();
         String password = pwd_input.getText().toString();
-
+        String post = "name";
         String link = DatabaseConstant.SELECT_ADMIN;
-//        String tableName = "ADMIN";
+
         try{
             QueryService query = new QueryServiceImp();
-            JSONObject JObjectResult = query.selectData(link,userName,null);
+            JSONObject JObjectResult = query.selectData(link,post,userName);
             int jResponse = JObjectResult.getInt("success");
             Log.i(MSG_MainActivity, "jResponse: " + jResponse);
 

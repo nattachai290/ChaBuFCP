@@ -35,6 +35,7 @@ import com.app.fcp.chabufcp.fragment.tab.fragment_pig;
 import com.app.fcp.chabufcp.fragment.tab.fragment_shushi;
 import com.app.fcp.chabufcp.fragment.tab.fragment_snack;
 import com.app.fcp.chabufcp.fragment.tab.fragment_vegetable;
+import com.app.fcp.constant.DatabaseConstant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,20 +49,12 @@ public class OrderMenu extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final String mActivityTitle = getTitle().toString();
+
         setContentView(R.layout.order_menu_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         initViewPager();
         initTabHost();
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
@@ -135,8 +128,34 @@ public class OrderMenu extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        MainOverView mov = new MainOverView();
-        return mov.OverViewOnNavigationItemSelected(item);
+        int id = item.getItemId();
+        Fragment fragment = null;
+        Class fragmentClass = null;
+        if (id == R.id.nav_profile) {
+            // Handle the camera action
+            fragmentClass = AddCustomer.class;
+
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.main_nav_content, fragment).commit();
+            item.setChecked(true);
+
+        } else if (id == R.id.nav_home) {
+            Intent main = new Intent(this,MainOverView.class);
+            startActivity(main);
+        }else if (id == R.id.nav_logout) {
+            Intent main = new Intent(this,MainLoginActivity.class);
+            startActivity(main);
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     private void calcTabHost(){

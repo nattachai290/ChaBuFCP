@@ -29,9 +29,8 @@ public class QueryServiceImp implements QueryService {
         Log.i(MSG_QueryServiceImp, "Begin SelectData");
         final String link = param[0];
         final JSONObject[] jResult = {null};
-        final String name = param[1]!=null?param[1]:null;
-        final String id = param[2]!=null?param[2]:null;
-
+        final String post = param[1];
+        final String post_var = param[2];
         class connectDataBase extends AsyncTask<Void, Void,Void>{
             @Override
             protected Void doInBackground(Void... params) {
@@ -42,8 +41,7 @@ public class QueryServiceImp implements QueryService {
 
                 try{
                     Uri.Builder builder = new Uri.Builder();
-                    builder.appendQueryParameter("name",name);
-                    builder.appendQueryParameter("id",id);
+                    builder.appendQueryParameter(post,post_var);
                     String param = builder.build().getEncodedQuery();
                     Log.i(MSG_QueryServiceImp, "Connection Database");
                     url = new URL(link);
@@ -71,12 +69,12 @@ public class QueryServiceImp implements QueryService {
                         //post data
                         String result ="";
                         InputStream in = urlConnection.getInputStream();
-                        InputStreamReader isw = new InputStreamReader(in);
+                        InputStreamReader isw = new InputStreamReader(in,"iso-8859-11");
                         BufferedReader reader = null;
                         Log.i(MSG_QueryServiceImp, "Start read Data");
 
                         try {
-                            reader = new BufferedReader(isw);
+                            reader = new BufferedReader(isw,8);
                             StringBuilder sb = new StringBuilder();
                             String line = null;
                             while ((line = reader.readLine()) != null) {

@@ -257,24 +257,13 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
             fragmentManager.beginTransaction().replace(R.id.main_nav_content, fragment).commit();
             item.setChecked(true);
 
-        } else if (id == R.id.nav_logout) {
+        } else if (id == R.id.nav_home) {
+            Intent main = new Intent(this,MainOverView.class);
+            startActivity(main);
+        }else if (id == R.id.nav_logout) {
             Intent main = new Intent(this,MainLoginActivity.class);
             startActivity(main);
-        }else if (id == R.id.nav_home) {
-            fragmentClass = MainOverView.class;
-
-            try {
-                fragment = (Fragment) fragmentClass.newInstance();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.main_nav_content, fragment).commit();
-            item.setChecked(true);
         }
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -286,14 +275,10 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
     }
 
     public void order(){
+            Intent main = new Intent(this,AddTable.class);
+            startActivity(main);
 
     }
 
-//    private void calcTabHost(){
-//        HorizontalScrollView hScrollView = (HorizontalScrollView) findViewById(R.id.scrollViewTab);
-//        View tabView = tabhost.getCurrentTabView();
-//        int scrollPos = tabView.getLeft()-(hScrollView.getWidth()-tabView.getWidth())/2;
-//        hScrollView.smoothScrollTo(scrollPos, 0);
-//    }
 
 }
