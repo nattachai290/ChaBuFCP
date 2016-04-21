@@ -24,9 +24,7 @@ if (isset($_POST["name"])||isset($_POST["id"])){
 	  if (!empty($result)) {
 		   // check for empty result
 		   
-		   
-		if (mysql_num_rows($result) > 0){
-			 $result = mysql_fetch_array($result);
+			$result = mysql_fetch_array($result);
  
 			$hisdtl = array();
 			$hisdtl["hisdtlId"] = $result["HISDTLID"];
@@ -45,15 +43,7 @@ if (isset($_POST["name"])||isset($_POST["id"])){
  
 			// echoing JSON response
 			echo json_encode($response);
-		}
-		else {
-			// no product found
-			$response["success"] = 0;
-			$response["message"] = "Data No found1 ";
- 
-			// echo no users JSON
-			echo json_encode($response);
-		}  	 
+
 	  }
 	  else {
 		// no product found
@@ -73,9 +63,6 @@ else {
 	// echoing JSON response
 	echo json_encode($response);
 }
-		
-		
-	
 	
 
 ?>

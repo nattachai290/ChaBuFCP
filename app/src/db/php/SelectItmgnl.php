@@ -27,7 +27,6 @@ if (isset($_POST["name"])||isset($_POST["id"])||isset($_POST["type"])){
 	  if (!empty($result)) {
 		   // check for empty result
 		   
-		   
 		if (mysql_num_rows($result) > 0){				
 			// user node
 			$response["itmgnl"] = array();

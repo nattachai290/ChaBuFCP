@@ -25,8 +25,7 @@ if (isset($_POST["name"])||isset($_POST["id"])){
 		   // check for empty result
 		   
 		   
-		if (mysql_num_rows($result) > 0){
-			 $result = mysql_fetch_array($result);
+			$result = mysql_fetch_array($result);
  
 			$type = array();
 			$type["typeId"] = $result["TYPEID"];
@@ -41,15 +40,7 @@ if (isset($_POST["name"])||isset($_POST["id"])){
  
 			// echoing JSON response
 			echo json_encode($response);
-		}
-		else {
-			// no product found
-			$response["success"] = 0;
-			$response["message"] = "Data No found1 ";
- 
-			// echo no users JSON
-			echo json_encode($response);
-		}  	 
+
 	  }
 	  else {
 		// no product found
