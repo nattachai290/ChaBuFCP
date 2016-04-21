@@ -48,8 +48,11 @@ public class listItemAdapter extends ArrayAdapter<String> {
         TextView text = (TextView) convertView.findViewById(R.id.list_row_text);
         text.setText(list.get(position));
 
-//        ImageView img = (ImageView) convertView.findViewById(R.id.image_list_pokemon);
-//        img.setImageResource(imageId[position]);
+        ImageView imgPlus = (ImageView) convertView.findViewById(R.id.imageButtonPlus);
+        imgPlus.setImageResource(imageId[0]);
+
+        ImageView imgMinus = (ImageView) convertView.findViewById(R.id.imageButtonMinus);
+        imgPlus.setImageResource(imageId[1]);
 
         return convertView;
     }
