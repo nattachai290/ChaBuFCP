@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">ChaBuFCP</string>
     <string name="action_settings">Settings</string>
-
+    <string name="action_confirm">ยืนยัน</string>
     <!-- Strings related to login -->
     <string name="text_username">Username</string>
     <string name="text_password">รหัสผ่าน</string>

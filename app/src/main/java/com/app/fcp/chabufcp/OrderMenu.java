@@ -45,6 +45,9 @@ public class OrderMenu extends AppCompatActivity
     private final String MSG_OrderMenu = "OrderMenu";
     ViewPager viewPager;
     TabHost tabhost;
+    String numTable ;
+    String numCustomer ;
+    String tableId ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,12 +71,13 @@ public class OrderMenu extends AppCompatActivity
                     return;
                 }
 
-                String msgUser = data.getString("userName");
-                String msgPos = data.getString("position");
-                TextView textUser = (TextView) findViewById(R.id.nav_head_name);
-                TextView textPosition = (TextView) findViewById(R.id.nav_head_pos);
-                textUser.setText(msgUser);
-                textPosition.setText(msgPos);
+                numTable = data.getString("numTable");
+                numCustomer = data.getString("numCustomer");
+                tableId = data.getString("tableId");
+//                TextView textUser = (TextView) findViewById(R.id.nav_head_name);
+//                TextView textPosition = (TextView) findViewById(R.id.nav_head_pos);
+//                textUser.setText(msgUser);
+//                textPosition.setText(msgPos);
 
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }

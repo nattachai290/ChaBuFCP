@@ -4,12 +4,23 @@ import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class AddTable extends AppCompatActivity {
+import com.app.fcp.constant.DatabaseConstant;
+import com.app.fcp.database.service.Imp.QueryServiceImp;
+import com.app.fcp.database.service.QueryService;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.concurrent.ExecutionException;
+
+public class AddTable extends AppCompatActivity {
+    private final String MSG = "MainLoginActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,10 +47,63 @@ public class AddTable extends AppCompatActivity {
             Toast.makeText(this, "กรุณาใส่จำนวนลูกค้า", Toast.LENGTH_LONG).show();
         }
         else{
-            Intent i = new Intent(this,OrderMenu.class);
-            i.putExtra("numTable", numTable);
-            i.putExtra("numCustomer", numCustomer);
-            startActivity(i);
+
+            String num_parameter = "2";
+            String link = DatabaseConstant.INSERT_HISTRNSHDR;
+            try{
+                QueryService query = new QueryServiceImp();
+                JSONObject JObjectResult = query.InsertData(link,num_parameter,numTable,numCustomer);
+                int jResponse = JObjectResult.getInt("success");
+                Log.i(MSG, "jResponse: " + jResponse);
+
+                if(jResponse==1){
+
+                    JSONArray jMember = JObjectResult.getJSONArray("hishdr");
+                    Log.i(MSG, "jMember: " + jMember.toString());
+
+                    Log.i(MSG, "=========================================");
+                    String QhishdrId=null;
+
+                    for (int i = 0; i < jMember.length(); i++) {
+
+                        QhishdrId = jMember.getJSONObject(i).getString("hishdrId");
+                        Log.i(MSG, "User Id: " + QhishdrId);
+                    }
+                    Log.i(MSG, "=========================================");
+
+                    if(Integer.valueOf(QhishdrId) == 0){
+                        Log.i(MSG, "Table not available!!! ");
+                        Toast.makeText(this, "โต๊ะ "+numTable+ "ไม่ว่าง", Toast.LENGTH_LONG).show();
+                    }
+                    else{
+                        Intent i = new Intent(this,OrderMenu.class);
+                        i.putExtra("numTable", numTable);
+                        i.putExtra("numCustomer", numCustomer);
+                        i.putExtra("tableId", QhishdrId);
+                        startActivity(i);
+                    }
+
+
+                }
+                else{
+                    Log.i(MSG, "Something wrong!!! ");
+//                Snackbar.make(view, "username หรือ password ไม่ถูกต้อง", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    Toast.makeText(this, "การส่งค่าผิดพลาด", Toast.LENGTH_LONG).show();
+                }
+
+            }catch (JSONException e){
+                Log.i(MSG, "Error JSON: "+e.toString());
+            }catch (NullPointerException e){
+                Log.i(MSG, "Error NullPointer: "+e.toString());
+            }catch (InterruptedException e){
+                Log.i(MSG, "Error Interrupted: "+e.toString());
+            }catch (ExecutionException e){
+                Log.i(MSG, "Error Execution: "+e.toString());
+            }catch (Exception e){
+                Log.i(MSG, "Error Exception: "+e.toString());
+            }
+
+
         }
 
     }

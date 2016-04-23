@@ -24,7 +24,7 @@ import org.json.JSONObject;
 import java.util.concurrent.ExecutionException;
 
 public class MainLoginActivity extends AppCompatActivity {
-    private final String MSG_MainActivity = "MainLoginActivity";
+    private final String MSG = "MainLoginActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +56,7 @@ public class MainLoginActivity extends AppCompatActivity {
     }
 
     public void clickLogin(View view){
-        Log.i(MSG_MainActivity, "Begin clickLogin");
+        Log.i(MSG, "Begin clickLogin");
         EditText username_input = (EditText) findViewById(R.id.usrname);
         EditText pwd_input = (EditText) findViewById(R.id.password);
         String userName = username_input.getText().toString();
@@ -68,43 +68,43 @@ public class MainLoginActivity extends AppCompatActivity {
             QueryService query = new QueryServiceImp();
             JSONObject JObjectResult = query.selectData(link,post,userName);
             int jResponse = JObjectResult.getInt("success");
-            Log.i(MSG_MainActivity, "jResponse: " + jResponse);
+            Log.i(MSG, "jResponse: " + jResponse);
 
             if(jResponse==1){
-                Log.i(MSG_MainActivity, "UserName: " + userName);
-                Log.i(MSG_MainActivity, "Password: " + password);
+                Log.i(MSG, "UserName: " + userName);
+                Log.i(MSG, "Password: " + password);
 
                 JSONArray jMember = JObjectResult.getJSONArray("admin");
-                Log.i(MSG_MainActivity, "jMember: " + jMember.toString());
+                Log.i(MSG, "jMember: " + jMember.toString());
 
-                Log.i(MSG_MainActivity, "=========================================");
+                Log.i(MSG, "=========================================");
                 String QuserId=null,Qname=null,Qpassword=null,Qfname=null,Qlname=null,Qposition=null;
 
                 for (int i = 0; i < jMember.length(); i++) {
 
                     QuserId = jMember.getJSONObject(i).getString("userId");
-                    Log.i(MSG_MainActivity, "User Id: " + QuserId);
+                    Log.i(MSG, "User Id: " + QuserId);
 
                     Qname = jMember.getJSONObject(i).getString("username");
-                    Log.i(MSG_MainActivity, "User Name: " + Qname);
+                    Log.i(MSG, "User Name: " + Qname);
 
                     Qpassword = jMember.getJSONObject(i).getString("pwd");
-                    Log.i(MSG_MainActivity, "Password: " + Qpassword);
+                    Log.i(MSG, "Password: " + Qpassword);
 
                     Qfname = jMember.getJSONObject(i).getString("fname");
-                    Log.i(MSG_MainActivity, "First Name: " + Qfname);
+                    Log.i(MSG, "First Name: " + Qfname);
 
                     Qlname = jMember.getJSONObject(i).getString("lname");
-                    Log.i(MSG_MainActivity, "Last Name: " + Qlname);
+                    Log.i(MSG, "Last Name: " + Qlname);
 
                     Qposition = jMember.getJSONObject(i).getString("position");
-                    Log.i(MSG_MainActivity, "Position: " + Qposition);
+                    Log.i(MSG, "Position: " + Qposition);
 
                 }
-                Log.i(MSG_MainActivity, "=========================================");
+                Log.i(MSG, "=========================================");
 
                 if(Qpassword.equals(password)){
-                    Log.i(MSG_MainActivity, "Welcome "+userName);
+                    Log.i(MSG, "Welcome "+userName);
                     Intent i = new Intent(this,MainOverView.class);
                     i.putExtra("userId", QuserId);
                     i.putExtra("userName", Qname);
@@ -115,30 +115,30 @@ public class MainLoginActivity extends AppCompatActivity {
                     startActivity(i);
                 }
                 else{
-                    Log.i(MSG_MainActivity, "User name or password Wrong!!! ");
+                    Log.i(MSG, "User name or password Wrong!!! ");
 //                    Snackbar.make(view, "username หรือ password ไม่ถูกต้อง", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                     Toast.makeText(this, "username หรือ password ไม่ถูกต้อง", Toast.LENGTH_LONG).show();
                 }
             }
             else{
-                Log.i(MSG_MainActivity, "User name or password Wrong!!! ");
+                Log.i(MSG, "User name or password Wrong!!! ");
 //                Snackbar.make(view, "username หรือ password ไม่ถูกต้อง", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 Toast.makeText(this, "username หรือ password ไม่ถูกต้อง", Toast.LENGTH_LONG).show();
             }
 
         }catch (JSONException e){
-            Log.i(MSG_MainActivity, "Error JSON: "+e.toString());
+            Log.i(MSG, "Error JSON: "+e.toString());
         }catch (NullPointerException e){
-            Log.i(MSG_MainActivity, "Error NullPointer: "+e.toString());
+            Log.i(MSG, "Error NullPointer: "+e.toString());
         }catch (InterruptedException e){
-            Log.i(MSG_MainActivity, "Error Interrupted: "+e.toString());
+            Log.i(MSG, "Error Interrupted: "+e.toString());
         }catch (ExecutionException e){
-            Log.i(MSG_MainActivity, "Error Execution: "+e.toString());
+            Log.i(MSG, "Error Execution: "+e.toString());
         }catch (Exception e){
-            Log.i(MSG_MainActivity, "Error Exception: "+e.toString());
+            Log.i(MSG, "Error Exception: "+e.toString());
         }
 
-        Log.i(MSG_MainActivity, "Exit clickLogin");
+        Log.i(MSG, "Exit clickLogin");
     }
 
 }

@@ -11,12 +11,12 @@ if (isset($_POST["name"])||isset($_POST["id"])){
 	
 	if (isset($_POST["name"])){
 	 $param = mysql_escape_string($_POST['name']);	
-	 $query = $query."WHERE HISHDRTBLNO = '$param'";
+	 $query = $query."WHERE HISHDRID = '$param'";
 	} 
 	
 	else if (isset($_POST["id"])){
 	 $param = mysql_escape_string($_POST['id']);	
-	 $query = $query."WHERE HISHDRID = '$param'";		 
+	 $query = $query."WHERE HISDTLID = '$param'";		 
 	}	
 	
 	$result = mysql_query($query)  or die(mysql_error());
@@ -24,23 +24,22 @@ if (isset($_POST["name"])||isset($_POST["id"])){
 	  if (!empty($result)) {
 		   // check for empty result
 		   
-		   
 			$result = mysql_fetch_array($result);
  
-			$hishdr = array();
-			$hishdr["hishdrId"] = $result["HISHDRID"];
-			$hishdr["hishdrTblNo"] = $result["HISHDRTBLNO"];
-			$hishdr["hishdrCus"] = $result["HISTRNCUS"];			
-			$hishdr["hishdrPrice"] = $result["HISHDRTOTALPRICE"];
-			$hishdr["hishdrStat"] = $result["HISTRNSTAT"];
-			$hishdr["hishdrTime"] = $result["HISHDRTIME"];	
+			$hisdtl = array();
+			$hisdtl["hisdtlId"] = $result["HISDTLID"];
+			$hisdtl["hisdtlHdrId"] = $result["HISHDRID"];
+			$hisdtl["hisdtlItmId"] = $result["HISDTLITMID"];
+			$hisdtl["hisdtlQty"] = $result["HISDTLQTY"];	
+			$hisdtl["hisdtlPrice"] = $result["HISDTLPRICE"];						
+			$hisdtl["hisdtlTime"] = $result["HISTIME"];
 			// success
 			$response["success"] = 1;
  
 			// user node
-			$response["hishdr"] = array();
+			$response["hisdtl"] = array();
  
-			array_push($response["hishdr"], $hishdr);
+			array_push($response["hisdtl"], $hisdtl);
  
 			// echoing JSON response
 			echo json_encode($response);
@@ -64,9 +63,6 @@ else {
 	// echoing JSON response
 	echo json_encode($response);
 }
-		
-		
-	
 	
 
 ?>
