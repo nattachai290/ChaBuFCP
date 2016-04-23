@@ -56,6 +56,7 @@ public class OrderMenu extends AppCompatActivity
         setContentView(R.layout.order_menu_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("โต๊ะที่ " + numTable);
         initViewPager();
         initTabHost();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -85,7 +86,7 @@ public class OrderMenu extends AppCompatActivity
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                getSupportActionBar().setTitle(mActivityTitle);
+                getSupportActionBar().setTitle("โต๊ะที่ "+numTable);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
