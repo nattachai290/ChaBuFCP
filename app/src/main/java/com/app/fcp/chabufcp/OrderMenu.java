@@ -133,19 +133,24 @@ public class OrderMenu extends AppCompatActivity
         Class fragmentClass = null;
         if (id == R.id.nav_profile) {
             // Handle the camera action
-            fragmentClass = AddCustomer.class;
+//            fragmentClass = AddCustomer.class;
+//
+//            try {
+//                fragment = (Fragment) fragmentClass.newInstance();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//
+//            FragmentManager fragmentManager = getSupportFragmentManager();
+//            fragmentManager.beginTransaction().replace(R.id.main_nav_content, fragment).commit();
+//            item.setChecked(true);
 
-            try {
-                fragment = (Fragment) fragmentClass.newInstance();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.main_nav_content, fragment).commit();
-            item.setChecked(true);
-
-        } else if (id == R.id.nav_home) {
+        }
+        else if(id==R.id.nav_checkBill){
+            Intent i = new Intent(this,CheckBill.class);
+            startActivity(i);
+        }
+        else if (id == R.id.nav_home) {
             Intent main = new Intent(this,MainOverView.class);
             startActivity(main);
         }else if (id == R.id.nav_logout) {

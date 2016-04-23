@@ -42,8 +42,6 @@ import java.util.List;
 
 public class MainOverView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private final String MSG_NavigateUser = "MainOverView";
-    ViewPager viewPager;
-    TabHost tabhost;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final String mActivityTitle = getTitle().toString();
@@ -51,9 +49,6 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.over_view_activity_navigation);
-//        initViewPager();
-//        initTabHost();
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.nav_toolbar);
         setSupportActionBar(toolbar);
 
@@ -61,8 +56,8 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
                 order();
 
             }
@@ -119,88 +114,6 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
 
     }
 
-
-    //pageListening
-//    @Override
-//    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//
-//    }
-
-//    @Override
-//    public void onPageSelected(int position) {
-//        tabhost.setCurrentTab(position);
-//
-//        calcTabHost();
-//    }
-
-//    @Override
-//    public void onPageScrollStateChanged(int state) {
-//
-//    }
-
-    //tabListening
-//    @Override
-//    public void onTabChanged(String tabId) {
-//        int selectTab = tabhost.getCurrentTab();
-//        viewPager.setCurrentItem(selectTab);
-//
-//        calcTabHost();
-//
-//    }
-
-//    private void initTabHost() {
-//        tabhost = (TabHost) findViewById(R.id.tabHost);
-//        tabhost.setup();
-//        String[] tabName = {"หมู","ไก่","ทะเล","เนื้อวัว","ผัก","ซูชิ","อาหารเส้น","อาหารสำเร็จรูป","ไข่","ของหวาน","ผลไม้","แอลกอฮอล์"};
-//        for (String i : tabName){
-//            TabHost.TabSpec tabSpec;
-//            tabSpec = tabhost.newTabSpec(i);
-//            tabSpec.setIndicator(i);
-//            tabSpec.setContent(new FakeConten(getApplicationContext()));
-//            tabhost.addTab(tabSpec);
-//        }
-//        tabhost.setOnTabChangedListener(this);
-//    }
-
-
-
-//    public class FakeConten implements TabHost.TabContentFactory {
-//        Context context;
-//        public FakeConten(Context context) {
-//            this.context = context;
-//        }
-//
-//        @Override
-//        public View createTabContent(String tag) {
-//            View fakeView = new View(context);
-//            fakeView.setMinimumHeight(0);
-//            fakeView.setMinimumWidth(0);
-//            return fakeView;
-//        }
-//    }
-
-//    private void initViewPager() {
-////       {"หมู","ไก่","ทะเล","เนื้อวัว","ผัก","ซูชิ","อาหารเส้น","อาหารสำเร็จรูป","ไข่","ของหวาน","ผลไม้","แอลกอฮอล์"};
-//        viewPager = (ViewPager) findViewById(R.id.view_page);
-//        List<Fragment> listFragment = new ArrayList<Fragment>();
-//        listFragment.add(new fragment_pig());
-//        listFragment.add(new fragment_chicken());
-//        listFragment.add(new fragment_aquatic_animal());
-//        listFragment.add(new fragment_beef());
-//        listFragment.add(new fragment_vegetable());
-//        listFragment.add(new fragment_shushi());
-//        listFragment.add(new fragment_noodles());
-//        listFragment.add(new fragment_snack());
-//        listFragment.add(new fragment_egg());
-//        listFragment.add(new fragment_dessert());
-//        listFragment.add(new fragment_fruit());
-//        listFragment.add(new fragment_alcohol());
-//
-//        fragmentPageAdapter myfragmentPagerAdapter = new fragmentPageAdapter(getSupportFragmentManager(),listFragment);
-//        viewPager.setAdapter(myfragmentPagerAdapter);
-//        viewPager.setOnPageChangeListener(this);
-//    }
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -245,24 +158,29 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
         Class fragmentClass = null;
         if (id == R.id.nav_profile) {
             // Handle the camera action
-            fragmentClass = AddCustomer.class;
+//            fragmentClass = AddCustomer.class;
+//
+//            try {
+//                fragment = (Fragment) fragmentClass.newInstance();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//
+//            FragmentManager fragmentManager = getSupportFragmentManager();
+//            fragmentManager.beginTransaction().replace(R.id.main_nav_content, fragment).commit();
+//            item.setChecked(true);
 
-            try {
-                fragment = (Fragment) fragmentClass.newInstance();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.main_nav_content, fragment).commit();
-            item.setChecked(true);
-
-        } else if (id == R.id.nav_home) {
-            Intent main = new Intent(this,MainOverView.class);
-            startActivity(main);
+        }
+        else if(id==R.id.nav_checkBill){
+            Intent i = new Intent(this,CheckBill.class);
+            startActivity(i);
+        }
+        else if (id == R.id.nav_home) {
+            Intent i = new Intent(this,MainOverView.class);
+            startActivity(i);
         }else if (id == R.id.nav_logout) {
-            Intent main = new Intent(this,MainLoginActivity.class);
-            startActivity(main);
+            Intent i = new Intent(this,MainLoginActivity.class);
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -2,6 +2,7 @@ package com.app.fcp.chabufcp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 import com.app.fcp.constant.DatabaseConstant;
@@ -29,8 +31,6 @@ public class MainLoginActivity extends AppCompatActivity {
         setContentView(R.layout.login_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
     @Override
@@ -116,10 +116,14 @@ public class MainLoginActivity extends AppCompatActivity {
                 }
                 else{
                     Log.i(MSG_MainActivity, "User name or password Wrong!!! ");
+//                    Snackbar.make(view, "username หรือ password ไม่ถูกต้อง", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                    Toast.makeText(this, "username หรือ password ไม่ถูกต้อง", Toast.LENGTH_LONG).show();
                 }
             }
             else{
                 Log.i(MSG_MainActivity, "User name or password Wrong!!! ");
+//                Snackbar.make(view, "username หรือ password ไม่ถูกต้อง", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                Toast.makeText(this, "username หรือ password ไม่ถูกต้อง", Toast.LENGTH_LONG).show();
             }
 
         }catch (JSONException e){

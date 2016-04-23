@@ -10,6 +10,11 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.NFC" />
+
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
@@ -31,11 +36,15 @@
             android:name=".MainOverView"
             android:label="@string/title_activity_navigation_user"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AddTable" />
+        <activity
+            android:name=".AddTable"
+            android:label="@string/title_activity_add_table"
+            android:parentActivityName=".MainOverView"></activity>
         <activity
             android:name=".OrderMenu"
             android:label="@string/title_activity_order_menu"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".CheckBill"></activity>
     </application>
 
 </manifest>
