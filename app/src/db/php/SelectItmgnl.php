@@ -26,10 +26,7 @@ if (isset($_POST["name"])||isset($_POST["id"])||isset($_POST["type"])){
 	
 	  if (!empty($result)) {
 		   // check for empty result
-		   
-		if (mysql_num_rows($result) > 0){				
-			// user node
-			$response["itmgnl"] = array();
+		  $response["itmgnl"] = array();
 			
 			 while ($row = mysql_fetch_array($result)) {
 				// temp user array
@@ -52,15 +49,6 @@ if (isset($_POST["name"])||isset($_POST["id"])||isset($_POST["type"])){
  
 			// echoing JSON response
 			echo json_encode($response);
-		}
-		else {
-			// no product found
-			$response["success"] = 0;
-			$response["message"] = "Data No found1 ";
- 
-			// echo no users JSON
-			echo json_encode($response);
-		}  	 
 	  }
 	  else {
 		// no product found

@@ -4,49 +4,49 @@ package com.app.fcp.chabufcp.entity;
  * Created by arm on 24/4/2559.
  */
 public class User {
-    private String USERID;
-    private String USERNAME;
-    private String POSITION;
-    private String FNAME;
-    private String LNAME;
+    static private String USERID;
+    static private String USERNAME;
+    static private String POSITION;
+    static private String FNAME;
+    static private String LNAME;
 
-    public String getUSERID() {
+    public static String getUSERID() {
         return USERID;
     }
 
-    public void setUSERID(String USERID) {
-        this.USERID = USERID;
+    public static void setUSERID(String USERID) {
+        User.USERID = USERID;
     }
 
-    public String getUSERNAME() {
+    public static String getUSERNAME() {
         return USERNAME;
     }
 
-    public void setUSERNAME(String USERNAME) {
-        this.USERNAME = USERNAME;
+    public static void setUSERNAME(String USERNAME) {
+        User.USERNAME = USERNAME;
     }
 
-    public String getPOSITION() {
+    public static String getPOSITION() {
         return POSITION;
     }
 
-    public void setPOSITION(String POSITION) {
-        this.POSITION = POSITION;
+    public static void setPOSITION(String POSITION) {
+        User.POSITION = POSITION;
     }
 
-    public String getFNAME() {
+    public static String getFNAME() {
         return FNAME;
     }
 
-    public void setFNAME(String FNAME) {
-        this.FNAME = FNAME;
+    public static void setFNAME(String FNAME) {
+        User.FNAME = FNAME;
     }
 
-    public String getLNAME() {
+    public static String getLNAME() {
         return LNAME;
     }
 
-    public void setLNAME(String LNAME) {
-        this.LNAME = LNAME;
+    public static void setLNAME(String LNAME) {
+        User.LNAME = LNAME;
     }
 }

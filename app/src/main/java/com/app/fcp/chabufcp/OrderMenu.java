@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -44,7 +45,7 @@ import java.util.List;
 
 public class OrderMenu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,ViewPager.OnPageChangeListener,TabHost.OnTabChangeListener {
-    private final String MSG_OrderMenu = "OrderMenu";
+    private final String MSG = "OrderMenu";
     ViewPager viewPager;
     TabHost tabhost;
     String numTable ;
@@ -80,9 +81,10 @@ public class OrderMenu extends AppCompatActivity
 
                 TextView textUser = (TextView) findViewById(R.id.nav_head_name);
                 TextView textPosition = (TextView) findViewById(R.id.nav_head_pos);
-                User user = new User();
-                textUser.setText(user.getUSERNAME());
-                textPosition.setText(user.getPOSITION());
+                Log.i(MSG, User.getUSERNAME());
+                Log.i(MSG, User.getPOSITION());
+                textUser.setText(User.getUSERNAME());
+                textPosition.setText(User.getPOSITION());
 
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
@@ -254,6 +256,25 @@ public class OrderMenu extends AppCompatActivity
         viewPager.setCurrentItem(selectTab);
 
         calcTabHost();
+
+    }
+
+    public void removeItem(View view){
+
+    }
+
+    public void addItem(View view){
+        TextView numItem = (TextView) findViewById(R.id.number_order);
+        String order = numItem.getText().toString();
+        int number = 1;
+        Log.i(MSG, order);
+        if(order.isEmpty()){
+            numItem.setText(String.valueOf(number));
+            Log.i(MSG, numItem.toString());
+        }else{
+            numItem.setText(String.valueOf(number+1));
+            Log.i(MSG, numItem.toString());
+        }
 
     }
 }

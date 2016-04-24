@@ -66,7 +66,7 @@ public class MainLoginActivity extends AppCompatActivity {
 
         try{
             QueryService query = new QueryServiceImp();
-            JSONObject JObjectResult = query.selectData(link,post,userName);
+            JSONObject JObjectResult = query.selectData(link,"now",post,userName);
             int jResponse = JObjectResult.getInt("success");
             Log.i(MSG, "jResponse: " + jResponse);
 
@@ -106,12 +106,12 @@ public class MainLoginActivity extends AppCompatActivity {
                 if(Qpassword.equals(password)){
                     Log.i(MSG, "Welcome "+userName);
                     Intent i = new Intent(this,MainOverView.class);
-                    User user = new User();
-                    user.setUSERID(QuserId);
-                    user.setUSERNAME(Qname);
-                    user.setFNAME(Qfname);
-                    user.setLNAME(Qlname);
-                    user.setPOSITION(Qposition);
+
+                    User.setUSERID(QuserId);
+                    User.setUSERNAME(Qname);
+                    User.setFNAME(Qfname);
+                    User.setLNAME(Qlname);
+                    User.setPOSITION(Qposition);
                     startActivity(i);
                 }
                 else{

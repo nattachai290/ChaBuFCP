@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -27,7 +28,7 @@ import java.util.concurrent.ExecutionException;
  * Created by arm on 9/4/2559.
  */
 public class listItemAdapter extends ArrayAdapter<String> {
-    private final String MSG_MainActivity = "listItemAdapter";
+    private final String MSG = "listItemAdapter";
     private int layoutResourceId;
     private List<String> list;
     private int[] imageId;
@@ -52,7 +53,7 @@ public class listItemAdapter extends ArrayAdapter<String> {
         imgPlus.setImageResource(imageId[0]);
 
         ImageView imgMinus = (ImageView) convertView.findViewById(R.id.imageButtonMinus);
-        imgPlus.setImageResource(imageId[1]);
+        imgMinus.setImageResource(imageId[1]);
 
         return convertView;
     }

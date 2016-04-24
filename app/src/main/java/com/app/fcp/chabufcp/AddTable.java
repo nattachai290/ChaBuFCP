@@ -53,7 +53,7 @@ public class AddTable extends AppCompatActivity {
             String link = DatabaseConstant.INSERT_HISTRNSHDR;
             try{
                 QueryService query = new QueryServiceImp();
-                JSONObject JObjectResult = query.InsertData(link,num_parameter,numTable,numCustomer);
+                JSONObject JObjectResult = query.InsertData(link,"now",num_parameter,numTable,numCustomer);
                 int jResponse = JObjectResult.getInt("success");
                 Log.i(MSG, "jResponse: " + jResponse);
 

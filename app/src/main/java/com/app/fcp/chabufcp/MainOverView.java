@@ -1,12 +1,9 @@
 package com.app.fcp.chabufcp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -18,31 +15,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.HorizontalScrollView;
-import android.widget.TabHost;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import com.app.fcp.chabufcp.adapter.fragmentPageAdapter;
+import com.app.fcp.chabufcp.adapter.OverViewAdapter;
+import com.app.fcp.chabufcp.entity.HisTrnHdr;
 import com.app.fcp.chabufcp.entity.User;
-import com.app.fcp.chabufcp.fragment.AddCustomer;
-import com.app.fcp.chabufcp.fragment.tab.fragment_alcohol;
-import com.app.fcp.chabufcp.fragment.tab.fragment_aquatic_animal;
-import com.app.fcp.chabufcp.fragment.tab.fragment_beef;
-import com.app.fcp.chabufcp.fragment.tab.fragment_chicken;
-import com.app.fcp.chabufcp.fragment.tab.fragment_dessert;
-import com.app.fcp.chabufcp.fragment.tab.fragment_egg;
-import com.app.fcp.chabufcp.fragment.tab.fragment_fruit;
-import com.app.fcp.chabufcp.fragment.tab.fragment_noodles;
-import com.app.fcp.chabufcp.fragment.tab.fragment_pig;
-import com.app.fcp.chabufcp.fragment.tab.fragment_shushi;
-import com.app.fcp.chabufcp.fragment.tab.fragment_snack;
-import com.app.fcp.chabufcp.fragment.tab.fragment_vegetable;
+import com.app.fcp.chabufcp.entity.itemgnl;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MainOverView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private final String MSG = "MainOverView";
+    ViewPager viewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final String mActivityTitle = getTitle().toString();
@@ -52,7 +38,7 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.over_view_activity_navigation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.nav_toolbar);
         setSupportActionBar(toolbar);
-
+        initTable();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,9 +65,11 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
 //                String msgPos = data.getString("position");
                 TextView textUser = (TextView) findViewById(R.id.nav_head_name);
                 TextView textPosition = (TextView) findViewById(R.id.nav_head_pos);
-                User user = new User();
-                textUser.setText(user.getUSERNAME());
-                textPosition.setText(user.getPOSITION());
+
+                Log.i(MSG, User.getUSERNAME());
+                Log.i(MSG, User.getPOSITION());
+                textUser.setText(User.getUSERNAME());
+                textPosition.setText(User.getPOSITION());
 
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
@@ -101,6 +89,18 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
 
 
 
+
+    }
+
+
+    private void initTable() {
+        HisTrnHdr hdr = new HisTrnHdr();
+        Map<String,List> map = hdr.initData();
+        if(map.get("ListHdrTableNo")!=null){
+            ListView list = (ListView) findViewById(R.id.listView_overview);
+            OverViewAdapter myAdap = new OverViewAdapter(this,R.layout.over_view_content_navigation, map.get("ListHdrTableNo"));
+            list.setAdapter(myAdap);
+        }
 
     }
 

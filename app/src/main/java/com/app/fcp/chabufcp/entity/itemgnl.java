@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutionException;
  * Created by arm on 9/4/2559.
  */
 public class itemgnl {
-    private final String MSG_MainActivity = "listItemAdapter";
+    private final String MSG = "itemgnl";
     private String type = null;
     private String post = null;
 
@@ -36,15 +36,15 @@ public class itemgnl {
 
         try {
             QueryService query = new QueryServiceImp();
-            JSONObject JObjectResult = query.selectData(link,post,type);
+            JSONObject JObjectResult = query.selectData(link,"now",post,type);
             int jResponse = JObjectResult.getInt("success");
-            Log.i(MSG_MainActivity, "jResponse: " + jResponse);
+            Log.i(MSG, "jResponse: " + jResponse);
 
             if(jResponse==1){
                 JSONArray jMember = JObjectResult.getJSONArray("itmgnl");
-                Log.i(MSG_MainActivity, "itmgnl: " + jMember.toString());
+                Log.i(MSG, "itmgnl: " + jMember.toString());
 
-                Log.i(MSG_MainActivity, "=========================================");
+                Log.i(MSG, "=========================================");
                 String QitmId=null,QitmName=null,QitmQty=null,QitmType=null;
                 ArrayList<String> ListItmId = new  ArrayList<String>();
                 ArrayList<String> ListItmName = new  ArrayList<String>();
@@ -53,40 +53,40 @@ public class itemgnl {
                 for (int i = 0; i < jMember.length(); i++) {
 
                     QitmId = jMember.getJSONObject(i).getString("itmId");
-                    Log.i(MSG_MainActivity, "item Id: " + QitmId);
+                    Log.i(MSG, "item Id: " + QitmId);
                     ListItmId.add(QitmId);
 
                     QitmName = jMember.getJSONObject(i).getString("itmName");
-                    Log.i(MSG_MainActivity, "item Name: " + QitmName);
+                    Log.i(MSG, "item Name: " + QitmName);
                     ListItmName.add(QitmName);
 
                     QitmQty = jMember.getJSONObject(i).getString("itmQty");
-                    Log.i(MSG_MainActivity, "qty: " + QitmQty);
+                    Log.i(MSG, "qty: " + QitmQty);
                     ListItmQty.add(QitmQty);
 
                     QitmType = jMember.getJSONObject(i).getString("itmType");
-                    Log.i(MSG_MainActivity, "item type: " + QitmType);
+                    Log.i(MSG, "item type: " + QitmType);
                 }
                 map.put("ListItmId",ListItmId);
                 map.put("ListItmName",ListItmName);
                 map.put("ListItmQty",ListItmQty);
-                Log.i(MSG_MainActivity, "=========================================");
+                Log.i(MSG, "=========================================");
 
             }
             else{
-                Log.i(MSG_MainActivity, "No data found");
+                Log.i(MSG, "No data found");
             }
         }
         catch (JSONException e){
-            Log.i(MSG_MainActivity, "Error JSON: " + e.toString());
+            Log.i(MSG, "Error JSON: " + e.toString());
         }catch (NullPointerException e){
-            Log.i(MSG_MainActivity, "Error NullPointer: "+e.toString());
+            Log.i(MSG, "Error NullPointer: "+e.toString());
         }catch (InterruptedException e){
-            Log.i(MSG_MainActivity, "Error Interrupted: "+e.toString());
+            Log.i(MSG, "Error Interrupted: "+e.toString());
         }catch (ExecutionException e){
-            Log.i(MSG_MainActivity, "Error Execution: "+e.toString());
+            Log.i(MSG, "Error Execution: "+e.toString());
         }catch (Exception e){
-            Log.i(MSG_MainActivity, "Error Exception: "+e.toString());
+            Log.i(MSG, "Error Exception: "+e.toString());
         }
 
         return map;

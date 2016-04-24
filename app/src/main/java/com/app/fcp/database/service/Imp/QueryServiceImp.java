@@ -29,8 +29,8 @@ public class QueryServiceImp implements QueryService {
         Log.i(MSG, "Begin SelectData");
         final String link = param[0];
         final JSONObject[] jResult = {null};
-        final String post = param[1];
-        final String post_var = param[2];
+        final String post = param[2];
+        final String post_var = param[3];
         class connectDataBase extends AsyncTask<Void, Void,Void>{
             @Override
             protected Void doInBackground(Void... params) {
@@ -118,7 +118,14 @@ public class QueryServiceImp implements QueryService {
             }
         }
 
-        new connectDataBase().execute().get();
+
+
+        if(param[1].equalsIgnoreCase("now")){
+            new connectDataBase().execute().get();
+        }else{
+            new connectDataBase().execute();
+        }
+
 
         Log.i(MSG, "Exit SelectData");
         return jResult[0];
@@ -129,7 +136,7 @@ public class QueryServiceImp implements QueryService {
         Log.i(MSG, "Begin InsertData");
         final String link = param[0];
         final JSONObject[] jResult = {null};
-        final int number_parameter = Integer.valueOf(param[1]);
+        final int number_parameter = Integer.valueOf(param[2]);
         Log.i(MSG, "Link: "+link);
         Log.i(MSG, "number parameter: "+number_parameter);
         class connectDataBase extends AsyncTask<Void, Void,Void> {
@@ -222,7 +229,11 @@ public class QueryServiceImp implements QueryService {
                 return null;
             }
         }
-        new connectDataBase().execute().get();
+        if(param[1].equalsIgnoreCase("now")){
+            new connectDataBase().execute().get();
+        }else{
+            new connectDataBase().execute();
+        }
         Log.i(MSG, "Exit InsertData");
         return jResult[0];
     }
