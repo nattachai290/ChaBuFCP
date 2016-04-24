@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.app.fcp.constant.Constant;
 import com.app.fcp.constant.DatabaseConstant;
 import com.app.fcp.database.service.Imp.QueryServiceImp;
 import com.app.fcp.database.service.QueryService;
@@ -36,15 +37,15 @@ public class AddTable extends AppCompatActivity {
         String numCustomer = number_customer.getText().toString();
         if(numTable.isEmpty()&&numCustomer.isEmpty()){
 //            Snackbar.make(view, "กรุณาใส่หมายเลขโต๊ะ และจำนวนลูกค้า", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-            Toast.makeText(this, "กรุณาใส่หมายเลขโต๊ะ และจำนวนลูกค้า", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, Constant.ERROR_NUMBER_TABLE_AND_CUSTOMER, Toast.LENGTH_LONG).show();
         }
         else if(numTable.isEmpty()){
 //            Snackbar.make(view, "กรุณาใส่หมายเลขโต๊ะ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-            Toast.makeText(this, "กรุณาใส่หมายเลขโต๊ะ", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, Constant.ERROR_NUMBER_TABLE, Toast.LENGTH_LONG).show();
         }
         else if(numCustomer.isEmpty()){
 //            Snackbar.make(view, "กรุณาใส่จำนวนลูกค้า", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-            Toast.makeText(this, "กรุณาใส่จำนวนลูกค้า", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, Constant.ERROR_NUMBER_CUSTOMER, Toast.LENGTH_LONG).show();
         }
         else{
 
@@ -73,7 +74,7 @@ public class AddTable extends AppCompatActivity {
 
                     if(Integer.valueOf(QhishdrId) == 0){
                         Log.i(MSG, "Table not available!!! ");
-                        Toast.makeText(this, "โต๊ะ "+numTable+ "ไม่ว่าง", Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, Constant.TABLE+numTable+Constant.BUSY, Toast.LENGTH_LONG).show();
                     }
                     else{
                         Intent i = new Intent(this,OrderMenu.class);
@@ -88,7 +89,7 @@ public class AddTable extends AppCompatActivity {
                 else{
                     Log.i(MSG, "Something wrong!!! ");
 //                Snackbar.make(view, "username หรือ password ไม่ถูกต้อง", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                    Toast.makeText(this, "การส่งค่าผิดพลาด", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, Constant.ERROR_PARAMETER, Toast.LENGTH_LONG).show();
                 }
 
             }catch (JSONException e){

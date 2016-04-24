@@ -12,7 +12,8 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainLoginActivity"
     tools:showIn="@layout/login_activity"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="#ffffff">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -28,7 +29,8 @@
         android:hint="@string/text_username"
         android:layout_marginLeft="20dp"
         android:layout_marginBottom="20dp"
-        android:layout_marginRight="20dp" />
+        android:layout_marginRight="20dp"
+        style="@style/BorderEditText" />
 
     <EditText
         android:layout_width="match_parent"

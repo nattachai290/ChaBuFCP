@@ -2,9 +2,7 @@ package com.app.fcp.chabufcp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,7 +11,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.app.fcp.constant.Constant;
 import com.app.fcp.constant.DatabaseConstant;
+import com.app.fcp.chabufcp.entity.User;
 import com.app.fcp.database.service.Imp.QueryServiceImp;
 import com.app.fcp.database.service.QueryService;
 
@@ -29,8 +29,8 @@ public class MainLoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+//        setSupportActionBar(toolbar);
     }
 
     @Override
@@ -106,24 +106,24 @@ public class MainLoginActivity extends AppCompatActivity {
                 if(Qpassword.equals(password)){
                     Log.i(MSG, "Welcome "+userName);
                     Intent i = new Intent(this,MainOverView.class);
-                    i.putExtra("userId", QuserId);
-                    i.putExtra("userName", Qname);
-                    i.putExtra("password", Qpassword);
-                    i.putExtra("fname", Qfname);
-                    i.putExtra("lname", Qlname);
-                    i.putExtra("position", Qposition);
+                    User user = new User();
+                    user.setUSERID(QuserId);
+                    user.setUSERNAME(Qname);
+                    user.setFNAME(Qfname);
+                    user.setLNAME(Qlname);
+                    user.setPOSITION(Qposition);
                     startActivity(i);
                 }
                 else{
                     Log.i(MSG, "User name or password Wrong!!! ");
 //                    Snackbar.make(view, "username หรือ password ไม่ถูกต้อง", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                    Toast.makeText(this, "username หรือ password ไม่ถูกต้อง", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, Constant.ERROR_PASSWORD, Toast.LENGTH_LONG).show();
                 }
             }
             else{
                 Log.i(MSG, "User name or password Wrong!!! ");
 //                Snackbar.make(view, "username หรือ password ไม่ถูกต้อง", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                Toast.makeText(this, "username หรือ password ไม่ถูกต้อง", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, Constant.ERROR_PASSWORD, Toast.LENGTH_LONG).show();
             }
 
         }catch (JSONException e){

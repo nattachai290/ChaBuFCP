@@ -22,6 +22,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.app.fcp.chabufcp.adapter.fragmentPageAdapter;
+import com.app.fcp.chabufcp.entity.User;
 import com.app.fcp.chabufcp.fragment.AddCustomer;
 import com.app.fcp.chabufcp.fragment.tab.fragment_alcohol;
 import com.app.fcp.chabufcp.fragment.tab.fragment_aquatic_animal;
@@ -35,6 +36,7 @@ import com.app.fcp.chabufcp.fragment.tab.fragment_pig;
 import com.app.fcp.chabufcp.fragment.tab.fragment_shushi;
 import com.app.fcp.chabufcp.fragment.tab.fragment_snack;
 import com.app.fcp.chabufcp.fragment.tab.fragment_vegetable;
+import com.app.fcp.constant.Constant;
 import com.app.fcp.constant.DatabaseConstant;
 
 import java.util.ArrayList;
@@ -56,7 +58,15 @@ public class OrderMenu extends AppCompatActivity
         setContentView(R.layout.order_menu_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("โต๊ะที่ " + numTable);
+
+        Bundle data = getIntent().getExtras();
+        if(data!=null){
+            numTable = data.getString("numTable");
+            numCustomer = data.getString("numCustomer");
+            tableId = data.getString("tableId");
+        }
+
+        getSupportActionBar().setTitle(Constant.TABLE + numTable);
         initViewPager();
         initTabHost();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -67,18 +77,12 @@ public class OrderMenu extends AppCompatActivity
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
 
-                Bundle data = getIntent().getExtras();
-                if(data==null){
-                    return;
-                }
 
-                numTable = data.getString("numTable");
-                numCustomer = data.getString("numCustomer");
-                tableId = data.getString("tableId");
-//                TextView textUser = (TextView) findViewById(R.id.nav_head_name);
-//                TextView textPosition = (TextView) findViewById(R.id.nav_head_pos);
-//                textUser.setText(msgUser);
-//                textPosition.setText(msgPos);
+                TextView textUser = (TextView) findViewById(R.id.nav_head_name);
+                TextView textPosition = (TextView) findViewById(R.id.nav_head_pos);
+                User user = new User();
+                textUser.setText(user.getUSERNAME());
+                textPosition.setText(user.getPOSITION());
 
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
@@ -86,7 +90,7 @@ public class OrderMenu extends AppCompatActivity
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                getSupportActionBar().setTitle("โต๊ะที่ "+numTable);
+                getSupportActionBar().setTitle(Constant.TABLE+numTable);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
@@ -200,7 +204,7 @@ public class OrderMenu extends AppCompatActivity
     private void initTabHost() {
         tabhost = (TabHost) findViewById(R.id.tabHost);
         tabhost.setup();
-        String[] tabName = {"หมู","ไก่","ทะเล","เนื้อวัว","ผัก","ซูชิ","อาหารเส้น","อาหารสำเร็จรูป","ไข่","ของหวาน","ผลไม้","แอลกอฮอล์"};
+        String[] tabName = {Constant.TAB_PIG,Constant.TAB_CHICKEN,Constant.TAB_AQUATIC_ANIMAL,Constant.TAB_BEEF,Constant.TAB_VEGETABLE,Constant.TAB_SHUSHI,Constant.TAB_NOODLES,Constant.TAB_SNACK,Constant.TAB_EGG,Constant.TAB_DESSERT,Constant.TAB_FRUIT,Constant.TAB_ALCOHOL};
         for (String i : tabName){
             TabHost.TabSpec tabSpec;
             tabSpec = tabhost.newTabSpec(i);

@@ -23,6 +23,7 @@ import android.widget.TabHost;
 import android.widget.TextView;
 
 import com.app.fcp.chabufcp.adapter.fragmentPageAdapter;
+import com.app.fcp.chabufcp.entity.User;
 import com.app.fcp.chabufcp.fragment.AddCustomer;
 import com.app.fcp.chabufcp.fragment.tab.fragment_alcohol;
 import com.app.fcp.chabufcp.fragment.tab.fragment_aquatic_animal;
@@ -41,11 +42,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainOverView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private final String MSG_NavigateUser = "MainOverView";
+    private final String MSG = "MainOverView";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final String mActivityTitle = getTitle().toString();
-        Log.i(MSG_NavigateUser, "Start onCreate NavigateUser");
+        Log.i(MSG, "Start onCreate NavigateUser");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.over_view_activity_navigation);
@@ -69,29 +70,18 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
 
-                Bundle data = getIntent().getExtras();
-                if(data==null){
-                    return;
-                }
-
-//                String msgId = data.getString("userId");
-                String msgUser = data.getString("userName");
-//                String msgPwd = data.getString("password");
-//                String msgFname = data.getString("fname");
-//                String msgLname = data.getString("lname");
-                String msgPos = data.getString("position");
-
-//                Log.i(MSG_NavigateUser, "msgUser: "+msgUser);
-//                Log.i(MSG_NavigateUser, "msgPos: "+msgPos);
-
+//                Bundle data = getIntent().getExtras();
+//                if(data==null){
+//                    return;
+//                }
+//
+//                String msgUser = data.getString("userName");
+//                String msgPos = data.getString("position");
                 TextView textUser = (TextView) findViewById(R.id.nav_head_name);
                 TextView textPosition = (TextView) findViewById(R.id.nav_head_pos);
-
-//                Log.i(MSG_NavigateUser, "TextView User: "+textUser);
-//                Log.i(MSG_NavigateUser, "TextView Pos: " + textPosition);
-
-                textUser.setText(msgUser);
-                textPosition.setText(msgPos);
+                User user = new User();
+                textUser.setText(user.getUSERNAME());
+                textPosition.setText(user.getPOSITION());
 
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
