@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.app.fcp.chabufcp.entity.User;
 import com.app.fcp.constant.Constant;
 import com.app.fcp.constant.DatabaseConstant;
 import com.app.fcp.database.service.Imp.QueryServiceImp;
@@ -49,11 +50,11 @@ public class AddTable extends AppCompatActivity {
         }
         else{
 
-            String num_parameter = "2";
+            int num_parameter = 3;
             String link = DatabaseConstant.INSERT_HISTRNSHDR;
             try{
                 QueryService query = new QueryServiceImp();
-                JSONObject JObjectResult = query.InsertData(link,"now",num_parameter,numTable,numCustomer);
+                JSONObject JObjectResult = query.InsertData(link,"now",num_parameter,numTable,numCustomer, User.getUSERID());
                 int jResponse = JObjectResult.getInt("success");
                 Log.i(MSG, "jResponse: " + jResponse);
 

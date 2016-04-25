@@ -21,6 +21,7 @@ import java.util.concurrent.ExecutionException;
  */
 public class HisTrnHdr {
     private final String MSG = "HisTrnHdr";
+    JSONObject JObjectResult ;
 
     public Map<String,List> initData(){
         Log.i(MSG, "Begin initData");
@@ -30,7 +31,7 @@ public class HisTrnHdr {
         try {
 
             QueryService query = new QueryServiceImp();
-            JSONObject JObjectResult = query.selectData(link,"",null,null);
+            JObjectResult = query.selectData(link, "now", null, null);
             Log.i(MSG, "JObjectResult: " + JObjectResult);
             int jResponse = JObjectResult.getInt("success");
             Log.i(MSG, "jResponse: " + jResponse);
@@ -40,34 +41,40 @@ public class HisTrnHdr {
                 Log.i(MSG, "hishdr: " + jMember.toString());
 
                 Log.i(MSG, "=========================================");
-                String QHdrId=null,QHdrTableNo=null,QHdrPrice=null,QHdrCus=null;
+                String QHdrId=null,QHdrTableNo=null,QHdrPrice=null,QHdrCus=null,QHdrTime=null;
                 ArrayList<String> ListHdrId = new  ArrayList<String>();
                 ArrayList<String> ListHdrTableNo = new  ArrayList<String>();
                 ArrayList<String> ListHdrCus = new  ArrayList<String>();
                 ArrayList<String> ListHdrPrice = new  ArrayList<String>();
-
+                ArrayList<String> ListHdrTime = new  ArrayList<String>();
                 for (int i = 0; i < jMember.length(); i++) {
 
                     QHdrId = jMember.getJSONObject(i).getString("hishdrId");
-                    Log.i(MSG, "item Id: " + QHdrId);
+                    Log.i(MSG, "hishdr Id: " + QHdrId);
                     ListHdrId.add(QHdrId);
 
                     QHdrTableNo = jMember.getJSONObject(i).getString("hishdrTblNo");
-                    Log.i(MSG, "item Name: " + QHdrTableNo);
+                    Log.i(MSG, "hishdrTblNo: " + QHdrTableNo);
                     ListHdrTableNo.add(QHdrTableNo);
 
                     QHdrCus = jMember.getJSONObject(i).getString("hishdrCus");
-                    Log.i(MSG, "qty: " + QHdrCus);
+                    Log.i(MSG, "hishdrCus: " + QHdrCus);
                     ListHdrCus.add(QHdrCus);
 
+                    QHdrTime = jMember.getJSONObject(i).getString("hishdrTime");
+                    Log.i(MSG, "hishdrTime: " + QHdrTime);
+                    ListHdrTime.add(QHdrTime);
+
                     QHdrPrice = jMember.getJSONObject(i).getString("hishdrPrice");
+                    Log.i(MSG, "hishdrPrice: " + QHdrPrice);
                     ListHdrPrice.add(QHdrPrice);
-                    Log.i(MSG, "item type: " + QHdrPrice);
+
                 }
                 map.put("ListHdrId",ListHdrId);
                 map.put("ListHdrTableNo",ListHdrTableNo);
                 map.put("ListHdrCus",ListHdrCus);
                 map.put("ListHdrPrice",ListHdrPrice);
+                map.put("ListHdrTime",ListHdrTime);
                 Log.i(MSG, "=========================================");
 
             }

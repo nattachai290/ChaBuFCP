@@ -6,8 +6,9 @@ $db = new DB_CONNECT();
 	
 if (isset($_POST["para1"])){
 	$table_number = $_POST["para1"] ;
-	$customer_number = $_POST["para2"] ;
-	$query = "CALL addTable('$table_number','$customer_number',@tableid)";
+	$customer_number = $_POST["para2"];
+	$responsibility = $_POST["para3"];
+	$query = "CALL addTable('$table_number','$customer_number',@tableid,'$responsibility')";
 	$query2 = "SELECT @tableid";
 	
 	mysql_query($query) or die(mysql_error());

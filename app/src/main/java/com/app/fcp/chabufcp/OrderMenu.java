@@ -3,10 +3,7 @@ package com.app.fcp.chabufcp;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -24,7 +21,6 @@ import android.widget.TextView;
 
 import com.app.fcp.chabufcp.adapter.fragmentPageAdapter;
 import com.app.fcp.chabufcp.entity.User;
-import com.app.fcp.chabufcp.fragment.AddCustomer;
 import com.app.fcp.chabufcp.fragment.tab.fragment_alcohol;
 import com.app.fcp.chabufcp.fragment.tab.fragment_aquatic_animal;
 import com.app.fcp.chabufcp.fragment.tab.fragment_beef;
@@ -38,7 +34,6 @@ import com.app.fcp.chabufcp.fragment.tab.fragment_shushi;
 import com.app.fcp.chabufcp.fragment.tab.fragment_snack;
 import com.app.fcp.chabufcp.fragment.tab.fragment_vegetable;
 import com.app.fcp.constant.Constant;
-import com.app.fcp.constant.DatabaseConstant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +44,6 @@ public class OrderMenu extends AppCompatActivity
     ViewPager viewPager;
     TabHost tabhost;
     String numTable ;
-    String numCustomer ;
     String tableId ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +57,6 @@ public class OrderMenu extends AppCompatActivity
         Bundle data = getIntent().getExtras();
         if(data!=null){
             numTable = data.getString("numTable");
-            numCustomer = data.getString("numCustomer");
             tableId = data.getString("tableId");
         }
 
@@ -144,7 +137,7 @@ public class OrderMenu extends AppCompatActivity
         Class fragmentClass = null;
         if (id == R.id.nav_profile) {
             // Handle the camera action
-//            fragmentClass = AddCustomer.class;
+//            fragmentClass = AddCus7tomer.class;
 //
 //            try {
 //                fragment = (Fragment) fragmentClass.newInstance();

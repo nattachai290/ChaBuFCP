@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 08, 2016 at 01:16 PM
+-- Generation Time: Apr 25, 2016 at 12:51 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.19
 
@@ -19,6 +19,27 @@ SET time_zone = "+00:00";
 --
 -- Database: `chabufcp`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addTable` (IN `table_num` INT, IN `cus_num` INT, OUT `table_id` INT, IN `respons` INT)  BEGIN
+DECLARE found_check int;
+DECLARE time_eat varchar(40);
+SELECT HISHDRTBLNO INTO found_check
+FROM histrnshdr WHERE HISHDRTBLNO = table_num AND HISTRNSTAT = 'OPEN';
+
+IF found_check IS NULL THEN
+INSERT INTO  histrnshdr (HISHDRTBLNO,HISTRNCUS,HISHDRTOTALPRICE,HISHDRRESPON,HISHDRTIMEEAT) VALUES(table_num,cus_num,cus_num*239,respons,CONCAT(DATE_FORMAT(CURRENT_TIME(),'%H:%i'),' - ',DATE_FORMAT(DATE_ADD(CURRENT_TIME(),INTERVAL 2 HOUR),'%H:%i') ));
+SET table_id = LAST_INSERT_ID();
+
+ELSE SET table_id = 0; 
+END IF;
+
+END$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -56,6 +77,7 @@ CREATE TABLE `histrnsdtl` (
   `HISDTLITMID` int(11) NOT NULL,
   `HISDTLQTY` int(4) DEFAULT NULL,
   `HISDTLPRICE` int(4) DEFAULT NULL,
+  `HISDTLRESPON` int(11) NOT NULL,
   `HISTIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -68,9 +90,21 @@ CREATE TABLE `histrnsdtl` (
 CREATE TABLE `histrnshdr` (
   `HISHDRID` int(11) NOT NULL,
   `HISHDRTBLNO` int(3) NOT NULL,
+  `HISTRNCUS` int(7) NOT NULL,
   `HISHDRTOTALPRICE` int(7) DEFAULT NULL,
-  `HISHDRTIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `HISTRNSTAT` varchar(6) NOT NULL DEFAULT 'OPEN',
+  `HISHDRRESPON` int(11) NOT NULL,
+  `HISHDRTIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `HISHDRTIMEEAT` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `histrnshdr`
+--
+
+INSERT INTO `histrnshdr` (`HISHDRID`, `HISHDRTBLNO`, `HISTRNCUS`, `HISHDRTOTALPRICE`, `HISTRNSTAT`, `HISHDRRESPON`, `HISHDRTIME`, `HISHDRTIMEEAT`) VALUES
+(1, 3, 1, 239, 'OPEN', 1, '0000-00-00 00:00:00', ''),
+(2, 4, 2, 478, 'OPEN', 1, '2016-04-25 10:12:05', '17:12 - 19:12');
 
 -- --------------------------------------------------------
 
@@ -102,7 +136,7 @@ INSERT INTO `itmgnl` (`ITMID`, `ITMNAME`, `ITMQTY`, `ITMTYPE`) VALUES
 (10, 'อกไก่', 99, 3),
 (11, 'น่องไก่', 99, 3),
 (12, 'ปีกไก่', 99, 3),
-(13, 'หัวใจไก่', 99, 10),
+(13, 'หัวใจไก่', 99, 3),
 (14, 'กุ้งแม่น้ำ', 99, 4),
 (15, 'หมึกกล้วย', 99, 4),
 (16, 'ปลาดอลี่', 99, 4),
@@ -231,7 +265,7 @@ ALTER TABLE `histrnsdtl`
 -- AUTO_INCREMENT for table `histrnshdr`
 --
 ALTER TABLE `histrnshdr`
-  MODIFY `HISHDRID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `HISHDRID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `itmgnl`
 --

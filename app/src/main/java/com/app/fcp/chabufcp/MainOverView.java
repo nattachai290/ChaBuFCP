@@ -32,7 +32,7 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final String mActivityTitle = getTitle().toString();
-        Log.i(MSG, "Start onCreate NavigateUser");
+        Log.i(MSG, "Start onCreate MainOverView");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.over_view_activity_navigation);
@@ -98,7 +98,7 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
         Map<String,List> map = hdr.initData();
         if(map.get("ListHdrTableNo")!=null){
             ListView list = (ListView) findViewById(R.id.listView_overview);
-            OverViewAdapter myAdap = new OverViewAdapter(this,R.layout.over_view_content_navigation, map.get("ListHdrTableNo"));
+            OverViewAdapter myAdap = new OverViewAdapter(this,R.layout.over_view_content_navigation, map);
             list.setAdapter(myAdap);
         }
 
@@ -148,7 +148,7 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
         Class fragmentClass = null;
         if (id == R.id.nav_profile) {
             // Handle the camera action
-//            fragmentClass = AddCustomer.class;
+//            fragmentClass = AddCu6stomer.class;
 //
 //            try {
 //                fragment = (Fragment) fragmentClass.newInstance();
@@ -179,13 +179,23 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
     }
 
     public void chooseTable(View view){
+        Log.i(MSG, "Start chooseTable");
+        TextView TextViewtableNo = (TextView) findViewById(R.id.table_no);
+        String numTable = TextViewtableNo.getText().toString();
+
+        TextView TextViewTableId = (TextView) findViewById(R.id.table_id);
+        String tableId = TextViewTableId.getText().toString();
+
+        Intent i = new Intent(this,OrderMenu.class);
+        i.putExtra("numTable", numTable);
+        i.putExtra("tableId", tableId);
+        startActivity(i);
 
     }
 
     public void order(){
             Intent main = new Intent(this,AddTable.class);
             startActivity(main);
-
     }
 
 
