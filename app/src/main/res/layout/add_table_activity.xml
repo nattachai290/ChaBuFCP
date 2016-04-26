@@ -34,21 +34,27 @@
             android:layout_height="match_parent"
             android:inputType="numberDecimal"
             android:ems="10"
-            android:id="@+id/editText_number_table" />
+            android:id="@+id/editText_number_table"
+            android:layout_marginLeft="10dp"
+            android:maxLength="2" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/number_customer"
-            android:id="@+id/textView4" />
+            android:id="@+id/textView4"
+            android:layout_marginTop="15dp" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
-            android:id="@+id/editText_number_customer" />
+            android:id="@+id/editText_number_customer"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:maxLength="3" />
 
     </GridLayout>
 
@@ -58,6 +64,13 @@
         android:text="@string/submit"
         android:id="@+id/button"
         android:layout_gravity="center_horizontal"
-        android:onClick="addTable_clickedSubmit" />
+        android:onClick="addTable_clickedSubmit"
+        android:background="@color/darkOrange"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:paddingLeft="60dp"
+        android:paddingRight="60dp"
+        android:layout_marginTop="60dp" />
 
 </LinearLayout>

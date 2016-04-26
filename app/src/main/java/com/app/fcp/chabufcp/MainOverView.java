@@ -3,6 +3,7 @@ package com.app.fcp.chabufcp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -15,13 +16,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.fcp.chabufcp.adapter.OverViewAdapter;
 import com.app.fcp.chabufcp.entity.HisTrnHdr;
 import com.app.fcp.chabufcp.entity.User;
 import com.app.fcp.chabufcp.entity.itemgnl;
+import com.app.fcp.constant.Constant;
 
 import java.util.List;
 import java.util.Map;
@@ -100,6 +104,24 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
             ListView list = (ListView) findViewById(R.id.listView_overview);
             OverViewAdapter myAdap = new OverViewAdapter(this,R.layout.over_view_content_navigation, map);
             list.setAdapter(myAdap);
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Log.i(MSG, "Start setOnItemClickListener");
+                    TextView TextViewtableNo = (TextView) view.findViewById(R.id.table_no);
+                    String numTable = TextViewtableNo.getText().toString();
+
+                    TextView TextViewTableId = (TextView) view.findViewById(R.id.table_id);
+                    String tableId = TextViewTableId.getText().toString();
+
+//                    Toast.makeText(getApplicationContext(), "โต๊ะที่ " + numTable + " ID: " + tableId, Toast.LENGTH_LONG).show();
+
+                    Intent i = new Intent(getApplicationContext(),OrderMenu.class);
+                    i.putExtra("numTable", numTable);
+                    i.putExtra("tableId", tableId);
+                    startActivity(i);
+                }
+            });
         }
 
     }
@@ -186,10 +208,8 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
         TextView TextViewTableId = (TextView) findViewById(R.id.table_id);
         String tableId = TextViewTableId.getText().toString();
 
-        Intent i = new Intent(this,OrderMenu.class);
-        i.putExtra("numTable", numTable);
-        i.putExtra("tableId", tableId);
-        startActivity(i);
+        Toast.makeText(this, "โต๊ะที่ "+numTable+" ID: "+tableId, Toast.LENGTH_LONG).show();
+
 
     }
 

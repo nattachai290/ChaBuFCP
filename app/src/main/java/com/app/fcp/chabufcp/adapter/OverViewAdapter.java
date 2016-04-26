@@ -35,14 +35,20 @@ public class OverViewAdapter  extends ArrayAdapter<String> {
         convertView = context.getLayoutInflater().inflate(R.layout.list_view_over_view,null,true);
         Log.i(MSG, "list: " + list);
         try {
-            TextView tableId = (TextView) convertView.findViewById(R.id.table_no);
+            TextView tableId = (TextView) convertView.findViewById(R.id.table_id);
             tableId.setText(list.get("ListHdrId").get(position).toString());
 
             TextView tableNo = (TextView) convertView.findViewById(R.id.table_no);
             tableNo.setText(list.get("ListHdrTableNo").get(position).toString());
 
+            TextView number_customer = (TextView) convertView.findViewById(R.id.table_cus);
+            number_customer.setText("จำนวนลูกค้า : "+list.get("ListHdrCus").get(position).toString());
+
             TextView time = (TextView) convertView.findViewById(R.id.table_time);
-            time.setText(list.get("ListHdrTime").get(position).toString());
+            time.setText("เวลา : "+list.get("ListHdrTime").get(position).toString());
+
+            TextView price = (TextView) convertView.findViewById(R.id.table_price);
+            price.setText(list.get("ListHdrPrice").get(position).toString()+" B");
 
 
         }catch (NullPointerException e){

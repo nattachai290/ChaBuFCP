@@ -10,8 +10,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.fcp.chabufcp.R;
+import com.app.fcp.constant.Constant;
 import com.app.fcp.constant.DatabaseConstant;
 import com.app.fcp.database.service.Imp.QueryServiceImp;
 import com.app.fcp.database.service.QueryService;
@@ -45,16 +47,67 @@ public class listItemAdapter extends ArrayAdapter<String> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        final int pos = position;
         convertView = context.getLayoutInflater().inflate(R.layout.list_view_item,null,true);
+        final TextView numItem = (TextView) convertView.findViewById(R.id.number_order);
+
         TextView text = (TextView) convertView.findViewById(R.id.list_row_text);
         text.setText(list.get(position));
 
         ImageView imgPlus = (ImageView) convertView.findViewById(R.id.imageButtonPlus);
         imgPlus.setImageResource(imageId[0]);
+        imgPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                String order = numItem.getText().toString();
+
+                int number = 1;
+                Integer value = null;
+                Log.i(MSG, order);
+                try {
+                    value = Integer.valueOf(order);
+
+                    if (value == 99) {
+                        Toast.makeText(getContext(), Constant.MAX_ORDER, Toast.LENGTH_LONG).show();
+                    } else {
+                        int newValue = value + 1;
+                        numItem.setText(String.valueOf(newValue));
+                    }
+
+                } catch (NumberFormatException e) {
+                    numItem.setText(String.valueOf(number));
+                }
+            }
+        });
         ImageView imgMinus = (ImageView) convertView.findViewById(R.id.imageButtonMinus);
         imgMinus.setImageResource(imageId[1]);
+        imgMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String order = numItem.getText().toString();
+                Integer value = null;
 
+                Log.i(MSG, order);
+                try {
+                    value = Integer.valueOf(order);
+
+                    if (value == 0) {
+                        Toast.makeText(getContext(), Constant.MIN_ORDER, Toast.LENGTH_LONG).show();
+                    } else {
+                        int newValue = value - 1;
+                        if (newValue == 0) {
+                            numItem.setText("");
+                        } else {
+                            numItem.setText(String.valueOf(newValue));
+                        }
+
+                    }
+                } catch (NumberFormatException e) {
+                    Toast.makeText(getContext(), Constant.MIN_ORDER, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
         return convertView;
     }
 

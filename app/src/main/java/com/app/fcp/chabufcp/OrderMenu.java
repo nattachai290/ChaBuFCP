@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.widget.HorizontalScrollView;
 import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.fcp.chabufcp.adapter.fragmentPageAdapter;
 import com.app.fcp.chabufcp.entity.User;
@@ -257,17 +258,9 @@ public class OrderMenu extends AppCompatActivity
     }
 
     public void addItem(View view){
-        TextView numItem = (TextView) findViewById(R.id.number_order);
-        String order = numItem.getText().toString();
-        int number = 1;
-        Log.i(MSG, order);
-        if(order.isEmpty()){
-            numItem.setText(String.valueOf(number));
-            Log.i(MSG, numItem.toString());
-        }else{
-            numItem.setText(String.valueOf(number+1));
-            Log.i(MSG, numItem.toString());
-        }
+
 
     }
+
+
 }

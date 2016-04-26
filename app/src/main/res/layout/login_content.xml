@@ -50,6 +50,11 @@
         android:id="@+id/btn_logIn"
         android:layout_gravity="center_horizontal"
         android:textSize="20dp"
-        android:onClick="clickLogin" />
+        android:onClick="clickLogin"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:background="@color/black" />
 
 </LinearLayout>

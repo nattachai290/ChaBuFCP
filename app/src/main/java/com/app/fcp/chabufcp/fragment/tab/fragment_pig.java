@@ -6,11 +6,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.fcp.chabufcp.R;
 import com.app.fcp.chabufcp.adapter.listItemAdapter;
 import com.app.fcp.chabufcp.entity.itemgnl;
+import com.app.fcp.constant.Constant;
 import com.app.fcp.constant.DatabaseConstant;
 import com.app.fcp.database.service.Imp.QueryServiceImp;
 import com.app.fcp.database.service.QueryService;
@@ -28,7 +32,7 @@ import java.util.concurrent.ExecutionException;
  * Created by arm on 6/4/2559.
  */
 public class fragment_pig extends Fragment{
-    private final String MSG_MainActivity = "fragment_pig";
+    private final String MSG = "fragment_pig";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,6 +49,36 @@ public class fragment_pig extends Fragment{
 
         ListView list = (ListView) view.findViewById(R.id.listView_pig);
         list.setAdapter(myAdap);
+//        list.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.i(MSG, "View = "+v);
+//            }
+//        });
+//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//                Log.i(MSG, "Start setOnItemClickListener");
+//                Log.i(MSG, "position = "+position);
+////                TextView numItem = (TextView) view.findViewById(R.id.number_order);
+////                String order = numItem.getText().toString();
+////
+////                int number = 1;
+////                Log.i(MSG, order);
+////                int value = Integer.valueOf(order);
+////                if (order.isEmpty()) {
+////                    numItem.setText(String.valueOf(number));
+////                } else if (value == 99) {
+////                Toast.makeText(getActivity(), Constant.MAX_ORDER, Toast.LENGTH_LONG).show();
+////                } else {
+////                    int newValue = value + 1;
+////                    numItem.setText(String.valueOf(newValue));
+////                }
+//
+//            }
+//        });
+
         return view;
     }
 

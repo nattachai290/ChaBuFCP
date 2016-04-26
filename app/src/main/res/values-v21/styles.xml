@@ -11,4 +11,10 @@
         <item name="android:strokeColor">@color/colorPrimary</item>
         <item name="android:fillColor">@color/colorAccent</item>
     </style>
+
+    <style name="tableNo">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@color/darkOrange</item>
+
+    </style>
 </resources>

@@ -9,9 +9,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.fcp.chabufcp.R;
 import com.app.fcp.chabufcp.adapter.listItemAdapter;
@@ -33,7 +35,7 @@ import java.util.concurrent.ExecutionException;
  * Created by arm on 6/4/2559.
  */
 public class fragment_alcohol extends Fragment {
-    private final String MSG_MainActivity = "fragment_alcohol";
+    private final String MSG = "fragment_alcohol";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,6 +52,25 @@ public class fragment_alcohol extends Fragment {
 
         ListView list = (ListView) view.findViewById(R.id.listView_alcohol);
         list.setAdapter(myAdap);
+//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Log.i(MSG, "Start setOnItemClickListener");
+//                TextView numItem = (TextView) view.findViewById(R.id.number_order);
+//                String order = numItem.getText().toString();
+//
+//                int number = 1;
+//                Log.i(MSG, order);
+//                if (order.isEmpty()) {
+//                    numItem.setText(String.valueOf(number));
+//                    Log.i(MSG, numItem.toString());
+//                } else {
+//                    numItem.setText(String.valueOf(order)+1);
+//                    Log.i(MSG, numItem.toString());
+//                }
+////                Toast.makeText(getActivity(), "โต๊ะที่ " + numTable + " ID: " + tableId, Toast.LENGTH_LONG).show();
+//            }
+//        });
         return view;
     }
 

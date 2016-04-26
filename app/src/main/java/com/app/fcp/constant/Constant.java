@@ -7,7 +7,8 @@ public class Constant {
 
     public static final String TABLE = " โต๊ะที่ ";
     public static final String BUSY = " ไม่ว่าง ";
-
+    public static final String MAX_ORDER = "จำนวนรายการนี้สูงสุดแล้ว";
+    public static final String MIN_ORDER = "ยังไม่สั่งรายการนี้";
     // Tab
     public static final String TAB_PIG = "หมู";
     public static final String TAB_ALCOHOL = "แอลกอฮอล์" ;
