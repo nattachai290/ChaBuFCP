@@ -40,7 +40,7 @@ public class fragment_chicken extends Fragment {
         itemgnl itm = new itemgnl(type,post);
         Map<String,List> map = itm.initData();
 
-        int[] imgAddMinus = {R.drawable.btn_plus,R.drawable.btn_minus};
+        int[] imgAddMinus = {R.drawable.button_add,R.drawable.button_remove};
         listItemAdapter myAdap = new listItemAdapter(getActivity(),imgAddMinus, map.get("ListItmName"));
 
         ListView list = (ListView) view.findViewById(R.id.listView_chicken);

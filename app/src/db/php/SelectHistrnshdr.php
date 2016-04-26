@@ -3,7 +3,7 @@ $response = array();
 require_once 'connectDB.php';
 // connecting to db
 $db = new DB_CONNECT();
-$query = "SELECT * FROM HISTRNSHDR WHERE HISTRNSTAT = 'OPEN'";
+$query = "SELECT * FROM HISTRNSHDR WHERE HISTRNSTAT = 'OPEN' ORDER by HISHDRTBLNO ASC ";
 
 $result = mysql_query($query)  or die(mysql_error());
 

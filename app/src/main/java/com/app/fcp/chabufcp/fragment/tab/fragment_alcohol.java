@@ -47,30 +47,12 @@ public class fragment_alcohol extends Fragment {
         String type = "8";
         itemgnl itm = new itemgnl(type,post);
         Map<String,List> map = itm.initData();
-        int[] imgAddMinus = {R.drawable.btn_plus,R.drawable.btn_minus};
+        int[] imgAddMinus = {R.drawable.button_add,R.drawable.button_remove};
         listItemAdapter myAdap = new listItemAdapter(getActivity(),imgAddMinus, map.get("ListItmName"));
 
         ListView list = (ListView) view.findViewById(R.id.listView_alcohol);
         list.setAdapter(myAdap);
-//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Log.i(MSG, "Start setOnItemClickListener");
-//                TextView numItem = (TextView) view.findViewById(R.id.number_order);
-//                String order = numItem.getText().toString();
-//
-//                int number = 1;
-//                Log.i(MSG, order);
-//                if (order.isEmpty()) {
-//                    numItem.setText(String.valueOf(number));
-//                    Log.i(MSG, numItem.toString());
-//                } else {
-//                    numItem.setText(String.valueOf(order)+1);
-//                    Log.i(MSG, numItem.toString());
-//                }
-////                Toast.makeText(getActivity(), "โต๊ะที่ " + numTable + " ID: " + tableId, Toast.LENGTH_LONG).show();
-//            }
-//        });
+
         return view;
     }
 

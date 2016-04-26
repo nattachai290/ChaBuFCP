@@ -44,40 +44,11 @@ public class fragment_pig extends Fragment{
         itemgnl itm = new itemgnl(type,post);
         Map<String,List> map = itm.initData();
 
-        int[] imgAddMinus = {R.drawable.btn_plus,R.drawable.btn_minus};
+        int[] imgAddMinus = {R.drawable.button_add,R.drawable.button_remove};
         listItemAdapter myAdap = new listItemAdapter(getActivity(),imgAddMinus, map.get("ListItmName"));
 
         ListView list = (ListView) view.findViewById(R.id.listView_pig);
         list.setAdapter(myAdap);
-//        list.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Log.i(MSG, "View = "+v);
-//            }
-//        });
-//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                Log.i(MSG, "Start setOnItemClickListener");
-//                Log.i(MSG, "position = "+position);
-////                TextView numItem = (TextView) view.findViewById(R.id.number_order);
-////                String order = numItem.getText().toString();
-////
-////                int number = 1;
-////                Log.i(MSG, order);
-////                int value = Integer.valueOf(order);
-////                if (order.isEmpty()) {
-////                    numItem.setText(String.valueOf(number));
-////                } else if (value == 99) {
-////                Toast.makeText(getActivity(), Constant.MAX_ORDER, Toast.LENGTH_LONG).show();
-////                } else {
-////                    int newValue = value + 1;
-////                    numItem.setText(String.valueOf(newValue));
-////                }
-//
-//            }
-//        });
 
         return view;
     }
