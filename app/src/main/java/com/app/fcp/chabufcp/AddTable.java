@@ -22,7 +22,7 @@ import org.json.JSONObject;
 import java.util.concurrent.ExecutionException;
 
 public class AddTable extends AppCompatActivity {
-    private final String MSG = "MainLoginActivity";
+    private final String MSG = "AddTable";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

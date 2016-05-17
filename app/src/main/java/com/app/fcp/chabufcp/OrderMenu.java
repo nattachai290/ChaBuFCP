@@ -134,33 +134,23 @@ public class OrderMenu extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        Fragment fragment = null;
-        Class fragmentClass = null;
         if (id == R.id.nav_profile) {
-            // Handle the camera action
-//            fragmentClass = AddCus7tomer.class;
-//
-//            try {
-//                fragment = (Fragment) fragmentClass.newInstance();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//
-//            FragmentManager fragmentManager = getSupportFragmentManager();
-//            fragmentManager.beginTransaction().replace(R.id.main_nav_content, fragment).commit();
-//            item.setChecked(true);
-
+            Intent i = new Intent(this,Profile.class);
+            startActivity(i);
         }
         else if(id==R.id.nav_checkBill){
             Intent i = new Intent(this,CheckBill.class);
             startActivity(i);
         }
         else if (id == R.id.nav_home) {
-            Intent main = new Intent(this,MainOverView.class);
-            startActivity(main);
+            Intent i = new Intent(this,MainOverView.class);
+            startActivity(i);
         }else if (id == R.id.nav_logout) {
-            Intent main = new Intent(this,MainLoginActivity.class);
-            startActivity(main);
+            Intent i = new Intent(this,MainLoginActivity.class);
+            startActivity(i);
+        }else if(id==R.id.nav_history){
+            Intent i = new Intent(this,History.class);
+            startActivity(i);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -39,8 +39,9 @@ public class ConnectDB extends AsyncTask<String,Void,JSONObject> {
         HttpURLConnection urlConnection = null;
 
         try{
-            String param = builder.build().getEncodedQuery();
             Log.i(MSG, "Connection Database");
+            String param = builder.build().getEncodedQuery();
+            Log.i(MSG, "param: " +param);
             url = new URL(link);
             urlConnection = (HttpURLConnection)url.openConnection();
             Log.i(MSG, String.valueOf(urlConnection));

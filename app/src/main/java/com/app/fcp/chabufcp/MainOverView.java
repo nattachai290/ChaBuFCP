@@ -35,10 +35,11 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
     ViewPager viewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         final String mActivityTitle = getTitle().toString();
         Log.i(MSG, "Start onCreate MainOverView");
 
-        super.onCreate(savedInstanceState);
+
         setContentView(R.layout.over_view_activity_navigation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.nav_toolbar);
         setSupportActionBar(toolbar);
@@ -60,13 +61,6 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
 
-//                Bundle data = getIntent().getExtras();
-//                if(data==null){
-//                    return;
-//                }
-//
-//                String msgUser = data.getString("userName");
-//                String msgPos = data.getString("position");
                 TextView textUser = (TextView) findViewById(R.id.nav_head_name);
                 TextView textPosition = (TextView) findViewById(R.id.nav_head_pos);
 
@@ -113,10 +107,7 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
 
                     TextView TextViewTableId = (TextView) view.findViewById(R.id.table_id);
                     String tableId = TextViewTableId.getText().toString();
-
-//                    Toast.makeText(getApplicationContext(), "โต๊ะที่ " + numTable + " ID: " + tableId, Toast.LENGTH_LONG).show();
-
-                    Intent i = new Intent(getApplicationContext(),OrderMenu.class);
+                    Intent i = new Intent(getApplicationContext(), OrderMenu.class);
                     i.putExtra("numTable", numTable);
                     i.putExtra("tableId", tableId);
                     startActivity(i);
@@ -166,22 +157,9 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
     public boolean OverViewOnNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        Fragment fragment = null;
-        Class fragmentClass = null;
         if (id == R.id.nav_profile) {
-            // Handle the camera action
-//            fragmentClass = AddCu6stomer.class;
-//
-//            try {
-//                fragment = (Fragment) fragmentClass.newInstance();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//
-//            FragmentManager fragmentManager = getSupportFragmentManager();
-//            fragmentManager.beginTransaction().replace(R.id.main_nav_content, fragment).commit();
-//            item.setChecked(true);
-
+            Intent i = new Intent(this,Profile.class);
+            startActivity(i);
         }
         else if(id==R.id.nav_checkBill){
             Intent i = new Intent(this,CheckBill.class);
@@ -192,6 +170,9 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
             startActivity(i);
         }else if (id == R.id.nav_logout) {
             Intent i = new Intent(this,MainLoginActivity.class);
+            startActivity(i);
+        }else if(id==R.id.nav_history){
+            Intent i = new Intent(this,History.class);
             startActivity(i);
         }
 
