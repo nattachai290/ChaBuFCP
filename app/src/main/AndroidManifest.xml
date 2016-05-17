@@ -12,9 +12,10 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.NFC" />
 
-    <uses-feature
-        android:name="android.hardware.nfc"
-        android:required="false" />
+    <uses-feature android:name="android.hardware.nfc" android:required="true" />
+    <uses-sdk
+        android:minSdkVersion="10"
+        android:targetSdkVersion="17" />
 
     <application
         android:allowBackup="true"
@@ -40,6 +41,9 @@
             android:name=".AddTable"
             android:label="@string/title_activity_add_table"
             android:parentActivityName=".MainOverView" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainOverView" />
         <activity
             android:name=".OrderMenu"
             android:label="@string/title_activity_order_menu"
@@ -48,6 +52,22 @@
             android:name=".CheckBill"
             android:label="@string/title_activity_check_bill"
             android:parentActivityName=".MainOverView" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainOverView" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.nfc.action.TECH_DISCOVERED" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/nfc_tech_filter" />
 
 
         </activity>
@@ -55,11 +75,21 @@
         <activity
             android:name=".History"
             android:label="@string/title_activity_history"
-            android:parentActivityName=".MainOverView"></activity>
+            android:parentActivityName=".MainOverView">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainOverView" />
+
+        </activity>
         <activity
             android:name=".Profile"
             android:label="@string/title_activity_profile"
-            android:parentActivityName=".MainOverView"></activity>
+            android:parentActivityName=".MainOverView">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainOverView" />
+
+        </activity>
     </application>
 
 </manifest>

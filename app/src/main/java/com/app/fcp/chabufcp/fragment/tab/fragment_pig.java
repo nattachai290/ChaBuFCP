@@ -44,7 +44,7 @@ public class fragment_pig extends Fragment{
         itemgnl itm = new itemgnl(type,post);
         Map<String,List> map = itm.initData();
 
-        int[] imgAddMinus = {R.drawable.button_add,R.drawable.button_remove};
+        int[] imgAddMinus = {Constant.BUTTON_ADD, Constant.BUTTON_REMOVE};
         listItemAdapter myAdap = new listItemAdapter(getActivity(),imgAddMinus, map.get("ListItmName"));
 
         ListView list = (ListView) view.findViewById(R.id.listView_pig);

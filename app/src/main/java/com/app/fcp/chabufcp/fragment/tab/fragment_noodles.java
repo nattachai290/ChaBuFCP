@@ -11,6 +11,7 @@ import android.widget.ListView;
 import com.app.fcp.chabufcp.R;
 import com.app.fcp.chabufcp.adapter.listItemAdapter;
 import com.app.fcp.chabufcp.entity.itemgnl;
+import com.app.fcp.constant.Constant;
 import com.app.fcp.constant.DatabaseConstant;
 import com.app.fcp.database.service.Imp.QueryServiceImp;
 import com.app.fcp.database.service.QueryService;
@@ -39,7 +40,7 @@ public class fragment_noodles extends Fragment{
         String type = "11";
         itemgnl itm = new itemgnl(type,post);
         Map<String,List> map = itm.initData();
-        int[] imgAddMinus = {R.drawable.button_add,R.drawable.button_remove};
+        int[] imgAddMinus = {Constant.BUTTON_ADD, Constant.BUTTON_REMOVE};
         listItemAdapter myAdap = new listItemAdapter(getActivity(),imgAddMinus, map.get("ListItmName"));
 
         ListView list = (ListView) view.findViewById(R.id.listView_noodles);

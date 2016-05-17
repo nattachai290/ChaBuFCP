@@ -1,5 +1,7 @@
 package com.app.fcp.constant;
 
+import com.app.fcp.chabufcp.R;
+
 /**
  * Created by arm on 24/4/2559.
  */
@@ -22,6 +24,10 @@ public class Constant {
     public static final String TAB_SHUSHI ="ซูชิ";
     public static final String TAB_SNACK = "อาหารสำเร็จรูป";
     public static final String TAB_VEGETABLE = "ผัก";
+
+    //button
+    public static final int BUTTON_ADD = R.drawable.plus_5_xxl;
+    public static final int BUTTON_REMOVE = R.drawable.minus_5_xxl;
 
     //Error
     public static final String ERROR_PASSWORD = "username หรือ password ไม่ถูกต้อง";
