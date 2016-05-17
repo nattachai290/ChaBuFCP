@@ -26,8 +26,8 @@ public class Constant {
     public static final String TAB_VEGETABLE = "ผัก";
 
     //button
-    public static final int BUTTON_ADD = R.drawable.plus_5_xxl;
-    public static final int BUTTON_REMOVE = R.drawable.minus_5_xxl;
+    public static final int BUTTON_ADD = R.drawable.plus_new;
+    public static final int BUTTON_REMOVE = R.drawable.minus_new;
 
     //Error
     public static final String ERROR_PASSWORD = "username หรือ password ไม่ถูกต้อง";
