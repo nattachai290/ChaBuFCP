@@ -48,7 +48,7 @@ public class ConnectDB extends AsyncTask<String,Void,JSONObject> {
 
             //add reuqest header
             urlConnection.setRequestMethod("POST");
-            urlConnection.setConnectTimeout(5000);
+            urlConnection.setConnectTimeout(50000);
 
             // Send post request
             urlConnection.setDoOutput(true);

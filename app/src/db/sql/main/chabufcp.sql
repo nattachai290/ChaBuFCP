@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2016 at 12:51 PM
+-- Generation Time: May 18, 2016 at 09:18 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.19
 
@@ -26,7 +26,6 @@ DELIMITER $$
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `addTable` (IN `table_num` INT, IN `cus_num` INT, OUT `table_id` INT, IN `respons` INT)  BEGIN
 DECLARE found_check int;
-DECLARE time_eat varchar(40);
 SELECT HISHDRTBLNO INTO found_check
 FROM histrnshdr WHERE HISHDRTBLNO = table_num AND HISTRNSTAT = 'OPEN';
 
@@ -53,17 +52,18 @@ CREATE TABLE `admin` (
   `PWD` varchar(255) DEFAULT NULL,
   `FNAME` varchar(255) DEFAULT NULL,
   `LNAME` varchar(255) DEFAULT NULL,
-  `POSITION` varchar(255) DEFAULT NULL
+  `POSITION` varchar(255) DEFAULT NULL,
+  `SEX` int(1) NOT NULL COMMENT '0=male,1=female'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`ADMID`, `USERNAME`, `PWD`, `FNAME`, `LNAME`, `POSITION`) VALUES
-(1, 'admin', 'admin', 'admin', 'admin', 'Admin'),
-(2, 'arm', '123456', 'Nattachai', 'Summart', 'Manager'),
-(3, 'big', '123456', 'KuyBig', 'ChengSus', 'Customer');
+INSERT INTO `admin` (`ADMID`, `USERNAME`, `PWD`, `FNAME`, `LNAME`, `POSITION`, `SEX`) VALUES
+(1, 'admin', 'admin', 'admin', 'admin', 'Admin', 1),
+(2, 'arm', '123456', 'Nattachai', 'Summart', 'Manager', 0),
+(3, 'big', '123456', 'KuyBig', 'ChengSus', 'Customer', 0);
 
 -- --------------------------------------------------------
 
@@ -73,12 +73,13 @@ INSERT INTO `admin` (`ADMID`, `USERNAME`, `PWD`, `FNAME`, `LNAME`, `POSITION`) V
 
 CREATE TABLE `histrnsdtl` (
   `HISDTLID` int(11) NOT NULL,
-  `HISHDRID` int(11) NOT NULL,
+  `HISDTLHDRID` int(11) NOT NULL,
   `HISDTLITMID` int(11) NOT NULL,
-  `HISDTLQTY` int(4) DEFAULT NULL,
+  `HISDTLQTY` int(4) NOT NULL,
   `HISDTLPRICE` int(4) DEFAULT NULL,
   `HISDTLRESPON` int(11) NOT NULL,
-  `HISTIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `HISTIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `HISDTLSTAT` int(1) NOT NULL DEFAULT '1' COMMENT '1=doing,2=did'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -103,8 +104,8 @@ CREATE TABLE `histrnshdr` (
 --
 
 INSERT INTO `histrnshdr` (`HISHDRID`, `HISHDRTBLNO`, `HISTRNCUS`, `HISHDRTOTALPRICE`, `HISTRNSTAT`, `HISHDRRESPON`, `HISHDRTIME`, `HISHDRTIMEEAT`) VALUES
-(1, 3, 1, 239, 'OPEN', 1, '0000-00-00 00:00:00', ''),
-(2, 4, 2, 478, 'OPEN', 1, '2016-04-25 10:12:05', '17:12 - 19:12');
+(1, 2, 5, 1195, 'OPEN', 1, '2016-05-16 16:42:16', '23:42 - 01:42'),
+(2, 6, 19, 4541, 'OPEN', 1, '2016-05-17 09:28:41', '16:28 - 18:28');
 
 -- --------------------------------------------------------
 
@@ -226,13 +227,15 @@ ALTER TABLE `admin`
 ALTER TABLE `histrnsdtl`
   ADD PRIMARY KEY (`HISDTLID`),
   ADD KEY `HISDTLITMID` (`HISDTLITMID`),
-  ADD KEY `HISHDRID` (`HISHDRID`);
+  ADD KEY `HISHDRID` (`HISDTLHDRID`),
+  ADD KEY `HISDTLRESPON` (`HISDTLRESPON`);
 
 --
 -- Indexes for table `histrnshdr`
 --
 ALTER TABLE `histrnshdr`
-  ADD PRIMARY KEY (`HISHDRID`);
+  ADD PRIMARY KEY (`HISHDRID`),
+  ADD KEY `HISHDRRESPON` (`HISHDRRESPON`);
 
 --
 -- Indexes for table `itmgnl`
@@ -265,7 +268,7 @@ ALTER TABLE `histrnsdtl`
 -- AUTO_INCREMENT for table `histrnshdr`
 --
 ALTER TABLE `histrnshdr`
-  MODIFY `HISHDRID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `HISHDRID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `itmgnl`
 --
@@ -285,7 +288,14 @@ ALTER TABLE `type`
 --
 ALTER TABLE `histrnsdtl`
   ADD CONSTRAINT `histrnsdtl_ibfk_1` FOREIGN KEY (`HISDTLITMID`) REFERENCES `itmgnl` (`ITMID`),
-  ADD CONSTRAINT `histrnsdtl_ibfk_2` FOREIGN KEY (`HISHDRID`) REFERENCES `histrnshdr` (`HISHDRID`);
+  ADD CONSTRAINT `histrnsdtl_ibfk_2` FOREIGN KEY (`HISDTLHDRID`) REFERENCES `histrnshdr` (`HISHDRID`),
+  ADD CONSTRAINT `histrnsdtl_ibfk_3` FOREIGN KEY (`HISDTLRESPON`) REFERENCES `admin` (`ADMID`);
+
+--
+-- Constraints for table `histrnshdr`
+--
+ALTER TABLE `histrnshdr`
+  ADD CONSTRAINT `histrnshdr_ibfk_1` FOREIGN KEY (`HISHDRRESPON`) REFERENCES `admin` (`ADMID`);
 
 --
 -- Constraints for table `itmgnl`
