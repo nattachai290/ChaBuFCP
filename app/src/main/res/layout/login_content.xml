@@ -18,7 +18,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView"
+        android:id="@+id/login_imageView"
         android:src="@drawable/logo_chabu"
         android:layout_weight="2" />
 
@@ -26,7 +26,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/usrname"
+            android:id="@+id/login_usrname"
             android:hint="@string/text_username"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="20dp"
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="10"
-            android:id="@+id/password"
+            android:id="@+id/login_password"
             android:hint="@string/text_password"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/text_log_in"
-        android:id="@+id/btn_logIn"
+        android:id="@+id/login_btn_logIn"
         android:layout_gravity="center_horizontal"
         android:textSize="20dp"
         android:onClick="clickLogin"

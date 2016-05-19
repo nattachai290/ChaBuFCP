@@ -49,12 +49,12 @@ public class listItemAdapter extends ArrayAdapter<String> {
     public View getView(int position, View convertView, ViewGroup parent) {
         final int pos = position;
         convertView = context.getLayoutInflater().inflate(R.layout.list_view_item,null,true);
-        final TextView numItem = (TextView) convertView.findViewById(R.id.number_order);
+        final TextView numItem = (TextView) convertView.findViewById(R.id.list_view_item_number_order);
 
-        TextView text = (TextView) convertView.findViewById(R.id.list_row_text);
+        TextView text = (TextView) convertView.findViewById(R.id.list_view_item_list_row_text);
         text.setText(list.get(position));
 
-        ImageView imgPlus = (ImageView) convertView.findViewById(R.id.imageButtonPlus);
+        ImageView imgPlus = (ImageView) convertView.findViewById(R.id.list_view_item_imageButtonPlus);
         imgPlus.setImageResource(imageId[0]);
         imgPlus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +80,7 @@ public class listItemAdapter extends ArrayAdapter<String> {
                 }
             }
         });
-        ImageView imgMinus = (ImageView) convertView.findViewById(R.id.imageButtonMinus);
+        ImageView imgMinus = (ImageView) convertView.findViewById(R.id.list_view_item_imageButtonMinus);
         imgMinus.setImageResource(imageId[1]);
         imgMinus.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -32,8 +32,8 @@ public class AddTable extends AppCompatActivity {
 
     public void addTable_clickedSubmit(View view) {
 
-        EditText number_table = (EditText) findViewById(R.id.editText_number_table);
-        EditText number_customer = (EditText) findViewById(R.id.editText_number_customer);
+        EditText number_table = (EditText) findViewById(R.id.add_table_editText_number_table);
+        EditText number_customer = (EditText) findViewById(R.id.add_table_editText_number_customer);
         String numTable = number_table.getText().toString();
         String numCustomer = number_customer.getText().toString();
         if(numTable.isEmpty()&&numCustomer.isEmpty()){

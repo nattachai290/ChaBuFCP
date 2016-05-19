@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/number_table"
-            android:id="@+id/textView"
+            android:id="@+id/add_table_textView"
             android:layout_marginLeft="30dp" />
 
         <EditText
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
-            android:id="@+id/editText_number_table"
+            android:id="@+id/add_table_editText_number_table"
             android:layout_marginLeft="10dp"
             android:background="@drawable/border_text3"
             android:textColor="@color/black"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/number_customer"
-            android:id="@+id/textView4"
+            android:id="@+id/add_table_textView4"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="30dp" />
 
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
             android:ems="10"
-            android:id="@+id/editText_number_customer"
+            android:id="@+id/add_table_editText_number_customer"
             android:background="@drawable/border_text3"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="10dp"
@@ -72,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/submit"
-        android:id="@+id/button"
+        android:id="@+id/add_table_button"
         android:layout_gravity="center_horizontal"
         android:onClick="addTable_clickedSubmit"
         android:background="@color/darkOrange"

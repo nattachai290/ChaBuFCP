@@ -29,7 +29,7 @@ public class History extends AppCompatActivity {
         HisTrnDtl dtl = new HisTrnDtl();
         Map<String,List> map = dtl.initData();
         if(map.get("ListHdrTableNo")!=null){
-            ListView list = (ListView) findViewById(R.id.listView_his);
+            ListView list = (ListView) findViewById(R.id.history_listView_his);
             OverViewAdapter myAdap = new OverViewAdapter(this,R.layout.history_activity, map);
             list.setAdapter(myAdap);
 

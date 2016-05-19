@@ -32,7 +32,7 @@ import java.util.Map;
 
 public class MainOverView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private final String MSG = "MainOverView";
-    ViewPager viewPager;
+    private ViewPager viewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,10 +102,10 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Log.i(MSG, "Start setOnItemClickListener");
-                    TextView TextViewtableNo = (TextView) view.findViewById(R.id.table_no);
+                    TextView TextViewtableNo = (TextView) view.findViewById(R.id.list_view_over_view_table_no);
                     String numTable = TextViewtableNo.getText().toString();
 
-                    TextView TextViewTableId = (TextView) view.findViewById(R.id.table_id);
+                    TextView TextViewTableId = (TextView) view.findViewById(R.id.list_view_over_view_table_id);
                     String tableId = TextViewTableId.getText().toString();
                     Intent i = new Intent(getApplicationContext(), OrderMenu.class);
                     i.putExtra("numTable", numTable);
@@ -183,10 +183,10 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
 
     public void chooseTable(View view){
         Log.i(MSG, "Start chooseTable");
-        TextView TextViewtableNo = (TextView) findViewById(R.id.table_no);
+        TextView TextViewtableNo = (TextView) findViewById(R.id.list_view_over_view_table_no);
         String numTable = TextViewtableNo.getText().toString();
 
-        TextView TextViewTableId = (TextView) findViewById(R.id.table_id);
+        TextView TextViewTableId = (TextView) findViewById(R.id.list_view_over_view_table_id);
         String tableId = TextViewTableId.getText().toString();
 
         Toast.makeText(this, "โต๊ะที่ "+numTable+" ID: "+tableId, Toast.LENGTH_LONG).show();

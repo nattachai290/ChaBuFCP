@@ -42,10 +42,10 @@ import java.util.List;
 public class OrderMenu extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,ViewPager.OnPageChangeListener,TabHost.OnTabChangeListener {
     private final String MSG = "OrderMenu";
-    ViewPager viewPager;
-    TabHost tabhost;
-    String numTable ;
-    String tableId ;
+    private ViewPager viewPager;
+    private TabHost tabhost;
+    private String numTable ;
+    private  String tableId ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -9,20 +9,11 @@
     <!-- Internet Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.NFC" />
 
     <uses-feature
         android:name="android.hardware.nfc"
         android:required="true" />
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -36,7 +27,6 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -57,6 +47,7 @@
             android:name=".OrderMenu"
             android:label="@string/title_activity_order_menu"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
         <activity
             android:name=".CheckBill"
             android:label="@string/title_activity_check_bill"
@@ -66,14 +57,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainOverView" />
 
-            <intent-filter>
-                <action android:name="android.nfc.action.TAG_DISCOVERED" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+            <!--<intent-filter>-->
+                <!--<action android:name="android.nfc.action.TAG_DISCOVERED" />-->
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--</intent-filter>-->
+
         </activity>
         <activity
             android:name=".History"
             android:label="@string/title_activity_history"
+            android:screenOrientation="landscape"
             android:parentActivityName=".MainOverView">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -87,7 +80,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainOverView" />
         </activity>
-        <activity android:name=".ConfirmCheckBill"></activity>
+        <activity
+            android:name=".ConfirmCheckBill"
+            android:launchMode="singleTask"
+            android:parentActivityName=".CheckBill">
+            <intent-filter>
+                <action android:name="android.nfc.action.TAG_DISCOVERED" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>

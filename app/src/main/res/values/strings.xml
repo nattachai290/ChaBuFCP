@@ -25,7 +25,7 @@
     <string name="number_table">หมายเลขโต๊ะ</string>
     <string name="number_customer">จำนวนลูกค้า</string>
     <string name="submit">ยืนยัน</string>
-
+    <string name="pay_money">ชำระเงิน</string>
     <!-- Title -->
     <string name="title_activity_order_menu">รายการอาหาร</string>
     <string name="title_activity_add_table">เพิ่มโต๊ะใหม่</string>
@@ -33,7 +33,7 @@
     <string name="title_activity_login">Sign in</string>
     <string name="title_activity_test_login">Sign in</string>
     <string name="title_activity_check_bill">Check Bill</string>
-    <string name="title_activity_history">รายการอาหาร</string>
+    <string name="title_activity_history">ประวัติรายการอาหาร</string>
     <string name="title_activity_profile">ข้อมูลพนักงาน</string>
 
     <!-- Strings related to login -->

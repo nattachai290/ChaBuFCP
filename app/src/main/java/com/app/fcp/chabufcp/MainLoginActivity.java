@@ -59,8 +59,8 @@ public class MainLoginActivity extends AppCompatActivity {
 
     public void clickLogin(View view){
         Log.i(MSG, "Begin clickLogin");
-        EditText username_input = (EditText) findViewById(R.id.usrname);
-        EditText pwd_input = (EditText) findViewById(R.id.password);
+        EditText username_input = (EditText) findViewById(R.id.login_usrname);
+        EditText pwd_input = (EditText) findViewById(R.id.login_password);
         String userName = username_input.getText().toString();
         String password = pwd_input.getText().toString();
         String post = "name";
