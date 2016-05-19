@@ -24,6 +24,7 @@
         <activity
             android:name=".MainLoginActivity"
             android:label="@string/app_name"
+
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,10 +33,12 @@
         </activity>
         <activity
             android:name=".MainOverView"
+
             android:label="@string/title_activity_navigation_user"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AddTable"
+
             android:label="@string/title_activity_add_table"
             android:parentActivityName=".MainOverView" />
 
@@ -51,7 +54,6 @@
         <activity
             android:name=".CheckBill"
             android:label="@string/title_activity_check_bill"
-            android:launchMode="singleTask"
             android:parentActivityName=".MainOverView">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -84,8 +86,14 @@
             android:name=".ConfirmCheckBill"
             android:launchMode="singleTask"
             android:parentActivityName=".CheckBill">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CheckBill" />
+
+
             <intent-filter>
                 <action android:name="android.nfc.action.TAG_DISCOVERED" />
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
 

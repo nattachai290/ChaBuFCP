@@ -52,7 +52,7 @@ public class ConfirmCheckBill extends AppCompatActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(v, "Please scan credit card", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                Snackbar.make(v, "Please scan a credit card", Snackbar.LENGTH_LONG).setAction("Action", null).show();
                 creditCard = 1;
                 Log.i(MSG, "creditCard="+creditCard);
             }
@@ -75,25 +75,23 @@ public class ConfirmCheckBill extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        Log.i(MSG, "onResume");
-        Log.i(MSG, "creditCard="+creditCard);
-        super.onResume();
-        Intent intent = getIntent();
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Log.i(MSG, "onNewIntent");
         Log.i(MSG, "intent = " + intent);
+
         String action = intent.getAction();
         Log.i(MSG, "action = " + action);
 
-        Log.i(MSG, "getType = " + intent.getType());
+
 
         if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)&&creditCard==1) {
-            Toast.makeText(this,
-                    "onResume() - ACTION_TAG_DISCOVERED",
-                    Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this,"onResume() - ACTION_TAG_DISCOVERED",Toast.LENGTH_SHORT).show();
 
             Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+            Log.i(MSG, "tag ="+tag);
             if(tag == null){
-                Toast.makeText(this, "tag == null", Toast.LENGTH_LONG).show();
+//                Toast.makeText(this, "tag == null", Toast.LENGTH_LONG).show();
                 Log.i(MSG, "tag == null");
             }else{
                 Log.i(MSG, "tag != null");
@@ -123,7 +121,8 @@ public class ConfirmCheckBill extends AppCompatActivity {
 
                 }
 
-                Toast.makeText(this, tagInfo, Toast.LENGTH_LONG).show();
+//                Toast.makeText(this, tagInfo, Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "ชำระเงินเรียบร้อยแล้ว", Toast.LENGTH_LONG).show();
 
             }
         }else{
@@ -131,5 +130,25 @@ public class ConfirmCheckBill extends AppCompatActivity {
                     "onResume() : " + action,
                     Toast.LENGTH_SHORT).show();
         }
+        Log.i(MSG, "onNewIntent end");
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+//        startActivity(getIntent());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        Log.i(MSG, "onResume");
+//        Log.i(MSG, "creditCard=" + creditCard);
+//        Log.i(MSG, "nfcAdapter = " + nfcAdapter);
+//        Intent intent = getIntent();
+//        intent.setAction("android.nfc.action.TAG_DISCOVERED");
+//        intent.addCategory("android.intent.category.DEFAULT");
+//        Log.i(MSG, "intent = " + intent);
+
     }
 }
