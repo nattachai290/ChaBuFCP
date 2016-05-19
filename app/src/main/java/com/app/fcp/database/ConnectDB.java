@@ -16,6 +16,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Created by arm on 25/4/2559.
@@ -48,7 +49,7 @@ public class ConnectDB extends AsyncTask<String,Void,JSONObject> {
 
             //add reuqest header
             urlConnection.setRequestMethod("POST");
-            urlConnection.setConnectTimeout(50000);
+            urlConnection.setConnectTimeout(5000);
 
             // Send post request
             urlConnection.setDoOutput(true);
@@ -104,6 +105,7 @@ public class ConnectDB extends AsyncTask<String,Void,JSONObject> {
                 }
             }
         }
+
         catch (Exception e){
             Log.i(MSG, "Error in http connection: "+ e.toString());
         }

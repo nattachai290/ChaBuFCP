@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 
@@ -25,12 +27,12 @@ import java.util.concurrent.ExecutionException;
 
 public class MainLoginActivity extends AppCompatActivity {
     private final String MSG = "MainLoginActivity";
+    private ProgressBar spinner;
+    Button btn_login;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.main_toolbar);
-//        setSupportActionBar(toolbar);
     }
 
     @Override
@@ -129,6 +131,7 @@ public class MainLoginActivity extends AppCompatActivity {
         }catch (JSONException e){
             Log.i(MSG, "Error JSON: "+e.toString());
         }catch (NullPointerException e){
+            Toast.makeText(this, Constant.ERROR_CONNECT_DATABASE, Toast.LENGTH_LONG).show();
             Log.i(MSG, "Error NullPointer: "+e.toString());
         }catch (InterruptedException e){
             Log.i(MSG, "Error Interrupted: "+e.toString());
@@ -137,7 +140,6 @@ public class MainLoginActivity extends AppCompatActivity {
         }catch (Exception e){
             Log.i(MSG, "Error Exception: "+e.toString());
         }
-
         Log.i(MSG, "Exit clickLogin");
     }
 

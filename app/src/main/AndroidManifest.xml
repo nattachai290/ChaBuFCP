@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.app.fcp.chabufcp">
 
+    <uses-sdk
+        android:minSdkVersion="10"
+        android:targetSdkVersion="17" />
+
     <!-- Internet Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -12,10 +16,13 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.NFC" />
 
-    <uses-feature android:name="android.hardware.nfc" android:required="true" />
-    <uses-sdk
-        android:minSdkVersion="10"
-        android:targetSdkVersion="17" />
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -41,37 +48,29 @@
             android:name=".AddTable"
             android:label="@string/title_activity_add_table"
             android:parentActivityName=".MainOverView" />
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainOverView" />
+
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainOverView" />
+
         <activity
             android:name=".OrderMenu"
             android:label="@string/title_activity_order_menu"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".CheckBill"
             android:label="@string/title_activity_check_bill"
-            android:parentActivityName=".MainOverView" >
+            android:launchMode="singleTask"
+            android:parentActivityName=".MainOverView">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainOverView" />
 
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.nfc.action.TAG_DISCOVERED" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
-            <intent-filter>
-                <action android:name="android.nfc.action.TECH_DISCOVERED" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.nfc.action.TECH_DISCOVERED"
-                android:resource="@xml/nfc_tech_filter" />
-
-
         </activity>
-
         <activity
             android:name=".History"
             android:label="@string/title_activity_history"
@@ -79,7 +78,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainOverView" />
-
         </activity>
         <activity
             android:name=".Profile"
@@ -88,8 +86,8 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainOverView" />
-
         </activity>
+        <activity android:name=".ConfirmCheckBill"></activity>
     </application>
 
 </manifest>

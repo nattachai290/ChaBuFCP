@@ -1,5 +1,6 @@
 package com.app.fcp.chabufcp;
 
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -39,7 +40,6 @@ public class CheckBill extends AppCompatActivity {
         setContentView(R.layout.check_bill_activity);
         initTable();
 
-
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         Log.i(MSG, "nfcAdapter = " + nfcAdapter);
 
@@ -50,45 +50,73 @@ public class CheckBill extends AppCompatActivity {
             return;
         }
 
-        if (!nfcAdapter.isEnabled()) {
+        else if (!nfcAdapter.isEnabled()) {
             Toast.makeText(this, "NFC is disabled.", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "NFC is enabled.", Toast.LENGTH_LONG).show();
         }
-
-        handleIntent(getIntent());
-
+//        else{
+//            intent.setAction("android.nfc.action.TAG_DISCOVERED");
+//            intent.addCategory("android.intent.category.DEFAULT");
+//            startActivity(intent);
+//        }
     }
-    private void handleIntent(Intent intent) {
-        // TODO: handle Intent
+
+    @Override
+    protected void onResume() {
+        Log.i(MSG, "onResume");
+        super.onResume();
+        Intent intent = getIntent();
+        Log.i(MSG, "intent = " + intent);
         String action = intent.getAction();
-        if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
+        Log.i(MSG, "action = " + action);
 
-            String type = intent.getType();
-            if (MIME_TEXT_PLAIN.equals(type)) {
+        Log.i(MSG, "getType = " + intent.getType());
 
-                Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-                new NdefReaderTask().execute(tag);
+        if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)) {
+            Toast.makeText(this,
+                    "onResume() - ACTION_TAG_DISCOVERED",
+                    Toast.LENGTH_SHORT).show();
 
-            } else {
-                Log.d(MSG, "Wrong mime type: " + type);
-            }
-        } else if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)) {
-
-            // In case we would still use the Tech Discovered Intent
             Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-            String[] techList = tag.getTechList();
-            String searchedTech = Ndef.class.getName();
+            if(tag == null){
+                Toast.makeText(this, "tag == null", Toast.LENGTH_LONG).show();
+                Log.i(MSG, "tag == null");
+            }else{
+                Log.i(MSG, "tag != null");
+                String tagInfo = tag.toString() + "\n";
+                tagInfo += "\nTag Id: \n";
 
-            for (String tech : techList) {
-                if (searchedTech.equals(tech)) {
-                    new NdefReaderTask().execute(tag);
-                    break;
+                byte[] tagId = tag.getId();
+                tagInfo += "length = " + tagId.length +"\n";
+
+
+                for(int i=0; i<tagId.length; i++){
+                    tagInfo += Integer.toHexString(tagId[i] & 0xFF) + " ";
+
                 }
+                tagInfo += "\n";
+
+
+                String[] techList = tag.getTechList();
+                tagInfo += "\nTech List\n";
+
+
+                tagInfo += "length = " + techList.length +"\n";
+
+
+                for(int i=0; i<techList.length; i++){
+                    tagInfo += techList[i] + "\n ";
+
+                }
+
+                Toast.makeText(this, tagInfo, Toast.LENGTH_LONG).show();
+
             }
+        }else{
+            Toast.makeText(this,
+                    "onResume() : " + action,
+                    Toast.LENGTH_SHORT).show();
         }
     }
-
 
     private void initTable() {
         HisTrnHdr hdr = new HisTrnHdr();
@@ -107,74 +135,12 @@ public class CheckBill extends AppCompatActivity {
                     TextView TextViewTableId = (TextView) view.findViewById(R.id.table_id);
                     String tableId = TextViewTableId.getText().toString();
 
-                    Log.i(MSG, "numTable ="+numTable);
-                    Log.i(MSG, "tableId = "+tableId);
+                    Log.i(MSG, "numTable =" + numTable);
+                    Log.i(MSG, "tableId = " + tableId);
                 }
             });
         }
 
     }
 
-    public class NdefReaderTask extends AsyncTask<Tag, Void, String> {
-        private final String MSG = "CheckBill";
-        @Override
-        protected String doInBackground(Tag... params) {
-            Tag tag = params[0];
-
-            Ndef ndef = Ndef.get(tag);
-            if (ndef == null) {
-                // NDEF is not supported by this Tag.
-                return null;
-            }
-
-            NdefMessage ndefMessage = ndef.getCachedNdefMessage();
-
-            NdefRecord[] records = ndefMessage.getRecords();
-            for (NdefRecord ndefRecord : records) {
-                if (ndefRecord.getTnf() == NdefRecord.TNF_WELL_KNOWN && Arrays.equals(ndefRecord.getType(), NdefRecord.RTD_TEXT)) {
-                    try {
-                        return readText(ndefRecord);
-                    } catch (UnsupportedEncodingException e) {
-                        Log.e(MSG, "Unsupported Encoding", e);
-                    }
-                }
-            }
-            return null;
-        }
-
-        private String readText(NdefRecord record) throws UnsupportedEncodingException {
-        /*
-         * See NFC forum specification for "Text Record Type Definition" at 3.2.1
-         *
-         * http://www.nfc-forum.org/specs/
-         *
-         * bit_7 defines encoding
-         * bit_6 reserved for future use, must be 0
-         * bit_5..0 length of IANA language code
-         */
-
-            byte[] payload = record.getPayload();
-
-            // Get the Text Encoding
-            String textEncoding ;
-            if((payload[0] & 128) == 0) textEncoding = "UTF-8";
-            else textEncoding = "UTF-16";
-
-            // Get the Language Code
-            int languageCodeLength = payload[0] & 0063;
-
-            // String languageCode = new String(payload, 1, languageCodeLength, "US-ASCII");
-            // e.g. "en"
-
-            // Get the Text
-            return new String(payload, languageCodeLength + 1, payload.length - languageCodeLength - 1, textEncoding);
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            if (result != null) {
-                Log.i(MSG, "Read content: " + result);
-            }
-        }
-    }
 }

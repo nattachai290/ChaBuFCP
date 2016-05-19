@@ -35,4 +35,5 @@ public class Constant {
     public static final String ERROR_NUMBER_TABLE_AND_CUSTOMER = "กรุณาใส่หมายเลขโต๊ะ และจำนวนลูกค้า";
     public static final String ERROR_NUMBER_TABLE = "กรุณาใส่หมายเลขโต๊ะ";
     public static final String ERROR_NUMBER_CUSTOMER = "กรุณาใส่จำนวนลูกค้า";
+    public static final String ERROR_CONNECT_DATABASE = "ไม่สามารถเชื่อมต่อดาต้าเบสได้";
 }
