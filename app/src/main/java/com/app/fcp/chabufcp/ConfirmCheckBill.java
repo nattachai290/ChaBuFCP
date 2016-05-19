@@ -15,6 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.fcp.constant.Constant;
+import com.app.fcp.constant.DatabaseConstant;
+import com.app.fcp.database.service.Imp.QueryServiceImp;
+import com.app.fcp.database.service.QueryService;
+
+import java.util.concurrent.ExecutionException;
 
 public class ConfirmCheckBill extends AppCompatActivity {
     private final String MSG = "ConfirmCheckBill";
@@ -94,13 +99,24 @@ public class ConfirmCheckBill extends AppCompatActivity {
                 Log.i(MSG, "tag == null");
             }else{
                 Log.i(MSG, "tag != null");
-
+                String link = DatabaseConstant.UPDATE_HISTRNSHDR;
+                try{
+                    QueryService query = new QueryServiceImp();
+                    query.updateData(link,"",1,tableId);
+                }catch (NullPointerException e){
+                    Log.i(MSG, "Error NullPointer: "+e.toString());
+                } catch (Exception e){
+                    Log.i(MSG, "Error Exception: "+e.toString());
+                }
                new AlertDialog.Builder(this)
                        .setMessage(Constant.TABLE + numTable+" ชำระเงินเรียบร้อยแล้ว")
                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                            @Override
                            public void onClick(DialogInterface dialog, int which) {
                                Log.i(MSG, "click ok");
+                               creditCard = 0;
+                               finish();
+                               return;
                            }
                        })
                        .show();
@@ -110,5 +126,14 @@ public class ConfirmCheckBill extends AppCompatActivity {
             Toast.makeText(this,"กรุณากดยืนยันการชำระเงิน",Toast.LENGTH_SHORT).show();
         }
         Log.i(MSG, "onNewIntent end");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(tableId == null){
+            finish();
+            return;
+        }
     }
 }

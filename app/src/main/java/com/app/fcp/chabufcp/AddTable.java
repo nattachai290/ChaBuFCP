@@ -116,9 +116,6 @@ public class AddTable extends AppCompatActivity {
             }catch (Exception e){
                 Log.i(MSG, "Error Exception: "+e.toString());
             }
-
-
         }
-
     }
 }

@@ -143,7 +143,7 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            Log.i(MSG, "Gu Click la");
         }
 
         return super.onOptionsItemSelected(item);

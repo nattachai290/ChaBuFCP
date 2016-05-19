@@ -68,14 +68,33 @@ public class QueryServiceImp implements QueryService,Async {
     }
 
     @Override
-    public JSONObject deleteData(String... param) throws ExecutionException, InterruptedException {
-        return null;
+    public void deleteData(String... param) throws ExecutionException, InterruptedException {
+
     }
 
     @Override
-    public JSONObject updateData(String... param) throws ExecutionException, InterruptedException {
+    public void updateData(String link,String now,int number_parameter,String... param) throws ExecutionException, InterruptedException {
+        Log.i(MSG, "Begin updateData");
+        Log.i(MSG, "Link: "+link);
+        Log.i(MSG, "number parameter: "+number_parameter);
 
-        return null;
+        Uri.Builder builder = new Uri.Builder();
+        for(int k=0;k<number_parameter;k++){
+            builder.appendQueryParameter("para"+(k+1),param[k]);
+            Log.i(MSG, "para"+(k+1)+" = "+param[k]);
+        }
+
+        ConnectDB con = new ConnectDB(link,builder);
+        if(now.equalsIgnoreCase("now")){
+            Log.i(MSG, "now");
+            jResult = con.execute().get();
+            Log.i(MSG, "after now: " + jResult.toString());
+        }else{
+            Log.i(MSG, "background");
+            con.async = this;
+            con.execute();
+        }
+        Log.i(MSG, "Exit updateData");
     }
 
     @Override
