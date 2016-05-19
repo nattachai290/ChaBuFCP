@@ -1,5 +1,7 @@
 package com.app.fcp.chabufcp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -32,7 +34,7 @@ public class AddTable extends AppCompatActivity {
 
     public void addTable_clickedSubmit(View view) {
 
-        EditText number_table = (EditText) findViewById(R.id.add_table_editText_number_table);
+        final EditText number_table = (EditText) findViewById(R.id.add_table_editText_number_table);
         EditText number_customer = (EditText) findViewById(R.id.add_table_editText_number_customer);
         String numTable = number_table.getText().toString();
         String numCustomer = number_customer.getText().toString();
@@ -75,7 +77,17 @@ public class AddTable extends AppCompatActivity {
 
                     if(Integer.valueOf(QhishdrId) == 0){
                         Log.i(MSG, "Table not available!!! ");
-                        Toast.makeText(this, Constant.TABLE+numTable+Constant.BUSY, Toast.LENGTH_LONG).show();
+                        new AlertDialog.Builder(this)
+                                .setMessage(Constant.TABLE+numTable+Constant.BUSY)
+                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Log.i(MSG, "click ok");
+                                        number_table.setText("");
+                                    }
+                                })
+                                .show();
+//                        Toast.makeText(this, Constant.TABLE+numTable+Constant.BUSY, Toast.LENGTH_LONG).show();
                     }
                     else{
                         Intent i = new Intent(this,OrderMenu.class);

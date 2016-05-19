@@ -1,5 +1,7 @@
 package com.app.fcp.chabufcp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
@@ -86,69 +88,27 @@ public class ConfirmCheckBill extends AppCompatActivity {
 
 
         if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)&&creditCard==1) {
-//            Toast.makeText(this,"onResume() - ACTION_TAG_DISCOVERED",Toast.LENGTH_SHORT).show();
-
             Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-            Log.i(MSG, "tag ="+tag);
+            Log.i(MSG, "tag =" + tag);
             if(tag == null){
-//                Toast.makeText(this, "tag == null", Toast.LENGTH_LONG).show();
                 Log.i(MSG, "tag == null");
             }else{
                 Log.i(MSG, "tag != null");
-                String tagInfo = tag.toString() + "\n";
-                tagInfo += "\nTag Id: \n";
 
-                byte[] tagId = tag.getId();
-                tagInfo += "length = " + tagId.length +"\n";
-
-
-                for(int i=0; i<tagId.length; i++){
-                    tagInfo += Integer.toHexString(tagId[i] & 0xFF) + " ";
-
-                }
-                tagInfo += "\n";
-
-
-                String[] techList = tag.getTechList();
-                tagInfo += "\nTech List\n";
-
-
-                tagInfo += "length = " + techList.length +"\n";
-
-
-                for(int i=0; i<techList.length; i++){
-                    tagInfo += techList[i] + "\n ";
-
-                }
-
-//                Toast.makeText(this, tagInfo, Toast.LENGTH_LONG).show();
-                Toast.makeText(this, "ชำระเงินเรียบร้อยแล้ว", Toast.LENGTH_LONG).show();
-
+               new AlertDialog.Builder(this)
+                       .setMessage(Constant.TABLE + numTable+" ชำระเงินเรียบร้อยแล้ว")
+                       .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                           @Override
+                           public void onClick(DialogInterface dialog, int which) {
+                               Log.i(MSG, "click ok");
+                           }
+                       })
+                       .show();
             }
-        }else{
-            Toast.makeText(this,
-                    "onResume() : " + action,
-                    Toast.LENGTH_SHORT).show();
+        }
+        if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)&&creditCard==0){
+            Toast.makeText(this,"กรุณากดยืนยันการชำระเงิน",Toast.LENGTH_SHORT).show();
         }
         Log.i(MSG, "onNewIntent end");
-    }
-
-    @Override
-    protected void onPostResume() {
-        super.onPostResume();
-//        startActivity(getIntent());
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-//        Log.i(MSG, "onResume");
-//        Log.i(MSG, "creditCard=" + creditCard);
-//        Log.i(MSG, "nfcAdapter = " + nfcAdapter);
-//        Intent intent = getIntent();
-//        intent.setAction("android.nfc.action.TAG_DISCOVERED");
-//        intent.addCategory("android.intent.category.DEFAULT");
-//        Log.i(MSG, "intent = " + intent);
-
     }
 }
