@@ -36,6 +36,8 @@
     <string name="title_activity_history">ประวัติรายการอาหาร</string>
     <string name="title_activity_profile">ข้อมูลพนักงาน</string>
 
+    <string name="title_check_order">รายการทั้งหมด</string>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>

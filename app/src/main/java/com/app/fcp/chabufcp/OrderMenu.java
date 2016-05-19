@@ -120,10 +120,10 @@ public class OrderMenu extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        Log.i(MSG, "id = "+id);
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.order_menu_action_settings) {
+            Log.i(MSG, "Gu Click la");
         }
 
         return super.onOptionsItemSelected(item);

@@ -127,27 +127,27 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    @Override
+ /*   @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.navigation_user, menu);
         return true;
-    }
+    }*/
 
-    @Override
+   /* @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+        Log.i(MSG, "id = "+id);
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.order_menu_action_settings) {
             Log.i(MSG, "Gu Click la");
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -181,7 +181,7 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    public void chooseTable(View view){
+   /* public void chooseTable(View view){
         Log.i(MSG, "Start chooseTable");
         TextView TextViewtableNo = (TextView) findViewById(R.id.list_view_over_view_table_no);
         String numTable = TextViewtableNo.getText().toString();
@@ -192,7 +192,7 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
         Toast.makeText(this, "โต๊ะที่ "+numTable+" ID: "+tableId, Toast.LENGTH_LONG).show();
 
 
-    }
+    }*/
 
     public void order(){
             Intent main = new Intent(this,AddTable.class);
