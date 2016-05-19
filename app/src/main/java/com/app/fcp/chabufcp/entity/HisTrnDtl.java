@@ -38,44 +38,44 @@ public class HisTrnDtl {
             Log.i(MSG, "jResponse: " + jResponse);
 
             if(jResponse==1){
-                JSONArray jMember = JObjectResult.getJSONArray("hishdr");
-                Log.i(MSG, "hishdr: " + jMember.toString());
+                JSONArray jMember = JObjectResult.getJSONArray("hisdtl");
+                Log.i(MSG, "hisdtl: " + jMember.toString());
 
                 Log.i(MSG, "=========================================");
-                String QHdrId=null,QHdrTableNo=null,QHdrPrice=null,QHdrCus=null,QHdrTime=null;
-                ArrayList<String> ListHdrId = new  ArrayList<String>();
-                ArrayList<String> ListHdrTableNo = new  ArrayList<String>();
-                ArrayList<String> ListHdrCus = new  ArrayList<String>();
-                ArrayList<String> ListHdrPrice = new  ArrayList<String>();
-                ArrayList<String> ListHdrTime = new  ArrayList<String>();
+                String time=null,tableNo=null,itmName=null,people=null,qty=null;
+                ArrayList<String> ListTime = new  ArrayList<String>();
+                ArrayList<String> ListTableNo = new  ArrayList<String>();
+                ArrayList<String> ListItmName = new  ArrayList<String>();
+                ArrayList<String> ListPeople = new  ArrayList<String>();
+                ArrayList<String> ListQty = new  ArrayList<String>();
                 for (int i = 0; i < jMember.length(); i++) {
 
-                    QHdrId = jMember.getJSONObject(i).getString("hishdrId");
-                    Log.i(MSG, "hishdr Id: " + QHdrId);
-                    ListHdrId.add(QHdrId);
+                    time = jMember.getJSONObject(i).getString("time");
+                    Log.i(MSG, "time: " + time);
+                    ListTime.add(time);
 
-                    QHdrTableNo = jMember.getJSONObject(i).getString("hishdrTblNo");
-                    Log.i(MSG, "hishdrTblNo: " + QHdrTableNo);
-                    ListHdrTableNo.add(QHdrTableNo);
+                    tableNo = jMember.getJSONObject(i).getString("tableNo");
+                    Log.i(MSG, "tableNo: " + tableNo);
+                    ListTableNo.add(tableNo);
 
-                    QHdrCus = jMember.getJSONObject(i).getString("hishdrCus");
-                    Log.i(MSG, "hishdrCus: " + QHdrCus);
-                    ListHdrCus.add(QHdrCus);
+                    itmName = jMember.getJSONObject(i).getString("itmName");
+                    Log.i(MSG, "itmName: " + itmName);
+                    ListItmName.add(itmName);
 
-                    QHdrTime = jMember.getJSONObject(i).getString("hishdrTime");
-                    Log.i(MSG, "hishdrTime: " + QHdrTime);
-                    ListHdrTime.add(QHdrTime);
+                    people = jMember.getJSONObject(i).getString("people");
+                    Log.i(MSG, "hishdrTime: " + people);
+                    ListPeople.add(people);
 
-                    QHdrPrice = jMember.getJSONObject(i).getString("hishdrPrice");
-                    Log.i(MSG, "hishdrPrice: " + QHdrPrice);
-                    ListHdrPrice.add(QHdrPrice);
+                    qty = jMember.getJSONObject(i).getString("qty");
+                    Log.i(MSG, "hishdrPrice: " + qty);
+                    ListQty.add(qty);
 
                 }
-                map.put("ListHdrId",ListHdrId);
-                map.put("ListHdrTableNo",ListHdrTableNo);
-                map.put("ListHdrCus",ListHdrCus);
-                map.put("ListHdrPrice",ListHdrPrice);
-                map.put("ListHdrTime",ListHdrTime);
+                map.put("ListTime",ListTime);
+                map.put("ListTableNo",ListTableNo);
+                map.put("ListItmName",ListItmName);
+                map.put("ListPeople",ListPeople);
+                map.put("ListQty",ListQty);
                 Log.i(MSG, "=========================================");
 
             }

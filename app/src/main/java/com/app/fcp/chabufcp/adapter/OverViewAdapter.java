@@ -24,6 +24,7 @@ public class OverViewAdapter  extends ArrayAdapter<String> {
     Activity context;
 
 
+
     public OverViewAdapter(Activity context, int resource, Map<String,List> list) {
         super(context, R.layout.list_view_over_view, list.get("ListHdrTableNo"));
         this.list = list;

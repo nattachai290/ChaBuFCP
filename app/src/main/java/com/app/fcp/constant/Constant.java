@@ -2,10 +2,16 @@ package com.app.fcp.constant;
 
 import com.app.fcp.chabufcp.R;
 
+import java.util.ArrayList;
+
 /**
  * Created by arm on 24/4/2559.
  */
 public class Constant {
+    public static ArrayList<Integer> idOrder = new ArrayList<Integer>();
+    public static ArrayList<String> nameOrder = new ArrayList<String>();
+    public static ArrayList<Integer> numberOrder = new ArrayList<Integer>();
+
 
     public static final String TABLE = " โต๊ะที่ ";
     public static final String BUSY = " ไม่ว่าง ";

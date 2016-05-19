@@ -41,7 +41,7 @@ public class fragment_beef extends Fragment {
         Map<String,List> map = itm.initData();
 
         int[] imgAddMinus = {Constant.BUTTON_ADD, Constant.BUTTON_REMOVE};
-        listItemAdapter myAdap = new listItemAdapter(getActivity(),imgAddMinus, map.get("ListItmName"));
+        listItemAdapter myAdap = new listItemAdapter(getActivity(),imgAddMinus, map.get("ListItmName"),map.get("ListItmId"));
 
         ListView list = (ListView) view.findViewById(R.id.listView_beef);
         list.setAdapter(myAdap);

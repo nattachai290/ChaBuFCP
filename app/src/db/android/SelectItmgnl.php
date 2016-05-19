@@ -5,7 +5,7 @@ require_once 'connectDB.php';
 $db = new DB_CONNECT();
 	
 if (isset($_POST["name"])||isset($_POST["id"])||isset($_POST["type"])){
-	mysql_query("SET NAMES UTF8");
+	
 	$param=null;
 	$query = "SELECT * FROM ITMGNL ";
 	

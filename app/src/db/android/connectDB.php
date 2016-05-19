@@ -20,6 +20,7 @@ class DB_CONNECT{
 		// Connecting to mysql database
 		$con = mysql_connect(DB_SERVER,DB_USER,DB_PASSWORD) or die(mysql_error());
 		mysql_select_db(DB_DATABASE);
+		mysql_query("SET NAMES UTF8");
 		// returing connection cursor
         return $con;
 	}

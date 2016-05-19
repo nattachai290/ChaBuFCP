@@ -18,7 +18,6 @@ import android.view.MenuItem;
 import android.widget.HorizontalScrollView;
 import android.widget.TabHost;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.app.fcp.chabufcp.adapter.fragmentPageAdapter;
 import com.app.fcp.chabufcp.entity.User;
@@ -45,7 +44,9 @@ public class OrderMenu extends AppCompatActivity
     private ViewPager viewPager;
     private TabHost tabhost;
     private String numTable ;
-    private  String tableId ;
+    private String tableId ;
+    private ArrayList<String> nameOrder;
+    ArrayList<Integer> numberOrder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,7 +124,11 @@ public class OrderMenu extends AppCompatActivity
         Log.i(MSG, "id = "+id);
         //noinspection SimplifiableIfStatement
         if (id == R.id.order_menu_action_settings) {
-            Log.i(MSG, "Gu Click la");
+
+            Intent in = new Intent(this,CheckOrder.class);
+            in.putExtra("numTable",numTable);
+            in.putExtra("tableId",tableId);
+            startActivity(in);
         }
 
         return super.onOptionsItemSelected(item);
@@ -200,6 +205,9 @@ public class OrderMenu extends AppCompatActivity
         }
         tabhost.setOnTabChangedListener(this);
     }
+
+
+
     public class FakeConten implements TabHost.TabContentFactory {
         Context context;
         public FakeConten(Context context) {
@@ -238,19 +246,10 @@ public class OrderMenu extends AppCompatActivity
     public void onTabChanged(String tabId) {
         int selectTab = tabhost.getCurrentTab();
         viewPager.setCurrentItem(selectTab);
-
         calcTabHost();
-
     }
 
-    public void removeItem(View view){
 
-    }
-
-    public void addItem(View view){
-
-
-    }
 
 
 }

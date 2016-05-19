@@ -9,7 +9,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.app.fcp.chabufcp.adapter.HistoryAdapter;
 import com.app.fcp.chabufcp.adapter.OverViewAdapter;
+import com.app.fcp.chabufcp.adapter.listCheckOrder;
 import com.app.fcp.chabufcp.entity.HisTrnDtl;
 import com.app.fcp.chabufcp.entity.HisTrnHdr;
 
@@ -21,18 +23,19 @@ public class History extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(MSG,"onCreate");
         setContentView(R.layout.history_activity);
-//        initTable();
+        initTable();
     }
 
     private void initTable() {
+        Log.i(MSG,"initTable");
         HisTrnDtl dtl = new HisTrnDtl();
         Map<String,List> map = dtl.initData();
-        if(map.get("ListHdrTableNo")!=null){
+        if(map.get("ListTableNo")!=null){
             ListView list = (ListView) findViewById(R.id.history_listView_his);
-            OverViewAdapter myAdap = new OverViewAdapter(this,R.layout.history_activity, map);
+            HistoryAdapter myAdap = new HistoryAdapter(this, map.get("ListTableNo"), map.get("ListItmName"), map.get("ListQty"), map.get("ListTime"), map.get("ListPeople"));
             list.setAdapter(myAdap);
-
         }
 
     }

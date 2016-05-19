@@ -25,6 +25,7 @@
     <string name="number_table">หมายเลขโต๊ะ</string>
     <string name="number_customer">จำนวนลูกค้า</string>
     <string name="submit">ยืนยัน</string>
+    <string name="change_order">สั่งเพิ่มเติม</string>
     <string name="pay_money">ชำระเงิน</string>
     <!-- Title -->
     <string name="title_activity_order_menu">รายการอาหาร</string>
