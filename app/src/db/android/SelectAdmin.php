@@ -32,6 +32,7 @@ if (isset($_POST["name"])||isset($_POST["id"])){
 			$admin["fname"] = $result["FNAME"];
 			$admin["lname"] = $result["LNAME"];           
 			$admin["position"] = $result["POSITION"];
+			$admin["sex"] = $result["SEX"];
 			// success
 			$response["success"] = 1;
  

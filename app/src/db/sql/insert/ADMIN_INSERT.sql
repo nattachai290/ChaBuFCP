@@ -1,8 +1,0 @@
-INSERT INTO ADMIN (USERNAME,PWD,FNAME,LNAME,POSITION)
-VALUES ('admin','admin','admin','admin','Admin');
-
-INSERT INTO ADMIN (USERNAME,PWD,FNAME,LNAME,POSITION)
-VALUES ('arm','123456','Nattachai','Summart','Manager');
-
-INSERT INTO ADMIN (USERNAME,PWD,FNAME,LNAME,POSITION)
-VALUES ('big','123456','KuyBig','ChengSus','Customer');

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2016 at 09:18 PM
+-- Generation Time: May 20, 2016 at 09:55 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 5.6.19
 
@@ -30,7 +30,7 @@ SELECT HISHDRTBLNO INTO found_check
 FROM histrnshdr WHERE HISHDRTBLNO = table_num AND HISTRNSTAT = 'OPEN';
 
 IF found_check IS NULL THEN
-INSERT INTO  histrnshdr (HISHDRTBLNO,HISTRNCUS,HISHDRTOTALPRICE,HISHDRRESPON,HISHDRTIMEEAT) VALUES(table_num,cus_num,cus_num*239,respons,CONCAT(DATE_FORMAT(CURRENT_TIME(),'%H:%i'),' - ',DATE_FORMAT(DATE_ADD(CURRENT_TIME(),INTERVAL 2 HOUR),'%H:%i') ));
+INSERT INTO  histrnshdr (HISHDRTBLNO,HISTRNCUS,HISHDRTOTALPRICE,HISHDRRESPON,HISHDRTIMEEAT) VALUES(table_num,cus_num,cus_num*239,respons,CONCAT(DATE_FORMAT(CURTIME(),'%H:%i'),' - ',DATE_FORMAT(DATE_ADD(CURTIME(),INTERVAL 2 HOUR),'%H:%i') ));
 SET table_id = LAST_INSERT_ID();
 
 ELSE SET table_id = 0; 
@@ -53,7 +53,7 @@ CREATE TABLE `admin` (
   `FNAME` varchar(255) DEFAULT NULL,
   `LNAME` varchar(255) DEFAULT NULL,
   `POSITION` varchar(255) DEFAULT NULL,
-  `SEX` int(1) NOT NULL COMMENT '0=male,1=female'
+  `SEX` varchar(10) NOT NULL COMMENT '0=male,1=female'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -61,9 +61,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`ADMID`, `USERNAME`, `PWD`, `FNAME`, `LNAME`, `POSITION`, `SEX`) VALUES
-(1, 'admin', 'admin', 'admin', 'admin', 'Admin', 1),
-(2, 'arm', '123456', 'Nattachai', 'Summart', 'Manager', 0),
-(3, 'big', '123456', 'KuyBig', 'ChengSus', 'Customer', 0);
+(1, 'admin', 'admin', 'admin', 'admin', 'Admin', 'Male');
 
 -- --------------------------------------------------------
 
@@ -98,14 +96,6 @@ CREATE TABLE `histrnshdr` (
   `HISHDRTIME` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `HISHDRTIMEEAT` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `histrnshdr`
---
-
-INSERT INTO `histrnshdr` (`HISHDRID`, `HISHDRTBLNO`, `HISTRNCUS`, `HISHDRTOTALPRICE`, `HISTRNSTAT`, `HISHDRRESPON`, `HISHDRTIME`, `HISHDRTIMEEAT`) VALUES
-(1, 2, 5, 1195, 'OPEN', 1, '2016-05-16 16:42:16', '23:42 - 01:42'),
-(2, 6, 19, 4541, 'OPEN', 1, '2016-05-17 09:28:41', '16:28 - 18:28');
 
 -- --------------------------------------------------------
 
@@ -268,7 +258,7 @@ ALTER TABLE `histrnsdtl`
 -- AUTO_INCREMENT for table `histrnshdr`
 --
 ALTER TABLE `histrnshdr`
-  MODIFY `HISHDRID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `HISHDRID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `itmgnl`
 --
