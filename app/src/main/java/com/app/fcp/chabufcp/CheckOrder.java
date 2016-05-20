@@ -31,13 +31,6 @@ public class CheckOrder extends AppCompatActivity  {
 
     private listCheckOrder mList;
     AlertDialog.Builder builder;
-    private handlerVisible mVisible;
-
-    public interface handlerVisible {
-        public void setVisible(ImageView plus, ImageView minus);
-    }
-
-    ImageView imgPlus,imgMinus;
     String tableId,numTable;
 
     @Override
@@ -64,7 +57,7 @@ public class CheckOrder extends AppCompatActivity  {
         ListView listView = (ListView) findViewById(R.id.listView_chckedOrder);
         listView.setAdapter(mList);
         Button button_confirm = (Button) findViewById(R.id.chckedOrder_confirm_button);
-        Button editOrder = (Button) findViewById(R.id.chckedOrder_change_order_button);
+
 
         button_confirm.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -82,38 +75,6 @@ public class CheckOrder extends AppCompatActivity  {
                     }
                 }
                 return false;
-            }
-        });
-
-        editOrder.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN: {
-                        v.getBackground().setColorFilter(Color.parseColor("#FF1042F7"), PorterDuff.Mode.SRC_ATOP);
-                        v.invalidate();
-                        break;
-                    }
-                    case MotionEvent.ACTION_UP: {
-                        v.getBackground().clearColorFilter();
-                        v.invalidate();
-                        break;
-                    }
-                }
-                return false;
-            }
-        });
-
-        try {
-            mVisible =  mList;
-        } catch (ClassCastException e) {
-            throw new ClassCastException();
-        }
-
-        editOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mVisible.setVisible(imgPlus, imgMinus);
             }
         });
     }
@@ -145,6 +106,9 @@ public class CheckOrder extends AppCompatActivity  {
                     new QueryServiceImp().InsertData(link, "", 4, tableId, String.valueOf(itmID.get(i)), String.valueOf(num.get(i)), User.getUSERID());
                 }
                 builder.setMessage(Constant.TABLE + numTable + " สั่งรายการอาหารเรียบร้อยแล้ว");
+                Constant.idOrder = new ArrayList<Integer>();
+                Constant.nameOrder = new ArrayList<String>();
+                Constant.numberOrder = new ArrayList<Integer>();
                 builder.show();
             } catch (NullPointerException e) {
                 Log.i(MSG, "Error NullPointer: " + e.toString());

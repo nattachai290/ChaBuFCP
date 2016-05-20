@@ -35,6 +35,7 @@ public class ConfirmCheckBill extends AppCompatActivity {
     private Button confirm;
     NfcAdapter nfcAdapter;
     private int creditCard = 0;
+    AlertDialog.Builder builder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,22 +49,25 @@ public class ConfirmCheckBill extends AppCompatActivity {
             time = data.getString("time");
             totalPrice = data.getString("totalPrice");
         }
-//        getSupportActionBar().setTitle(Constant.TABLE + numTable);
-//        Typeface f = Typeface.createFromAsset(getAssets(),"fonts/THSaraban.ttf");
+        builder = new AlertDialog.Builder(this);
+        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+                return;
+            }
+        });
         TextView customer = (TextView) findViewById(R.id.confirm_checkbill_num_customer);
         customer.setText(numCustomer);
-//        customer.setTypeface(f);
 
         TextView tableNo = (TextView) findViewById(R.id.confirm_checkbill_table_no);
         tableNo.setText(Constant.TABLE + numTable);
 
         TextView timming = (TextView) findViewById(R.id.confirm_checkbill_time);
         timming.setText(time);
-//        timming.setTypeface(f);
 
         TextView price = (TextView) findViewById(R.id.confirm_checkbill_price);
         price.setText("Total \n" + totalPrice);
-//        price.setTypeface(f);
 
         confirm = (Button) findViewById(R.id.confirm_checkbill_btn_pay);
         confirm.setOnClickListener(new View.OnClickListener() {
@@ -136,22 +140,14 @@ public class ConfirmCheckBill extends AppCompatActivity {
                 } catch (Exception e){
                     Log.i(MSG, "Error Exception: "+e.toString());
                 }
-               new AlertDialog.Builder(this)
-                       .setMessage(Constant.TABLE + numTable+" ชำระเงินเรียบร้อยแล้ว")
-                       .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                           @Override
-                           public void onClick(DialogInterface dialog, int which) {
-                               Log.i(MSG, "click ok");
-                               creditCard = 0;
-                               finish();
-                               return;
-                           }
-                       })
-                       .show();
+
+                builder.setMessage(Constant.TABLE + numTable+" ชำระเงินเรียบร้อยแล้ว");
+                builder.show();
+                finish();
             }
         }
         if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)&&creditCard==0){
-            Toast.makeText(this,"กรุณากดยืนยันการชำระเงิน",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, Constant.TABLE + numTable+" กรุณากดยืนยันการชำระเงิน", Toast.LENGTH_LONG).show();
         }
         Log.i(MSG, "onNewIntent end");
     }
