@@ -31,11 +31,12 @@ import java.util.concurrent.ExecutionException;
  * Created by arm on 6/4/2559.
  */
 public class fragment_aquatic_animal extends Fragment {
-    private final String MSG_MainActivity = "fragment_aquatic_animal";
+    private final String MSG = "fragment_aquatic_animal";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Log.i(MSG, "onCreateView");
         View view = inflater.inflate(R.layout.tab_fragment_aquatic_animal,container,false);
         String post = "type";
         String type = "4";
@@ -48,5 +49,29 @@ public class fragment_aquatic_animal extends Fragment {
         ListView list = (ListView) view.findViewById(R.id.listView_aquatic_animal);
         list.setAdapter(myAdap);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        Log.i(MSG, "onResume");
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        Log.i(MSG, "onPause");
+        super.onPause();
+    }
+
+    @Override
+    public void onStart() {
+        Log.i(MSG, "onStart");
+        super.onStart();
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.i(MSG, "onDestroy");
+        super.onDestroy();
     }
 }

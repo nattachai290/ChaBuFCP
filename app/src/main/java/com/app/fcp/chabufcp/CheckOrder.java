@@ -3,9 +3,12 @@ package com.app.fcp.chabufcp;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -27,7 +30,7 @@ public class CheckOrder extends AppCompatActivity  {
     private ArrayList<Integer> itmID = new ArrayList(Constant.idOrder);
 
     private listCheckOrder mList;
-
+    AlertDialog.Builder builder;
     private handlerVisible mVisible;
 
     public interface handlerVisible {
@@ -49,18 +52,63 @@ public class CheckOrder extends AppCompatActivity  {
             numTable = data.getString("numTable");
             tableId = data.getString("tableId");
         }
+        builder = new AlertDialog.Builder(this);
+        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+                return;
+            }
+        });
         mList = new listCheckOrder(this, order, num);
-
         ListView listView = (ListView) findViewById(R.id.listView_chckedOrder);
         listView.setAdapter(mList);
+        Button button_confirm = (Button) findViewById(R.id.chckedOrder_confirm_button);
+        Button editOrder = (Button) findViewById(R.id.chckedOrder_change_order_button);
+
+        button_confirm.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        v.getBackground().setColorFilter(0xe0f47521, PorterDuff.Mode.SRC_ATOP);
+                        v.invalidate();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP: {
+                        v.getBackground().clearColorFilter();
+                        v.invalidate();
+                        break;
+                    }
+                }
+                return false;
+            }
+        });
+
+        editOrder.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        v.getBackground().setColorFilter(Color.parseColor("#FF1042F7"), PorterDuff.Mode.SRC_ATOP);
+                        v.invalidate();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP: {
+                        v.getBackground().clearColorFilter();
+                        v.invalidate();
+                        break;
+                    }
+                }
+                return false;
+            }
+        });
 
         try {
             mVisible =  mList;
         } catch (ClassCastException e) {
             throw new ClassCastException();
         }
-
-        Button editOrder = (Button) findViewById(R.id.chckedOrder_change_order_button);
 
         editOrder.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,26 +136,25 @@ public class CheckOrder extends AppCompatActivity  {
     public void ConfirmOrder(final View view){
         Log.i(MSG, "ConfirmOrder");
         Log.i(MSG, String.valueOf(num.size()));
-        String link = DatabaseConstant.INSERT_HISTRNSDTL;
-        try{
-            for(int i : num){
-                new QueryServiceImp().InsertData(link, "", 4, tableId,String.valueOf(itmID.get(i)),String.valueOf(num.get(i)), User.getUSERID());
-            }
+        if(num.size()>0) {
 
-            new AlertDialog.Builder(this)
-                    .setMessage(Constant.TABLE + numTable+" สั่งรายการอาหารเรียบร้อยแล้ว")
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(view.getContext(),MainOverView.class);
-                            startActivity(intent);
-                        }
-                    })
-                    .show();
-        }catch (NullPointerException e){
-            Log.i(MSG, "Error NullPointer: "+e.toString());
-        } catch (Exception e){
-            Log.i(MSG, "Error Exception: "+e.toString());
+
+            String link = DatabaseConstant.INSERT_HISTRNSDTL;
+            try {
+                for (int i : num) {
+                    new QueryServiceImp().InsertData(link, "", 4, tableId, String.valueOf(itmID.get(i)), String.valueOf(num.get(i)), User.getUSERID());
+                }
+                builder.setMessage(Constant.TABLE + numTable + " สั่งรายการอาหารเรียบร้อยแล้ว");
+                builder.show();
+            } catch (NullPointerException e) {
+                Log.i(MSG, "Error NullPointer: " + e.toString());
+            } catch (Exception e) {
+                Log.i(MSG, "Error Exception: " + e.toString());
+            }
+        }
+        else{
+            builder.setMessage(Constant.TABLE + numTable + " ยังไม่ได้เลือกรายการอาหาร");
+            builder.show();
         }
     }
 

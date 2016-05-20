@@ -4,10 +4,12 @@ package com.app.fcp.constant;
  * Created by arm on 22/3/2559.
  */
 public class DatabaseConstant {
-    static final String WEB_HOST ="http://192.168.43.19/";
+    static final String MY_COM ="http://192.168.43.19/";
+    static final String WEB_HOST ="http://www.chabufcp.96.lt/";
+
     static final String AVD = "http://10.0.2.2/";
     static final String GENYMOTION = "http://10.0.3.2/";
-    static final String HTTP_URL = WEB_HOST+"android/";
+    static final String HTTP_URL = MY_COM+"android/";
 
     /*** INSERT ***/
     public static final String INSERT_HISTRNSHDR = HTTP_URL+"InsertHistrnshdr.php";

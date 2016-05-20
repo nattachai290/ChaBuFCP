@@ -1,6 +1,8 @@
 package com.app.fcp.chabufcp;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,6 +10,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,6 +21,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,13 +50,30 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
         initTable();
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        Button button_confirm = (Button) findViewById(R.id.add_table_button);
+        fab.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        v.getBackground().setColorFilter(Color.parseColor("#FF37F60C"), PorterDuff.Mode.SRC_ATOP);
+                        v.invalidate();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP: {
+                        v.getBackground().clearColorFilter();
+                        v.invalidate();
+                        break;
+                    }
+                }
+                return false;
+            }
+        });
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
                 order();
-
             }
         });
 
@@ -148,20 +169,26 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_profile) {
             Intent i = new Intent(this,Profile.class);
             startActivity(i);
+
         }
         else if(id==R.id.nav_checkBill){
             Intent i = new Intent(this,CheckBill.class);
             startActivity(i);
+
         }
         else if (id == R.id.nav_home) {
             Intent i = new Intent(this,MainOverView.class);
             startActivity(i);
+
         }else if (id == R.id.nav_logout) {
             Intent i = new Intent(this,MainLoginActivity.class);
             startActivity(i);
+
+
         }else if(id==R.id.nav_history){
             Intent i = new Intent(this,History.class);
             startActivity(i);
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

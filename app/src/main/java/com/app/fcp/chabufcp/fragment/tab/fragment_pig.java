@@ -38,7 +38,7 @@ public class fragment_pig extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.tab_fragment_pig,container,false);
-
+        Log.i(MSG, "onCreateView ");
         String post = "type";
         String type = "2";
         itemgnl itm = new itemgnl(type,post);
@@ -52,5 +52,27 @@ public class fragment_pig extends Fragment{
 
         return view;
     }
+    @Override
+    public void onResume() {
+        Log.i(MSG, "onResume");
+        super.onResume();
+    }
 
+    @Override
+    public void onPause() {
+        Log.i(MSG, "onPause");
+        super.onPause();
+    }
+
+    @Override
+    public void onStart() {
+        Log.i(MSG, "onStart");
+        super.onStart();
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.i(MSG, "onDestroy");
+        super.onDestroy();
+    }
 }

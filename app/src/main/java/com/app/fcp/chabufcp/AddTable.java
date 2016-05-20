@@ -3,11 +3,15 @@ package com.app.fcp.chabufcp;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -29,7 +33,26 @@ public class AddTable extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_table_activity);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Button button_confirm = (Button) findViewById(R.id.add_table_button);
+        button_confirm.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN: {
+                        v.getBackground().setColorFilter(Color.parseColor("#FF37F60C"), PorterDuff.Mode.SRC_ATOP);
+                        v.invalidate();
+                        break;
+                    }
+                    case MotionEvent.ACTION_UP: {
+                        v.getBackground().clearColorFilter();
+                        v.invalidate();
+                        break;
+                    }
+                }
+                return false;
+            }
+        });
     }
 
     public void addTable_clickedSubmit(View view) {
@@ -39,15 +62,12 @@ public class AddTable extends AppCompatActivity {
         String numTable = number_table.getText().toString();
         String numCustomer = number_customer.getText().toString();
         if(numTable.isEmpty()&&numCustomer.isEmpty()){
-//            Snackbar.make(view, "กรุณาใส่หมายเลขโต๊ะ และจำนวนลูกค้า", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             Toast.makeText(this, Constant.ERROR_NUMBER_TABLE_AND_CUSTOMER, Toast.LENGTH_LONG).show();
         }
         else if(numTable.isEmpty()){
-//            Snackbar.make(view, "กรุณาใส่หมายเลขโต๊ะ", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             Toast.makeText(this, Constant.ERROR_NUMBER_TABLE, Toast.LENGTH_LONG).show();
         }
         else if(numCustomer.isEmpty()){
-//            Snackbar.make(view, "กรุณาใส่จำนวนลูกค้า", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             Toast.makeText(this, Constant.ERROR_NUMBER_CUSTOMER, Toast.LENGTH_LONG).show();
         }
         else{

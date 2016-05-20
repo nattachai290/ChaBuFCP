@@ -29,11 +29,12 @@ import java.util.concurrent.ExecutionException;
  * Created by arm on 6/4/2559.
  */
 public class fragment_dessert extends Fragment {
-    private final String MSG_MainActivity = "fragment_dessert";
+    private final String MSG = "fragment_dessert";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Log.i(MSG, "onCreateView");
         View view = inflater.inflate(R.layout.tab_fragment_dessert,container,false);
         String post = "type";
         String type = "6";
@@ -47,5 +48,27 @@ public class fragment_dessert extends Fragment {
         list.setAdapter(myAdap);
         return view;
     }
+    @Override
+    public void onResume() {
+        Log.i(MSG, "onResume");
+        super.onResume();
+    }
 
+    @Override
+    public void onPause() {
+        Log.i(MSG, "onPause");
+        super.onPause();
+    }
+
+    @Override
+    public void onStart() {
+        Log.i(MSG, "onStart");
+        super.onStart();
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.i(MSG, "onDestroy");
+        super.onDestroy();
+    }
 }

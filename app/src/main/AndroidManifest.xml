@@ -53,6 +53,7 @@
         <activity
             android:name=".OrderMenu"
             android:label="@string/title_activity_order_menu"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CheckBill"

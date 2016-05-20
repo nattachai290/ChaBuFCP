@@ -1,10 +1,11 @@
 package com.app.fcp.chabufcp;
 
+import android.app.LocalActivityManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTabHost;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -46,8 +47,8 @@ public class OrderMenu extends AppCompatActivity
     private TabHost tabhost;
     private String numTable ;
     private String tableId ;
-    private ArrayList<String> nameOrder;
-    ArrayList<Integer> numberOrder;
+    private FragmentTabHost mTabHost;
+//    LocalActivityManager mLocalActivityManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +65,35 @@ public class OrderMenu extends AppCompatActivity
         }
 
         getSupportActionBar().setTitle(Constant.TABLE + numTable);
+
+
+//        mTabHost = (FragmentTabHost) findViewById(R.id.tabHost);
+//        Log.i(MSG, "mTabHost =" + mTabHost);
+//        mTabHost.setup(this, getSupportFragmentManager(), android.R.id.tabcontent);
+//        mTabHost.addTab(mTabHost.newTabSpec(Constant.TAB_PIG).setIndicator(Constant.TAB_PIG),
+//                fragment_pig.class, null);
+//       Constant.TAB_DESSERT,Constant.TAB_FRUIT,Constant.TAB_ALCOHOL};
+//        mTabHost.addTab(mTabHost.newTabSpec(Constant.TAB_PIG).setIndicator(Constant.TAB_PIG, null).setContent(new Intent(this,fragment_pig.class)));
+//        mTabHost.addTab(mTabHost.newTabSpec(Constant.TAB_CHICKEN).setIndicator(Constant.TAB_CHICKEN, null).setContent(new Intent(this,fragment_chicken.class)));
+//        mTabHost.addTab(mTabHost.newTabSpec(Constant.TAB_AQUATIC_ANIMAL).setIndicator(Constant.TAB_AQUATIC_ANIMAL, null).setContent(new Intent(this,fragment_aquatic_animal.class)));
+//        mTabHost.addTab(mTabHost.newTabSpec(Constant.TAB_BEEF).setIndicator(Constant.TAB_BEEF, null).setContent(new Intent(this,fragment_beef.class)));
+//        mTabHost.addTab(mTabHost.newTabSpec(Constant.TAB_VEGETABLE).setIndicator(Constant.TAB_VEGETABLE, null).setContent(new Intent(this,fragment_vegetable.class)));
+
+//        mTabHost.addTab(
+//                mTabHost.newTabSpec(Constant.TAB_SHUSHI).setIndicator(Constant.TAB_AQUATIC_ANIMAL, null),
+//                fragment_shushi.class, null);
+//        mTabHost.addTab(
+//                mTabHost.newTabSpec(Constant.TAB_NOODLES).setIndicator(Constant.TAB_AQUATIC_ANIMAL, null),
+//                fragment_noodles.class, null);
+//        mTabHost.addTab(
+//                mTabHost.newTabSpec(Constant.TAB_SNACK).setIndicator(Constant.TAB_AQUATIC_ANIMAL, null),
+//                fragment_snack.class, null);
+//        mTabHost.addTab(
+//                mTabHost.newTabSpec(Constant.TAB_EGG).setIndicator(Constant.TAB_AQUATIC_ANIMAL, null),
+//                fragment_egg.class, null);
+//        listFragment.add(new fragment_dessert());
+//        listFragment.add(new fragment_fruit());
+//        listFragment.add(new fragment_alcohol());
         initViewPager();
         initTabHost();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -77,14 +107,11 @@ public class OrderMenu extends AppCompatActivity
 
                 TextView textUser = (TextView) findViewById(R.id.nav_head_name);
                 TextView textPosition = (TextView) findViewById(R.id.nav_head_pos);
-//                Typeface f = Typeface.createFromAsset(getAssets(),"fonts/THSaraban.ttf");
                 Log.i(MSG, User.getUSERNAME());
                 Log.i(MSG, User.getPOSITION());
                 try{
-//                    textUser.setTypeface(f);
                     textUser.setText(User.getUSERNAME());
                     textPosition.setText(User.getPOSITION());
-//                    textPosition.setTypeface(f);
                 }catch (Exception e){
                     Intent loginScreen = new Intent(getApplicationContext(),MainLoginActivity.class);
                     startActivity(loginScreen);
@@ -151,20 +178,28 @@ public class OrderMenu extends AppCompatActivity
         if (id == R.id.nav_profile) {
             Intent i = new Intent(this,Profile.class);
             startActivity(i);
+
         }
         else if(id==R.id.nav_checkBill){
             Intent i = new Intent(this,CheckBill.class);
             startActivity(i);
+
         }
         else if (id == R.id.nav_home) {
             Intent i = new Intent(this,MainOverView.class);
             startActivity(i);
+
+
         }else if (id == R.id.nav_logout) {
             Intent i = new Intent(this,MainLoginActivity.class);
             startActivity(i);
+
+
         }else if(id==R.id.nav_history){
             Intent i = new Intent(this,History.class);
             startActivity(i);
+
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -173,14 +208,17 @@ public class OrderMenu extends AppCompatActivity
     }
 
     private void calcTabHost(){
+        Log.i(MSG, "calcTabHost start");
         HorizontalScrollView hScrollView = (HorizontalScrollView) findViewById(R.id.scrollViewTab);
         View tabView = tabhost.getCurrentTabView();
         int scrollPos = tabView.getLeft()-(hScrollView.getWidth()-tabView.getWidth())/2;
         hScrollView.smoothScrollTo(scrollPos, 0);
+        Log.i(MSG, "calcTabHost end");
     }
 
     private void initViewPager() {
 //       {"หมู","ไก่","ทะเล","เนื้อวัว","ผัก","ซูชิ","อาหารเส้น","อาหารสำเร็จรูป","ไข่","ของหวาน","ผลไม้","แอลกอฮอล์"};
+        Log.i(MSG, "initViewPager start");
         viewPager = (ViewPager) findViewById(R.id.view_page);
         List<Fragment> listFragment = new ArrayList<Fragment>();
         listFragment.add(new fragment_pig());
@@ -195,13 +233,17 @@ public class OrderMenu extends AppCompatActivity
         listFragment.add(new fragment_dessert());
         listFragment.add(new fragment_fruit());
         listFragment.add(new fragment_alcohol());
-
+        Log.i(MSG, "listFragment="+listFragment);
         fragmentPageAdapter myfragmentPagerAdapter = new fragmentPageAdapter(getSupportFragmentManager(),listFragment);
+        Log.i(MSG, "myfragmentPagerAdapter = "+myfragmentPagerAdapter);
         viewPager.setAdapter(myfragmentPagerAdapter);
         viewPager.setOnPageChangeListener(this);
+        Log.i(MSG, "viewPager ="+viewPager);
+        Log.i(MSG, "initViewPager Exit");
     }
 
     private void initTabHost() {
+        Log.i(MSG, "initTabHost start");
         tabhost = (TabHost) findViewById(R.id.tabHost);
         tabhost.setup();
         String[] tabName = {Constant.TAB_PIG,Constant.TAB_CHICKEN,Constant.TAB_AQUATIC_ANIMAL,Constant.TAB_BEEF,Constant.TAB_VEGETABLE,Constant.TAB_SHUSHI,Constant.TAB_NOODLES,Constant.TAB_SNACK,Constant.TAB_EGG,Constant.TAB_DESSERT,Constant.TAB_FRUIT,Constant.TAB_ALCOHOL};
@@ -213,11 +255,13 @@ public class OrderMenu extends AppCompatActivity
             tabhost.addTab(tabSpec);
         }
         tabhost.setOnTabChangedListener(this);
+        Log.i(MSG, "initTabHost end");
     }
 
 
 
     public class FakeConten implements TabHost.TabContentFactory {
+
         Context context;
         public FakeConten(Context context) {
             this.context = context;
@@ -225,9 +269,13 @@ public class OrderMenu extends AppCompatActivity
 
         @Override
         public View createTabContent(String tag) {
+            Log.i(MSG, "FakeConten createTabContent");
+            Log.i(MSG, "context ="+context);
             View fakeView = new View(context);
+            Log.i(MSG, "fakeView ="+fakeView);
             fakeView.setMinimumHeight(0);
             fakeView.setMinimumWidth(0);
+            Log.i(MSG, "FakeConten createTabContent end");
             return fakeView;
         }
     }
@@ -240,9 +288,10 @@ public class OrderMenu extends AppCompatActivity
 
     @Override
     public void onPageSelected(int position) {
+        Log.i(MSG, "onPageSelected start");
         tabhost.setCurrentTab(position);
-
         calcTabHost();
+        Log.i(MSG, "onPageSelected end");
     }
 
     @Override
@@ -253,12 +302,24 @@ public class OrderMenu extends AppCompatActivity
     //tabListening
     @Override
     public void onTabChanged(String tabId) {
+        Log.i(MSG, "onTabChanged start");
         int selectTab = tabhost.getCurrentTab();
         viewPager.setCurrentItem(selectTab);
         calcTabHost();
+        Log.i(MSG, "onTabChanged end");
     }
 
+    @Override
+    protected void onResume() {
+        Log.i(MSG, "onResume");
+        super.onResume();
+//        mLocalActivityManager.dispatchResume();
+    }
 
-
-
+    @Override
+    protected void onPause() {
+        Log.i(MSG, "onPause");
+        super.onPause();
+//        mLocalActivityManager.dispatchPause(!isFinishing());
+    }
 }

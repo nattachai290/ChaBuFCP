@@ -43,7 +43,7 @@ public class fragment_alcohol extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.tab_fragment_alcohol,container,false);
-
+        Log.i(MSG, "onCreateView");
         String post = "type";
         String type = "8";
         itemgnl itm = new itemgnl(type,post);
@@ -57,8 +57,28 @@ public class fragment_alcohol extends Fragment {
     }
 
 
+    @Override
+    public void onResume() {
+        Log.i(MSG, "onResume");
+        super.onResume();
+    }
 
+    @Override
+    public void onPause() {
+        Log.i(MSG, "onPause");
+        super.onPause();
+    }
 
+    @Override
+    public void onStart() {
+        Log.i(MSG, "onStart");
+        super.onStart();
+    }
 
+    @Override
+    public void onDestroy() {
+        Log.i(MSG, "onDestroy");
+        super.onDestroy();
+    }
 
 }
