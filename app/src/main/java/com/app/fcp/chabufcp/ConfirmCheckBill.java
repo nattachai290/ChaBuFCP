@@ -3,6 +3,7 @@ package com.app.fcp.chabufcp;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.support.design.widget.Snackbar;
@@ -45,15 +46,18 @@ public class ConfirmCheckBill extends AppCompatActivity {
             totalPrice = data.getString("totalPrice");
         }
         getSupportActionBar().setTitle(Constant.TABLE + numTable);
-
+//        Typeface f = Typeface.createFromAsset(getAssets(),"fonts/THSaraban.ttf");
         TextView customer = (TextView) findViewById(R.id.confirm_checkbill_num_customer);
         customer.setText(numCustomer);
+//        customer.setTypeface(f);
 
         TextView timming = (TextView) findViewById(R.id.confirm_checkbill_time);
         timming.setText(time);
+//        timming.setTypeface(f);
 
         TextView price = (TextView) findViewById(R.id.confirm_checkbill_price);
         price.setText("Total :"+totalPrice);
+//        price.setTypeface(f);
 
         confirm = (Button) findViewById(R.id.confirm_checkbill_btn_pay);
         confirm.setOnClickListener(new View.OnClickListener() {

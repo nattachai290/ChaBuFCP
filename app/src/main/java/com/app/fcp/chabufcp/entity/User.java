@@ -9,6 +9,7 @@ public class User {
     static private String POSITION;
     static private String FNAME;
     static private String LNAME;
+    static private String SEX;
 
     public static String getUSERID() {
         return USERID;
@@ -48,5 +49,13 @@ public class User {
 
     public static void setLNAME(String LNAME) {
         User.LNAME = LNAME;
+    }
+
+    public static String getSEX() {
+        return SEX;
+    }
+
+    public static void setSEX(String SEX) {
+        User.SEX = SEX;
     }
 }

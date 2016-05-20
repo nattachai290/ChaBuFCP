@@ -19,14 +19,21 @@ import com.app.fcp.database.service.Imp.QueryServiceImp;
 import com.app.fcp.database.service.QueryService;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
-public class CheckOrder extends AppCompatActivity implements listCheckOrder.VisiblaImg {
+public class CheckOrder extends AppCompatActivity {
     private final String MSG = "CheckOrder";
     private ArrayList<String> order = new ArrayList<String>(Constant.nameOrder);;
     private ArrayList<Integer> num = new ArrayList<Integer>(Constant.numberOrder);;
     private ArrayList<Integer> itmID = new ArrayList<Integer>(Constant.idOrder);;
-    ImageView imgPlus,imgMinus;
-    String tableId,numTable;
+    private ImageView imgPlus,imgMinus;
+    private String tableId,numTable;
+    private listCheckOrder mList;
+    private handlerVisible mVisible;
+
+    public interface handlerVisible {
+        public void setVisible(ImageView plus, ImageView minus);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +46,7 @@ public class CheckOrder extends AppCompatActivity implements listCheckOrder.Visi
             numTable = data.getString("numTable");
             tableId = data.getString("tableId");
         }
-        listCheckOrder mList = new listCheckOrder(this, order, num);
+        mList = new listCheckOrder(this, order, num);
 
         ListView listView = (ListView) findViewById(R.id.listView_chckedOrder);
         listView.setAdapter(mList);
@@ -60,32 +67,67 @@ public class CheckOrder extends AppCompatActivity implements listCheckOrder.Visi
 
     public void ConfirmOrder(final View view){
         Log.i(MSG, "ConfirmOrder");
-        Log.i(MSG, String.valueOf(num.size()));
-                String link = DatabaseConstant.INSERT_HISTRNSDTL;
+        final String link = DatabaseConstant.INSERT_HISTRNSDTL;
         try{
-            for(int i : num){
+            Log.i(MSG, "size="+num.size());
+            for(int i=0;i<num.size();i++){
+                Log.i(MSG, "i="+i);
                 new QueryServiceImp().InsertData(link, "", 4, tableId,String.valueOf(itmID.get(i)),String.valueOf(num.get(i)), User.getUSERID());
             }
-
+            Constant.idOrder = new ArrayList<Integer>();
+            Constant.nameOrder = new ArrayList<String>();
+            Constant.numberOrder = new ArrayList<Integer>();
             new AlertDialog.Builder(this)
-                    .setMessage(Constant.TABLE + numTable+" สั่งรายการอาหารเรียบร้อยแล้ว")
+                    .setMessage(Constant.TABLE + numTable + " สั่งรายการอาหารเรียบร้อยแล้ว")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(view.getContext(),MainOverView.class);
+
+                            Intent intent = new Intent(view.getContext(), MainOverView.class);
                             startActivity(intent);
                         }
                     })
                     .show();
+
         }catch (NullPointerException e){
-            Log.i(MSG, "Error NullPointer: "+e.toString());
-        } catch (Exception e){
-            Log.i(MSG, "Error Exception: "+e.toString());
+            Log.e(MSG, e.toString());
+        }catch (IndexOutOfBoundsException e){
+            Log.e(MSG, e.toString());
+        }
+        catch (Exception e){
+            Log.e(MSG,e.toString());
         }
     }
+
     @Override
-    public void sendImage(ImageView imgPlus, ImageView imgMinus) {
-        this.imgPlus = imgPlus;
-        this.imgMinus = imgMinus;
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.i(MSG, "save instance state");
+        outState.putIntegerArrayList("num", mList.getNumOrder());
     }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        Log.i(MSG, "restore instance state");
+        num = savedInstanceState.getIntegerArrayList("num");
+    }
+
+
+
+//    @Override
+//    public void sendImage(ImageView imgPlus, ImageView imgMinus) {
+//        this.imgPlus = imgPlus;
+//        this.imgMinus = imgMinus;
+//    }
+//
+//    @Override
+//    public int onClickImgPlusBtn(int value) {
+//        return ++value;
+//    }
+//
+//    @Override
+//    public int onClickImgMinusBtn(int value) {
+//        return --value;
+//    }
 }

@@ -1,6 +1,7 @@
 package com.app.fcp.chabufcp;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -63,11 +64,20 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
 
                 TextView textUser = (TextView) findViewById(R.id.nav_head_name);
                 TextView textPosition = (TextView) findViewById(R.id.nav_head_pos);
-
+//                Typeface f = Typeface.createFromAsset(getAssets(),"fonts/THSaraban.ttf");
                 Log.i(MSG, User.getUSERNAME());
                 Log.i(MSG, User.getPOSITION());
-                textUser.setText(User.getUSERNAME());
-                textPosition.setText(User.getPOSITION());
+
+                try{
+//                    textUser.setTypeface(f);
+                    textUser.setText(User.getUSERNAME());
+                    textPosition.setText(User.getPOSITION());
+//                    textPosition.setTypeface(f);
+                }catch (Exception e){
+                    Intent loginScreen = new Intent(getApplicationContext(),MainLoginActivity.class);
+                    startActivity(loginScreen);
+                }
+
 
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
@@ -127,28 +137,6 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
         }
     }
 
- /*   @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.navigation_user, menu);
-        return true;
-    }*/
-
-   /* @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        Log.i(MSG, "id = "+id);
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.order_menu_action_settings) {
-            Log.i(MSG, "Gu Click la");
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
-
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         return OverViewOnNavigationItemSelected(item);
@@ -180,19 +168,6 @@ public class MainOverView extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-   /* public void chooseTable(View view){
-        Log.i(MSG, "Start chooseTable");
-        TextView TextViewtableNo = (TextView) findViewById(R.id.list_view_over_view_table_no);
-        String numTable = TextViewtableNo.getText().toString();
-
-        TextView TextViewTableId = (TextView) findViewById(R.id.list_view_over_view_table_id);
-        String tableId = TextViewTableId.getText().toString();
-
-        Toast.makeText(this, "โต๊ะที่ "+numTable+" ID: "+tableId, Toast.LENGTH_LONG).show();
-
-
-    }*/
 
     public void order(){
             Intent main = new Intent(this,AddTable.class);

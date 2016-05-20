@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.app.fcp.chabufcp.CheckOrder;
 import com.app.fcp.chabufcp.R;
 import com.app.fcp.constant.Constant;
 
@@ -18,11 +19,13 @@ import java.util.ArrayList;
 /**
  * Created by user on 5/19/2016.
  */
-public class listCheckOrder extends ArrayAdapter {
+public class listCheckOrder extends ArrayAdapter implements CheckOrder.handlerVisible {
     private final String MSG = "listCheckOrder";
     private Activity context;
     private ArrayList<String> order;
     private ArrayList<Integer> numOrder;
+    private ImageView imgPlus;
+    private ImageView imgMinus;
     private int[] imageId = {Constant.BUTTON_ADD, Constant.BUTTON_REMOVE};
     public listCheckOrder(Activity context, ArrayList<String> order,
                                             ArrayList<Integer> numOrder) {
@@ -32,11 +35,13 @@ public class listCheckOrder extends ArrayAdapter {
         this.numOrder = new ArrayList<Integer>(numOrder);
     }
 
-    public interface VisiblaImg {
-        public void sendImage(ImageView imgPlus, ImageView imgMinus);
-    }
+//    public interface VisibleImg {
+//        public void sendImage(ImageView imgPlus, ImageView imgMinus);
+//        public int onClickImgPlusBtn(int value);
+//        public int onClickImgMinusBtn(int value);
+//    }
 
-    VisiblaImg visiblaImg = (VisiblaImg) getContext();
+//    VisibleImg visibleImg = (VisibleImg) getContext();
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -48,10 +53,12 @@ public class listCheckOrder extends ArrayAdapter {
 
         ImageView imgPlus = (ImageView) convertView.findViewById(R.id.list_check_order_imageButtonPlus);
         imgPlus.setImageResource(imageId[0]);
-        imgPlus.setVisibility(View.GONE);
+//        imgPlus.setVisibility(View.GONE);
+        imgPlus.setVisibility(View.INVISIBLE);
         imgPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String orderNum = tvNum.getText().toString();
                 int number = 1;
                 Integer value = null;
@@ -64,6 +71,7 @@ public class listCheckOrder extends ArrayAdapter {
                         Toast.makeText(getContext(), Constant.MAX_ORDER, Toast.LENGTH_LONG).show();
                     } else {
                         int newValue = value + 1;
+//                        int newValue = visibleImg.onClickImgPlusBtn(value);
                         tvNum.setText(String.valueOf(newValue));
                         int index = Constant.nameOrder.indexOf(order.get(position));
                         Constant.numberOrder.set(index, newValue);
@@ -81,7 +89,8 @@ public class listCheckOrder extends ArrayAdapter {
         });
         ImageView imgMinus = (ImageView) convertView.findViewById(R.id.list_check_order_imageButtonMinus);
         imgMinus.setImageResource(imageId[1]);
-        imgMinus.setVisibility(View.GONE);
+//        imgMinus.setVisibility(View.GONE);
+        imgMinus.setVisibility(View.INVISIBLE);
         imgMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +105,7 @@ public class listCheckOrder extends ArrayAdapter {
                         Toast.makeText(getContext(), Constant.MIN_ORDER, Toast.LENGTH_LONG).show();
                     } else {
                         int newValue = value - 1;
+//                        int newValue = visibleImg.onClickImgMinusBtn(value);
                         if (newValue == 0) {
                             tvNum.setText("");
                         } else {
@@ -110,7 +120,22 @@ public class listCheckOrder extends ArrayAdapter {
             }
         });
 
-        visiblaImg.sendImage(imgPlus,imgMinus);
+//        visibleImg.sendImage(imgPlus,imgMinus);
         return convertView;
+    }
+
+    public ArrayList<Integer> getNumOrder() {
+        return numOrder;
+    }
+
+    public ImageView[] getImgView() {
+        ImageView[] mArray = {imgPlus, imgMinus};
+        return mArray;
+    }
+
+    @Override
+    public void setVisible(ImageView plus, ImageView minus) {
+        plus.setVisibility(View.VISIBLE);
+        minus.setVisibility(View.VISIBLE);
     }
 }

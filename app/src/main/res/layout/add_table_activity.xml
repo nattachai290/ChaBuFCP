@@ -65,6 +65,7 @@
             android:maxLength="3"
             android:textColor="@color/black"
             android:layout_marginRight="200dp"
+            android:typeface="monospace"
             android:gravity="center_horizontal" />
 
     </GridLayout>

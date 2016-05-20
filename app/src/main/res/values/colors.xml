@@ -8,5 +8,6 @@
     <color name="blackBar">#272822</color>
     <color name="black">#222222</color>
     <color name="silver">#f3f3f3</color>
+    <color name="gray">#FFEAEAEA</color>
     <color name="silver2">#eeeeee</color>
 </resources>

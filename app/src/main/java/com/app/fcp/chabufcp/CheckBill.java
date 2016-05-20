@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Typeface;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -50,6 +51,7 @@ public class CheckBill extends AppCompatActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Log.i(MSG, "Start setOnItemClickListener");
+
                     TextView TextViewtableNo = (TextView) view.findViewById(R.id.list_view_over_view_table_no);
                     String numTable = TextViewtableNo.getText().toString();
 

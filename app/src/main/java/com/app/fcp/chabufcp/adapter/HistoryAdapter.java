@@ -1,6 +1,7 @@
 package com.app.fcp.chabufcp.adapter;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;

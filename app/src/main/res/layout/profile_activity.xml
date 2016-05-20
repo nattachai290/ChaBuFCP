@@ -11,14 +11,13 @@
     tools:context="com.app.fcp.chabufcp.Profile"
     android:orientation="vertical">
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="ข้อมูลพนักงาน"
-        android:id="@+id/profile_title"
+        android:id="@+id/imageView"
+        android:src="@drawable/administrator"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="50dp" />
+        android:layout_marginBottom="30dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -47,6 +46,13 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/profile_lname"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/profile_sex"
         android:layout_marginBottom="10dp" />
 
     <TextView

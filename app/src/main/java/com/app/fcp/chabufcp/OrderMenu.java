@@ -2,6 +2,7 @@ package com.app.fcp.chabufcp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -76,10 +77,18 @@ public class OrderMenu extends AppCompatActivity
 
                 TextView textUser = (TextView) findViewById(R.id.nav_head_name);
                 TextView textPosition = (TextView) findViewById(R.id.nav_head_pos);
+//                Typeface f = Typeface.createFromAsset(getAssets(),"fonts/THSaraban.ttf");
                 Log.i(MSG, User.getUSERNAME());
                 Log.i(MSG, User.getPOSITION());
-                textUser.setText(User.getUSERNAME());
-                textPosition.setText(User.getPOSITION());
+                try{
+//                    textUser.setTypeface(f);
+                    textUser.setText(User.getUSERNAME());
+                    textPosition.setText(User.getPOSITION());
+//                    textPosition.setTypeface(f);
+                }catch (Exception e){
+                    Intent loginScreen = new Intent(getApplicationContext(),MainLoginActivity.class);
+                    startActivity(loginScreen);
+                }
 
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
