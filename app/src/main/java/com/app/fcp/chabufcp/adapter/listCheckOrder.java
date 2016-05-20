@@ -15,6 +15,7 @@ import com.app.fcp.chabufcp.R;
 import com.app.fcp.constant.Constant;
 
 import java.util.ArrayList;
+import java.util.zip.Checksum;
 
 /**
  * Created by user on 5/19/2016.
@@ -24,24 +25,26 @@ public class listCheckOrder extends ArrayAdapter implements CheckOrder.handlerVi
     private Activity context;
     private ArrayList<String> order;
     private ArrayList<Integer> numOrder;
+    private int[] imageId = {Constant.BUTTON_ADD, Constant.BUTTON_REMOVE};
+
     private ImageView imgPlus;
     private ImageView imgMinus;
-    private int[] imageId = {Constant.BUTTON_ADD, Constant.BUTTON_REMOVE};
-    public listCheckOrder(Activity context, ArrayList<String> order,
-                                            ArrayList<Integer> numOrder) {
+
+    public listCheckOrder(Activity context, ArrayList<String> order,ArrayList<Integer> numOrder) {
         super(context, R.layout.list_chck_order, order);
         this.context = context;
         this.order = new ArrayList<String>(order);
         this.numOrder = new ArrayList<Integer>(numOrder);
     }
 
-//    public interface VisibleImg {
-//        public void sendImage(ImageView imgPlus, ImageView imgMinus);
-//        public int onClickImgPlusBtn(int value);
-//        public int onClickImgMinusBtn(int value);
-//    }
 
-//    VisibleImg visibleImg = (VisibleImg) getContext();
+    /*public interface VisibleImg {
+        public void sendImage(ImageView imgPlus, ImageView imgMinus);
+        public int onClickImgPlusBtn(int value);
+        public int onClickImgMinusBtn(int value);
+    }
+
+    VisibleImg visibleImg = (VisibleImg) getContext();*/
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -51,14 +54,12 @@ public class listCheckOrder extends ArrayAdapter implements CheckOrder.handlerVi
         tvOrder.setText(order.get(position));
         tvNum.setText(String.valueOf(numOrder.get(position)));
 
-        ImageView imgPlus = (ImageView) convertView.findViewById(R.id.list_check_order_imageButtonPlus);
+        imgPlus = (ImageView) convertView.findViewById(R.id.list_check_order_imageButtonPlus);
         imgPlus.setImageResource(imageId[0]);
-//        imgPlus.setVisibility(View.GONE);
         imgPlus.setVisibility(View.INVISIBLE);
         imgPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String orderNum = tvNum.getText().toString();
                 int number = 1;
                 Integer value = null;
@@ -70,8 +71,7 @@ public class listCheckOrder extends ArrayAdapter implements CheckOrder.handlerVi
                     if (value == 99) {
                         Toast.makeText(getContext(), Constant.MAX_ORDER, Toast.LENGTH_LONG).show();
                     } else {
-                        int newValue = value + 1;
-//                        int newValue = visibleImg.onClickImgPlusBtn(value);
+                        int newValue = ++value;
                         tvNum.setText(String.valueOf(newValue));
                         int index = Constant.nameOrder.indexOf(order.get(position));
                         Constant.numberOrder.set(index, newValue);
@@ -87,9 +87,8 @@ public class listCheckOrder extends ArrayAdapter implements CheckOrder.handlerVi
                 }
             }
         });
-        ImageView imgMinus = (ImageView) convertView.findViewById(R.id.list_check_order_imageButtonMinus);
+        imgMinus = (ImageView) convertView.findViewById(R.id.list_check_order_imageButtonMinus);
         imgMinus.setImageResource(imageId[1]);
-//        imgMinus.setVisibility(View.GONE);
         imgMinus.setVisibility(View.INVISIBLE);
         imgMinus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,8 +103,7 @@ public class listCheckOrder extends ArrayAdapter implements CheckOrder.handlerVi
                     if (value == 0) {
                         Toast.makeText(getContext(), Constant.MIN_ORDER, Toast.LENGTH_LONG).show();
                     } else {
-                        int newValue = value - 1;
-//                        int newValue = visibleImg.onClickImgMinusBtn(value);
+                        int newValue = --value;
                         if (newValue == 0) {
                             tvNum.setText("");
                         } else {
@@ -120,7 +118,6 @@ public class listCheckOrder extends ArrayAdapter implements CheckOrder.handlerVi
             }
         });
 
-//        visibleImg.sendImage(imgPlus,imgMinus);
         return convertView;
     }
 

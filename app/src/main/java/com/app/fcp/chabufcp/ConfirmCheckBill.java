@@ -45,18 +45,21 @@ public class ConfirmCheckBill extends AppCompatActivity {
             time = data.getString("time");
             totalPrice = data.getString("totalPrice");
         }
-        getSupportActionBar().setTitle(Constant.TABLE + numTable);
+//        getSupportActionBar().setTitle(Constant.TABLE + numTable);
 //        Typeface f = Typeface.createFromAsset(getAssets(),"fonts/THSaraban.ttf");
         TextView customer = (TextView) findViewById(R.id.confirm_checkbill_num_customer);
         customer.setText(numCustomer);
 //        customer.setTypeface(f);
+
+        TextView tableNo = (TextView) findViewById(R.id.confirm_checkbill_table_no);
+        tableNo.setText(Constant.TABLE + numTable);
 
         TextView timming = (TextView) findViewById(R.id.confirm_checkbill_time);
         timming.setText(time);
 //        timming.setTypeface(f);
 
         TextView price = (TextView) findViewById(R.id.confirm_checkbill_price);
-        price.setText("Total :"+totalPrice);
+        price.setText("Total \n" + totalPrice);
 //        price.setTypeface(f);
 
         confirm = (Button) findViewById(R.id.confirm_checkbill_btn_pay);

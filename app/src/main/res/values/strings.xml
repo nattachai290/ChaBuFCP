@@ -36,6 +36,7 @@
     <string name="title_activity_check_bill">Check Bill</string>
     <string name="title_activity_history">ประวัติรายการอาหาร</string>
     <string name="title_activity_profile">ข้อมูลพนักงาน</string>
+    <string name="title_activity_connfirm_checkBill">ยืนยันการชำระเงิน</string>
 
     <string name="title_check_order">รายการทั้งหมด</string>
 

@@ -49,7 +49,7 @@ public class OverViewAdapter  extends ArrayAdapter<String> {
             time.setText("เวลา : "+list.get("ListHdrTime").get(position).toString());
 
             TextView price = (TextView) convertView.findViewById(R.id.list_view_over_view_table_price);
-            price.setText(list.get("ListHdrPrice").get(position).toString()+" B");
+            price.setText(list.get("ListHdrPrice").get(position).toString()+" ฿");
 
 
         }catch (NullPointerException e){
