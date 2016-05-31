@@ -47,7 +47,6 @@ public class OrderMenu extends AppCompatActivity
     private TabHost tabhost;
     private String numTable ;
     private String tableId ;
-    private FragmentTabHost mTabHost;
 //    LocalActivityManager mLocalActivityManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

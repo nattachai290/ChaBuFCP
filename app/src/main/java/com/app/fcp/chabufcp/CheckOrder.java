@@ -50,7 +50,8 @@ public class CheckOrder extends AppCompatActivity  {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 finish();
-                return;
+                Intent overview = new Intent(getApplicationContext(),MainOverView.class);
+                startActivity(overview);
             }
         });
         mList = new listCheckOrder(this, order, num);
@@ -98,11 +99,9 @@ public class CheckOrder extends AppCompatActivity  {
         Log.i(MSG, "ConfirmOrder");
         Log.i(MSG, String.valueOf(num.size()));
         if(num.size()>0) {
-
-
             String link = DatabaseConstant.INSERT_HISTRNSDTL;
             try {
-                for (int i : num) {
+                for (int i=0 ;i<num.size();i++) {
                     new QueryServiceImp().InsertData(link, "", 4, tableId, String.valueOf(itmID.get(i)), String.valueOf(num.get(i)), User.getUSERID());
                 }
                 builder.setMessage(Constant.TABLE + numTable + " สั่งรายการอาหารเรียบร้อยแล้ว");
